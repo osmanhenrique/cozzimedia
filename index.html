@@ -1,0 +1,524 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Cozzi Media</title>
+    <style>
+      :root {
+        --cor-fundo: #0b0f16;
+        --cor-card: #111827;
+        --cor-borda: #1e293b;
+        --cor-texto: #f1f5f9;
+        --cor-destaque: #2dd4bf;
+        --cor-secundaria: #94a3b8;
+      }
+
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+
+      body {
+        font-family: "Inter", sans-serif;
+        background: var(--cor-fundo);
+        color: var(--cor-texto);
+      }
+
+      header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 1.5rem 3rem;
+        position: sticky;
+        top: 0;
+        background: var(--cor-fundo);
+        z-index: 10;
+      }
+
+      header h1 {
+        color: var(--cor-destaque);
+        font-size: 1.6rem;
+        font-weight: 700;
+      }
+      header a {
+        background: var(--cor-destaque);
+        color: #000;
+        text-decoration: none;
+        font-weight: 600;
+        padding: 0.6rem 1rem;
+        border-radius: 8px;
+      }
+
+      .hero {
+        text-align: center;
+        padding: 6rem 1rem 4rem;
+      }
+      .hero h2 {
+        font-size: 2.5rem;
+        font-weight: 800;
+        line-height: 1.3;
+      }
+      .hero h2 span {
+        color: var(--cor-destaque);
+      }
+      .hero p {
+        color: var(--cor-secundaria);
+        margin-top: 1rem;
+        font-size: 1.1rem;
+      }
+      .hero a {
+        display: inline-block;
+        margin-top: 2rem;
+        background: var(--cor-destaque);
+        color: #000;
+        text-decoration: none;
+        font-weight: 600;
+        padding: 0.9rem 1.8rem;
+        border-radius: 10px;
+        transition: 0.3s;
+      }
+      .hero a:hover {
+        opacity: 0.8;
+      }
+
+      section {
+        padding: 4rem 1rem;
+        text-align: center;
+      }
+      section h3 {
+        font-size: 2rem;
+        margin-bottom: 0.5rem;
+      }
+      section p {
+        color: var(--cor-secundaria);
+        margin-bottom: 3rem;
+        font-size: 1.1rem;
+      }
+
+      .cards-container {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 2rem;
+      }
+
+      .card {
+        background: var(--cor-card);
+        border: 1px solid var(--cor-borda);
+        border-radius: 12px;
+        padding: 2rem;
+        text-align: left;
+        width: 300px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        transition: 0.3s;
+        min-height: 450px; /* altura uniforme */
+      }
+
+      .card:hover {
+        border-color: var(--cor-destaque);
+        transform: translateY(-3px);
+      }
+
+      .card h4 {
+        font-size: 1.4rem;
+        color: var(--cor-texto);
+        margin-bottom: 0.5rem;
+      }
+      .card span {
+        color: var(--cor-destaque);
+        font-size: 1.2rem;
+        font-weight: 700;
+      }
+      .card ul {
+        list-style: none;
+        padding: 0;
+        margin: 1rem 0 1.5rem;
+        flex-grow: 1;
+      }
+      .card li {
+        color: var(--cor-secundaria);
+        margin: 0.5rem 0;
+        font-size: 0.95rem;
+      }
+      .card li::before {
+        content: "✔";
+        color: var(--cor-destaque);
+        margin-right: 0.4rem;
+      }
+
+      .card a.card-btn {
+        display: block;
+        text-align: center;
+        background: var(--cor-destaque);
+        color: #000;
+        padding: 0.9rem;
+        border-radius: 8px;
+        font-weight: 600;
+        text-decoration: none;
+        transition: 0.3s;
+        margin-top: auto;
+      }
+
+      .card a.card-btn:hover {
+        opacity: 0.9;
+      }
+
+      form {
+        max-width: 480px;
+        margin: auto;
+        background: var(--cor-card);
+        padding: 2rem;
+        border-radius: 12px;
+        border: 1px solid var(--cor-borda);
+        text-align: left;
+      }
+
+      form label {
+        display: block;
+        margin-bottom: 0.3rem;
+        font-weight: 600;
+        color: var(--cor-texto);
+      }
+      form input,
+      form select {
+        width: 100%;
+        padding: 0.8rem;
+        margin-bottom: 1rem;
+        border-radius: 8px;
+        border: none;
+        background: #1e293b;
+        color: white;
+      }
+
+      form button {
+        width: 100%;
+        background: var(--cor-destaque);
+        color: #000;
+        border: none;
+        padding: 1rem;
+        border-radius: 8px;
+        font-size: 1rem;
+        font-weight: 600;
+        cursor: pointer;
+      }
+
+      footer {
+        text-align: center;
+        padding: 3rem 1rem;
+        background: var(--cor-fundo); /* mesma cor da página */
+        color: var(--cor-secundaria);
+      }
+
+      footer h4 {
+        color: var(--cor-destaque);
+        margin-bottom: 0.5rem;
+      }
+
+      .whatsapp-btn {
+        position: fixed;
+        bottom: 25px;
+        right: 25px;
+        background: var(--cor-destaque);
+        color: #000;
+        width: 55px;
+        height: 55px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 24px;
+        box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
+        cursor: pointer;
+        transition: 0.3s;
+      }
+
+      .whatsapp-btn:hover {
+        transform: scale(1.1);
+      }
+
+      @media (max-width: 768px) {
+        .cards-container {
+          flex-direction: column;
+          align-items: center;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <h1>Cozzi Media</h1>
+      <a href="#contato">Fale Conosco</a>
+    </header>
+
+    <section class="hero">
+      <h2>Transforme Sua Presença Digital com <span>Cozzi Media</span></h2>
+      <p>
+        Gestão profissional de programação de mídias, tráfego pago, automação e produção de
+        conteúdo que gera resultados reais.
+      </p>
+      <a
+        href="https://api.whatsapp.com/send/?phone=5581995387708&text=Ol%C3%A1%21+Tenho+interesse+no+plano+Solicitar+Proposta+%28%29.+Gostaria+de+mais+informa%C3%A7%C3%B5es.&type=phone_number&app_absent=0"
+        >💬 Solicitar Proposta</a
+      >
+    </section>
+
+    <!-- Planos de Gestão -->
+    </section>
+
+    <!-- Planos de Gestão -->
+    <section id="planos">
+      <h3>Planos de Gestão</h3>
+      <p>Gestão Tráfego Pago</p>
+      <div class="cards-container">
+        <div class="card">
+          <h4>🚀 Starter</h4>
+          <span>R$ 597/mês</span>
+          <ul>
+            <li>Automação de pré-atendimento no Instagram</li>
+            <li>Suporte starter via grupo de WhatsApp</li>
+            <li>Planejamento estratégico</li>
+            <li>Relatórios semanais</li>
+            <li>Gestão de tráfego pago (Meta Ads)</li>
+          </ul>
+          <a
+            href="https://api.whatsapp.com/send/?phone=5581995387708&text=Ol%C3%A1%21+Tenho+interesse+no+plano+Starter+%28R%24+597%2Fm%C3%AAs%29.+Gostaria+de+mais+informa%C3%A7%C3%B5es.&type=phone_number&app_absent=0"
+            class="card-btn"
+            >Quero o Starter</a
+          >
+        </div>
+
+        <div class="card" style="border-color: var(--cor-destaque)">
+          <h4>
+            ⭐ Pro
+            <small style="color: var(--cor-destaque); font-size: 0.9rem"
+              >POPULAR</small
+            >
+          </h4>
+          <span>R$ 1.197/mês</span>
+          <ul>
+            <li>Automação de pré-atendimento no Instagram</li>
+            <li>Suporte starter via grupo de WhatsApp</li>
+            <li>Planejamento estratégico</li>
+            <li>Relatórios semanais</li>
+            <li>Gestão de tráfego pago (Meta Ads e Google Ads)</li>
+            <li>Programação de mídias</li>
+            <li>12 posts mensais</li>
+            <li>Suporte Pro via grupo de WhatsApp</li>
+          </ul>
+          <a
+            href="https://api.whatsapp.com/send/?phone=5581995387708&text=Ol%C3%A1%21+Tenho+interesse+no+plano+Pro+%28R%24+1.197%2Fm%C3%AAs%29.+Gostaria+de+mais+informa%C3%A7%C3%B5es.&type=phone_number&app_absent=0"
+            class="card-btn"
+            >Quero o Pro</a
+          >
+        </div>
+
+        <div class="card">
+          <h4>👑 Premium</h4>
+          <span>R$ 1.997/mês</span>
+          <ul>
+            <li>Tudo do Pro</li>
+            <li>CRM</li>
+            <li>24 posts mensais</li>
+            <li>Suporte intensivo via grupo de WhatsApp</li>
+          </ul>
+          <a
+            href="https://api.whatsapp.com/send/?phone=5581995387708&text=Ol%C3%A1%21+Tenho+interesse+no+plano+Premium+%28R%24+1.997%2Fm%C3%AAs%29.+Gostaria+de+mais+informa%C3%A7%C3%B5es.&type=phone_number&app_absent=0"
+            class="card-btn"
+            >Quero o Premium</a
+          >
+        </div>
+      </div>
+    </section>
+
+    <!-- Produção Drone -->
+    <section id="producao">
+      <h3>🎥 Imagens + Vídeos com Drone + Edições + Entrega</h3>
+      <p>Conteúdos profissionais para suas redes sociais</p>
+      <div class="cards-container">
+        <div class="card">
+          <h4>📸 Pacote Básico</h4>
+          <span>R$ 349</span>
+          <ul>
+            <li>3 vídeos (até 1 minuto)</li>
+            <li>3 fotos</li>
+            <li>Edição básica</li>
+          </ul>
+          <a
+            href="https://api.whatsapp.com/send/?phone=5581995387708&text=Ol%C3%A1%21+Tenho+interesse+no+plano+Pacote+B%C3%A1sico+%28R%24349%29.+Gostaria+de+mais+informa%C3%A7%C3%B5es.&type=phone_number&app_absent=0"
+            class="card-btn"
+            >Quero o Básico</a
+          >
+        </div>
+
+        <div class="card">
+          <h4>🎬 Pacote Intermediário</h4>
+          <span>R$ 649</span>
+          <ul>
+            <li>5 vídeos (até 1 minuto e meio)</li>
+            <li>5 fotos</li>
+            <li>Edição básica</li>
+          </ul>
+          <a
+            href="https://api.whatsapp.com/send/?phone=5581995387708&text=Ol%C3%A1%21+Tenho+interesse+no+plano+Pacote+Intermedi%C3%A1rio+%28R%24649%29.+Gostaria+de+mais+informa%C3%A7%C3%B5es.&type=phone_number&app_absent=0"
+            class="card-btn"
+            >Quero o Intermediário</a
+          >
+        </div>
+
+        <div class="card">
+          <h4>🎥 Pacote Profissional</h4>
+          <span>R$ 859</span>
+          <ul>
+            <li>5 vídeos (até 1 minuto e meio)</li>
+            <li>5 fotos</li>
+            <li>Edição dinâmica</li>
+            <li>Vídeo institucional para redes sociais</li>
+          </ul>
+          <a
+            href="https://api.whatsapp.com/send/?phone=5581995387708&text=Ol%C3%A1%21+Tenho+interesse+no+plano+Pacote+Profissional+%28R%24859%29.+Gostaria+de+mais+informa%C3%A7%C3%B5es.&type=phone_number&app_absent=0"
+            class="card-btn"
+            >Quero o Profissional</a
+          >
+        </div>
+      </div>
+    </section>
+
+    <!-- Google Meu Negócio -->
+    <section id="google">
+      <h3>Google Meu Negócio</h3>
+      <p>Otimização completa para seu negócio aparecer no Google</p>
+      <div class="cards-container">
+        <div class="card">
+          <h4>🏆 Plano Anual GMN</h4>
+          <span>R$ 7.000/ano</span>
+          <ul>
+            <li>Otimização completa do perfil</li>
+            <li>Gestão de avaliações</li>
+            <li>Posts semanais</li>
+            <li>Site institucional incluso</li>
+            <li>Relatórios mensais</li>
+          </ul>
+          <a
+            href="https://api.whatsapp.com/send/?phone=5581995387708&text=Ol%C3%A1%21+Tenho+interesse+no+plano+Plano+Anual+GMN+%28R%247.000%2Fano%29.+Gostaria+de+mais+informa%C3%A7%C3%B5es.&type=phone_number&app_absent=0"
+            class="card-btn"
+            >Quero o Plano Anual</a
+          >
+        </div>
+
+        <div class="card">
+          <h4>⚡ Otimização 15 Dias GMN</h4>
+          <span>R$ 399 / R$ 699</span>
+          <ul>
+            <li>Cadastro e verificação</li>
+            <li>Otimização de fotos</li>
+            <li>Descrição otimizada</li>
+            <li>Categorias e atributos</li>
+          </ul>
+          <a
+            href="https://api.whatsapp.com/send/?phone=5581995387708&text=Ol%C3%A1%21+Tenho+interesse+no+plano+Otimiza%C3%A7%C3%A3o+15+Dias+GMN+%28R%24399+ou+R%24699%29.+Gostaria+de+mais+informa%C3%A7%C3%B5es.&type=phone_number&app_absent=0"
+            class="card-btn"
+            >Quero a Otimização</a
+          >
+        </div>
+
+        <div class="card">
+          <h4>📅 Plano 3 Meses GMN</h4>
+          <span>R$ 1.997</span>
+          <ul>
+            <li>Setup completo</li>
+            <li>Gestão trimestral</li>
+            <li>Posts semanais</li>
+            <li>Monitoramento de avaliações</li>
+            <li>Relatório final completo</li>
+          </ul>
+          <a
+            href="https://api.whatsapp.com/send/?phone=5581995387708&text=Ol%C3%A1%21+Tenho+interesse+no+plano+Plano+3+Meses+GMN+%28R%241.997%29.+Gostaria+de+mais+informa%C3%A7%C3%B5es.&type=phone_number&app_absent=0"
+            class="card-btn"
+            >Quero o Plano 3 Meses</a
+          >
+        </div>
+      </div>
+    </section>
+
+    <!-- Consultoria -->
+<section id="consultoria">
+  <h3>💼 Consultoria</h3>
+  <p>Aprenda a criar e gerenciar campanhas digitais do zero com acompanhamento especializado</p>
+  <div class="cards-container">
+    <div class="card">
+      <h4>📊 Consultoria Completa</h4>
+      <span>Últimas vagas</span>
+      <ul>
+        <li>Como criar campanhas do zero</li>
+        <li>Diferença e escolha do objetivo de campanha</li>
+        <li>Estrutura: Campanha, conjunto, anúncio</li>
+        <li>Padrão de nomenclatura</li>
+        <li>ABO vs CBO (tipos de orçamento)</li>
+        <li>Estrutura e segmentação</li>
+        <li>Como conectar BM, Instagram e WhatsApp</li>
+        <li>Contingência e estruturação de conta</li>
+        <li>Definição de público ideal
+          <ul style="margin-left: 1rem; list-style-type: disc;">
+            <li>Segmentado</li>
+            <li>Envolvimento</li>
+            <li>Aberto</li>
+          </ul>
+        </li>
+        <li>Temperatura do lead (frio e quente)</li>
+        <li>Videoview (criação de públicos personalizados por % de vídeo assistido)</li>
+        <li>Call estratégica de 1h30 a 2h</li>
+        <li>Acompanhamento por 7 dias via WhatsApp</li>
+        <li>Empresário envia as imagens e vídeos</li>
+      </ul>
+      <a
+        href="https://api.whatsapp.com/send/?phone=5581995387708&text=Ol%C3%A1%21+Tenho+interesse+na+Consultoria+Completa+%28R%241.497%29.+Gostaria+de+mais+informa%C3%A7%C3%B5es.&type=phone_number&app_absent=0"
+        class="card-btn"
+        >Quero a Consultoria</a
+      >
+    </div>
+  </div>
+</section>
+
+    <!-- Contato -->
+    <section id="contato">
+      <h3>Entre em Contato</h3>
+      <p>Preencha o formulário e receba uma proposta personalizada</p>
+      <form
+        onsubmit="event.preventDefault(); window.location.href='https://api.whatsapp.com/send/?phone=5581995387708&text=Ol%C3%A1%21+Gostaria+de+mais+informa%C3%A7%C3%B5es+sobre+os+planos.';"
+      >
+        <label>Nome da Empresa</label>
+        <input
+          type="text"
+          placeholder="Digite o nome da sua empresa"
+          required
+        />
+        <label>Serviço de Interesse</label>
+        <select required>
+          <option>Gestão de Tráfego Pago</option>
+          <option>Imagens + Vídeos com Drone + Edições + Entrega</option>
+          <option>Google Meu Negócio</option>
+          <option>Consultoria</option>
+          <option>Todos os Serviços</option>
+        </select>
+        <button type="submit">💬 Enviar pelo WhatsApp</button>
+      </form>
+    </section>
+
+    <footer>
+      <h4>Cozzi Media</h4>
+      <p>Transformando sua presença digital em resultados reais</p>
+      <p>© 2025 Cozzi Media. Todos os direitos reservados.</p>
+    </footer>
+
+    <div
+      class="whatsapp-btn"
+      onclick="window.location.href='https://api.whatsapp.com/send/?phone=5581995387708';"
+    >
+      💬
+    </div>
+  </body>
+</html>
