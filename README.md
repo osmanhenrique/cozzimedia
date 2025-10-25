@@ -44,3 +44,14 @@ Site institucional da **Cozzi Media**, agência especializada em gestão de trá
 
 ## 📄 Estrutura do projeto
 
+Todo o CSS está embutido no arquivo principal. Nenhuma dependência externa é necessária além do navegador.
+
+## ✨ Contato
+
+Para dúvidas ou sugestões, envie mensagem via WhatsApp:  
+[💬 WhatsApp Cozzi Media](https://api.whatsapp.com/send/?phone=5581995387708)
+
+---
+
+**Cozzi Media © 2025** — Transformando sua presença digital em resultados reais.
+
