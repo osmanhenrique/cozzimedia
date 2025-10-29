@@ -4,11 +4,11 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Cozzi Media</title>
-      <link
-    rel="icon"
-    type="image/png"
-    href="https://i.postimg.cc/wBsHdKMn/logo-Copia.jpg"
-      />
+    <link
+      rel="icon"
+      type="image/png"
+      href="https://i.postimg.cc/wBsHdKMn/logo-Copia.jpg"
+    />
     <style>
       :root {
         --cor-fundo: #0b0f16;
@@ -47,6 +47,7 @@
         font-size: 1.6rem;
         font-weight: 700;
       }
+
       header a {
         background: var(--cor-destaque);
         color: #000;
@@ -60,19 +61,23 @@
         text-align: center;
         padding: 6rem 1rem 4rem;
       }
+
       .hero h2 {
         font-size: 2.5rem;
         font-weight: 800;
         line-height: 1.3;
       }
+
       .hero h2 span {
         color: var(--cor-destaque);
       }
+
       .hero p {
         color: var(--cor-secundaria);
         margin-top: 1rem;
         font-size: 1.1rem;
       }
+
       .hero a {
         display: inline-block;
         margin-top: 2rem;
@@ -84,6 +89,7 @@
         border-radius: 10px;
         transition: 0.3s;
       }
+
       .hero a:hover {
         opacity: 0.8;
       }
@@ -92,10 +98,12 @@
         padding: 4rem 1rem;
         text-align: center;
       }
+
       section h3 {
         font-size: 2rem;
         margin-bottom: 0.5rem;
       }
+
       section p {
         color: var(--cor-secundaria);
         margin-bottom: 3rem;
@@ -120,7 +128,7 @@
         flex-direction: column;
         justify-content: space-between;
         transition: 0.3s;
-        min-height: 450px; /* altura uniforme */
+        min-height: 450px;
       }
 
       .card:hover {
@@ -133,22 +141,26 @@
         color: var(--cor-texto);
         margin-bottom: 0.5rem;
       }
+
       .card span {
         color: var(--cor-destaque);
         font-size: 1.2rem;
         font-weight: 700;
       }
+
       .card ul {
         list-style: none;
         padding: 0;
         margin: 1rem 0 1.5rem;
         flex-grow: 1;
       }
+
       .card li {
         color: var(--cor-secundaria);
         margin: 0.5rem 0;
         font-size: 0.95rem;
       }
+
       .card li::before {
         content: "✔";
         color: var(--cor-destaque);
@@ -188,8 +200,10 @@
         font-weight: 600;
         color: var(--cor-texto);
       }
+
       form input,
-      form select {
+      form select,
+      form textarea {
         width: 100%;
         padding: 0.8rem;
         margin-bottom: 1rem;
@@ -197,6 +211,11 @@
         border: none;
         background: #1e293b;
         color: white;
+      }
+
+      form textarea {
+        min-height: 120px;
+        resize: vertical;
       }
 
       form button {
@@ -214,7 +233,7 @@
       footer {
         text-align: center;
         padding: 3rem 1rem;
-        background: var(--cor-fundo); /* mesma cor da página */
+        background: var(--cor-fundo);
         color: var(--cor-secundaria);
       }
 
@@ -245,10 +264,55 @@
         transform: scale(1.1);
       }
 
+      /* ===== CORREÇÃO GMN ===== */
+      #google .cards-container {
+        flex-wrap: nowrap;
+        overflow-x: auto;
+        justify-content: center;
+        gap: 2rem;
+        overflow: visible !important; /* evita cortar o hover */
+        align-items: flex-start; /* alinha os cards pelo topo */
+      }
+
+      #google .cards-container::-webkit-scrollbar {
+        display: none;
+      }
+
+      #google .card {
+        min-height: 450px;
+        transition: transform 0.3s, border-color 0.3s;
+      }
+
+      #google .card:hover {
+        transform: translateY(-3px);
+        border-color: var(--cor-destaque);
+      }
+
+      @media (max-width: 1024px) {
+        .hero {
+          padding-top: 4.5rem;
+        }
+
+        header {
+          padding: 1rem 1.2rem;
+        }
+      }
+
       @media (max-width: 768px) {
         .cards-container {
           flex-direction: column;
           align-items: center;
+        }
+
+        #google .cards-container {
+          flex-wrap: wrap;
+          overflow: visible;
+          padding-bottom: 1rem;
+        }
+
+        .card {
+          width: 100%;
+          max-width: 420px;
         }
       }
     </style>
@@ -269,9 +333,6 @@
         href="https://api.whatsapp.com/send/?phone=5581995387708&text=Ol%C3%A1%21+Tenho+interesse+no+plano+Solicitar+Proposta+%28%29.+Gostaria+de+mais+informa%C3%A7%C3%B5es.&type=phone_number&app_absent=0"
         >💬 Solicitar Proposta</a
       >
-    </section>
-
-    <!-- Planos de Gestão -->
     </section>
 
     <!-- Planos de Gestão -->
@@ -392,80 +453,62 @@
       </div>
     </section>
 
-    
-<!-- Google Meu Negócio -->
-<section id="google">
-  <h3>Google Meu Negócio</h3>
-  <p>Otimização completa para seu negócio aparecer no Google</p>
+    <!-- Google Meu Negócio (GMN) -->
+    <section id="google">
+      <h3>Google Meu Negócio</h3>
+      <p>Otimização completa para seu negócio aparecer no Google</p>
 
-  <div class="cards-container" style="flex-wrap: nowrap; overflow-x: auto; justify-content: center; gap: 2rem;">
-    <div class="card">
-      <h4>🏆 Plano Anual GMN</h4>
-      <span>R$ 7.000/ano</span>
-      <ul>
-        <li>Otimização completa do perfil</li>
-        <li>Gestão de avaliações</li>
-        <li>Posts semanais</li>
-        <li>Site institucional incluso</li>
-        <li>Relatórios mensais</li>
-      </ul>
-      <a
-        href="https://api.whatsapp.com/send/?phone=5581995387708&text=Olá! Tenho interesse no plano Plano Anual GMN (R$7.000/ano). Gostaria de mais informações.&type=phone_number&app_absent=0"
-        class="card-btn"
-        >Quero o Plano Anual</a
-      >
-    </div>
+      <div class="cards-container">
+        <div class="card">
+          <h4>🏆 Plano Anual GMN</h4>
+          <span>R$ 8.000/ano</span>
+          <ul>
+            <li>Otimização completa do perfil</li>
+            <li>Gestão de avaliações</li>
+            <li>Posts semanais</li>
+            <li>Site institucional incluso</li>
+            <li>Relatórios mensais</li>
+          </ul>
+          <a
+            href="https://api.whatsapp.com/send/?phone=5581995387708&text=Olá! Tenho interesse no plano Plano Anual GMN (R$8.000/ano). Gostaria de mais informações.&type=phone_number&app_absent=0"
+            class="card-btn"
+            >Quero o Plano Anual</a
+          >
+        </div>
 
-    <div class="card">
-      <h4>⚡ Otimização 7 Dias GMN</h4>
-      <span>R$ 399</span>
-      <ul>
-        <li>Cadastro e verificação</li>
-        <li>Otimização de fotos</li>
-        <li>Descrição otimizada</li>
-        <li>Categorias e atributos</li>
-      </ul>
-      <a
-        href="https://api.whatsapp.com/send/?phone=5581995387708&text=Olá! Tenho interesse no plano Otimização 7 Dias GMN (R$399). Gostaria de mais informações.&type=phone_number&app_absent=0"
-        class="card-btn"
-        >Quero a Otimização</a
-      >
-    </div>
+        <div class="card">
+          <h4>⚡ Otimização 7 Dias GMN</h4>
+          <span>R$ 399</span>
+          <ul>
+            <li>Cadastro e verificação</li>
+            <li>Otimização de fotos</li>
+            <li>Descrição otimizada</li>
+            <li>Categorias e atributos</li>
+          </ul>
+          <a
+            href="https://api.whatsapp.com/send/?phone=5581995387708&text=Olá! Tenho interesse no plano Otimização 7 Dias GMN (R$399). Gostaria de mais informações.&type=phone_number&app_absent=0"
+            class="card-btn"
+            >Quero a Otimização</a
+          >
+        </div>
 
-    <div class="card">
-      <h4>⚡ Otimização 15 Dias GMN</h4>
-      <span>R$ 798</span>
-      <ul>
-        <li>Cadastro e verificação</li>
-        <li>Otimização de fotos</li>
-        <li>Descrição otimizada</li>
-        <li>Categorias e atributos</li>
-      </ul>
-      <a
-        href="https://api.whatsapp.com/send/?phone=5581995387708&text=Olá! Tenho interesse no plano Otimização 15 Dias GMN (R$798). Gostaria de mais informações.&type=phone_number&app_absent=0"
-        class="card-btn"
-        >Quero a Otimização</a
-      >
-    </div>
-
-    <div class="card">
-      <h4>📅 Plano 3 Meses GMN</h4>
-      <span>R$ 3.830 — Desconto de 40%</span>
-      <ul>
-        <li>Setup completo</li>
-        <li>Gestão trimestral</li>
-        <li>Atualizações semanais</li>
-        <li>Monitoramento de avaliações</li>
-      </ul>
-      <a
-        href="https://api.whatsapp.com/send/?phone=5581995387708&text=Olá! Tenho interesse no plano Plano 3 Meses GMN (R$3.830). Gostaria de mais informações.&type=phone_number&app_absent=0"
-        class="card-btn"
-        >Quero o Plano 3 Meses</a
-      >
-    </div>
-  </div>
-</section>
-
+        <div class="card">
+          <h4>📅 Plano 3 Meses GMN</h4>
+          <span>R$ 3.599 </span>
+          <ul>
+            <li>Setup completo</li>
+            <li>Gestão trimestral</li>
+            <li>Atualizações semanais</li>
+            <li>Monitoramento de avaliações</li>
+          </ul>
+          <a
+            href="https://api.whatsapp.com/send/?phone=5581995387708&text=Olá! Tenho interesse no plano Plano 3 Meses GMN (R$3.830). Gostaria de mais informações.&type=phone_number&app_absent=0"
+            class="card-btn"
+            >Quero o Plano 3 Meses</a
+          >
+        </div>
+      </div>
+    </section>
 
     <!-- Consultoria -->
 <section id="consultoria">
@@ -545,6 +588,7 @@
     </div>
   </body>
 </html>
+
 
 
 
