@@ -549,30 +549,61 @@
   </div>
 </section>
 
-    <!-- Contato -->
-    <section id="contato">
-      <h3>Entre em Contato</h3>
-      <p>Preencha o formulário e receba uma proposta personalizada</p>
-      <form
-        onsubmit="event.preventDefault(); window.location.href='https://api.whatsapp.com/send/?phone=5581995387708&text=Ol%C3%A1%21+Gostaria+de+mais+informa%C3%A7%C3%B5es+sobre+os+planos.';"
-      >
-        <label>Nome da Empresa</label>
-        <input
-          type="text"
-          placeholder="Digite o nome da sua empresa"
-          required
-        />
-        <label>Serviço de Interesse</label>
-        <select required>
-          <option>Gestão de Tráfego Pago</option>
-          <option>Imagens + Vídeos com Drone + Edições + Entrega</option>
-          <option>Google Meu Negócio</option>
-          <option>Consultoria</option>
-          <option>Todos os Serviços</option>
-        </select>
-        <button type="submit">💬 Enviar pelo WhatsApp</button>
-      </form>
-    </section>
+   <!-- Contato -->
+<section id="contato">
+  <h3>Entre em Contato</h3>
+  <p>Preencha o formulário e tire suas dúvidas</p>
+
+  <form id="form-contato">
+    <label for="nome">Nome da Empresa</label>
+    <input
+      id="nome"
+      type="text"
+      placeholder="Digite o nome da sua empresa"
+      required
+    />
+
+    <label for="servico">Serviço de Interesse</label>
+    <select id="servico" required>
+      <option>Gestão de Tráfego Pago</option>
+      <option>Imagens + Vídeos com Drone + Edições + Entrega</option>
+      <option>Google Meu Negócio</option>
+      <option>Consultoria</option>
+      <option>Todos os Serviços</option>
+    </select>
+
+    <label for="mensagem">Mensagem / Observações (opcional)</label>
+    <textarea
+      id="mensagem"
+      placeholder="Conte-nos sobre seu projeto (opcional)"
+    ></textarea>
+
+    <button type="submit">💬 Enviar pelo WhatsApp</button>
+  </form>
+
+  <script>
+    const form = document.getElementById("form-contato");
+    form.addEventListener("submit", function (e) {
+      e.preventDefault();
+
+      const nome = document.getElementById("nome").value.trim();
+      const servico = document.getElementById("servico").value;
+      const mensagem = document.getElementById("mensagem").value.trim();
+
+      // Monta a mensagem para o WhatsApp
+      let texto = `Ol%C3%A1%21+Tenho+interesse+nos+servi%C3%A7os+da+Cozzi+Media.%0A`;
+      texto += `Nome da empresa: ${encodeURIComponent(nome)}%0A`;
+      texto += `Serviço de interesse: ${encodeURIComponent(servico)}`;
+
+      if (mensagem) {
+        texto += `%0AMensagem/Observações: ${encodeURIComponent(mensagem)}`;
+      }
+
+      const url = `https://api.whatsapp.com/send/?phone=5581995387708&text=${texto}&type=phone_number&app_absent=0`;
+      window.open(url, "_blank");
+    });
+  </script>
+</section>
 
     <footer>
       <h4>Cozzi Media</h4>
@@ -588,6 +619,7 @@
     </div>
   </body>
 </html>
+
 
 
 
