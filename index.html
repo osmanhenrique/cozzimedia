@@ -8,6 +8,7 @@
       rel="icon"
       type="image/png"
       href="https://i.postimg.cc/wBsHdKMn/logo-Copia.jpg"
+      onerror="this.onerror=null; this.href='https://placehold.co/32x32/01d4ff/000?text=CM'"
     />
     <style>
       :root {
@@ -40,12 +41,14 @@
         top: 0;
         background: var(--cor-fundo);
         z-index: 10;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
       }
 
       header h1 {
         color: var(--cor-destaque);
         font-size: 1.6rem;
         font-weight: 700;
+        cursor: pointer;
       }
 
       header a {
@@ -55,6 +58,11 @@
         font-weight: 600;
         padding: 0.6rem 1rem;
         border-radius: 8px;
+        transition: background 0.3s;
+      }
+      
+      header a:hover {
+          background: #39eaff;
       }
 
       .hero {
@@ -63,7 +71,7 @@
       }
 
       .hero h2 {
-        font-size: 2.5rem;
+        font-size: clamp(1.8rem, 5vw, 2.5rem);
         font-weight: 800;
         line-height: 1.3;
       }
@@ -75,7 +83,10 @@
       .hero p {
         color: var(--cor-secundaria);
         margin-top: 1rem;
-        font-size: 1.1rem;
+        font-size: clamp(1rem, 2vw, 1.1rem);
+        max-width: 700px;
+        margin-left: auto;
+        margin-right: auto;
       }
 
       .hero a {
@@ -100,8 +111,9 @@
       }
 
       section h3 {
-        font-size: 2rem;
+        font-size: clamp(1.6rem, 4vw, 2rem);
         margin-bottom: 0.5rem;
+        color: var(--cor-destaque);
       }
 
       section p {
@@ -129,11 +141,17 @@
         justify-content: space-between;
         transition: 0.3s;
         min-height: 450px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+      }
+      
+      #crm .card, #conteudo .card {
+          min-height: 350px; /* Ajuste para cartões com menos conteúdo */
       }
 
       .card:hover {
         border-color: var(--cor-destaque);
-        transform: translateY(-3px);
+        transform: translateY(-5px); /* Efeito mais visível */
+        box-shadow: 0 8px 15px rgba(1, 212, 255, 0.15); /* Sombra do destaque */
       }
 
       .card h4 {
@@ -165,6 +183,18 @@
         content: "✔";
         color: var(--cor-destaque);
         margin-right: 0.4rem;
+        font-weight: bold;
+      }
+      
+      /* Estilo para a lista aninhada na Consultoria */
+      .card ul ul {
+        margin: 0.5rem 0 0.5rem 1rem;
+        list-style-type: disc;
+        flex-grow: 0;
+      }
+
+      .card ul ul li::before {
+        content: ""; /* Remove o ícone "✔" dos itens aninhados */
       }
 
       .card a.card-btn {
@@ -176,12 +206,12 @@
         border-radius: 8px;
         font-weight: 600;
         text-decoration: none;
-        transition: 0.3s;
+        transition: background 0.3s;
         margin-top: auto;
       }
 
       .card a.card-btn:hover {
-        opacity: 0.9;
+        background: #39eaff;
       }
 
       form {
@@ -192,6 +222,7 @@
         border-radius: 12px;
         border: 1px solid var(--cor-borda);
         text-align: left;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
       }
 
       form label {
@@ -201,6 +232,36 @@
         color: var(--cor-texto);
       }
 
+      form .input-group {
+        margin-bottom: 1rem;
+      }
+      
+      form .checkbox-group {
+          display: flex;
+          align-items: flex-start;
+          margin-bottom: 1rem;
+          padding: 0.8rem;
+          border-radius: 8px;
+          background: #1e293b;
+          color: var(--cor-secundaria);
+          font-size: 0.9rem;
+      }
+      
+      form input[type="checkbox"] {
+          width: auto;
+          margin-right: 0.7rem;
+          margin-top: 3px;
+          flex-shrink: 0;
+          cursor: pointer;
+      }
+      
+      form .checkbox-group label {
+          margin-bottom: 0;
+          font-weight: 400;
+          color: var(--cor-secundaria);
+          cursor: pointer;
+      }
+
       form input,
       form select,
       form textarea {
@@ -208,9 +269,16 @@
         padding: 0.8rem;
         margin-bottom: 1rem;
         border-radius: 8px;
-        border: none;
+        border: 1px solid var(--cor-borda);
         background: #1e293b;
         color: white;
+      }
+      
+      form select {
+          appearance: none;
+          background: #1e293b url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%2394a3b8'%3E%3Cpath d='M7 10l5 5 5-5z'/%3E%3C/svg%3E") no-repeat right 0.8rem center;
+          background-size: 1em;
+          cursor: pointer;
       }
 
       form textarea {
@@ -228,6 +296,11 @@
         font-size: 1rem;
         font-weight: 600;
         cursor: pointer;
+        transition: background 0.3s;
+      }
+      
+      form button:hover {
+          background: #39eaff;
       }
 
       footer {
@@ -235,6 +308,7 @@
         padding: 3rem 1rem;
         background: var(--cor-fundo);
         color: var(--cor-secundaria);
+        border-top: 1px solid var(--cor-borda);
       }
 
       footer h4 {
@@ -255,37 +329,27 @@
         align-items: center;
         justify-content: center;
         font-size: 24px;
-        box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
+        box-shadow: 0 0 15px rgba(1, 212, 255, 0.4);
         cursor: pointer;
         transition: 0.3s;
       }
 
       .whatsapp-btn:hover {
         transform: scale(1.1);
+        background: #39eaff;
       }
+      
+      /* Responsividade */
 
-      /* ===== CORREÇÃO GMN ===== */
-      #google .cards-container {
-        flex-wrap: nowrap;
-        overflow-x: auto;
-        justify-content: center;
-        gap: 2rem;
-        overflow: visible !important; /* evita cortar o hover */
-        align-items: flex-start; /* alinha os cards pelo topo */
-      }
-
-      #google .cards-container::-webkit-scrollbar {
-        display: none;
-      }
-
-      #google .card {
-        min-height: 450px;
-        transition: transform 0.3s, border-color 0.3s;
-      }
-
-      #google .card:hover {
-        transform: translateY(-3px);
-        border-color: var(--cor-destaque);
+      @media (min-width: 1025px) {
+        /* Garante 4 cards em GMN em telas grandes */
+        #google .cards-container {
+            flex-wrap: nowrap;
+            overflow-x: auto;
+        }
+        #google .card {
+             flex-shrink: 0;
+        }
       }
 
       @media (max-width: 1024px) {
@@ -299,20 +363,33 @@
       }
 
       @media (max-width: 768px) {
+        header {
+            padding: 1rem;
+        }
+        
+        section {
+            padding: 3rem 0.5rem;
+        }
+        
         .cards-container {
           flex-direction: column;
           align-items: center;
         }
 
+        .card {
+          width: 95%;
+          max-width: 420px;
+          min-height: auto;
+        }
+        
         #google .cards-container {
           flex-wrap: wrap;
           overflow: visible;
           padding-bottom: 1rem;
         }
-
-        .card {
-          width: 100%;
-          max-width: 420px;
+        
+        form {
+            max-width: 95%;
         }
       }
     </style>
@@ -326,8 +403,8 @@
     <section class="hero">
       <h2>Transforme Sua Presença Digital com <span>Cozzi Media</span></h2>
       <p>
-        Gestão profissional de programação de mídias, tráfego pago, automação e produção de
-        conteúdo que gera resultados reais.
+        Gestão profissional de programação de mídias, tráfego pago, automação e
+        produção de conteúdo que gera resultados reais.
       </p>
       <a
         href="https://api.whatsapp.com/send/?phone=5581995387708&text=Ol%C3%A1%21+Tenho+interesse+no+plano+Solicitar+Proposta+%28%29.+Gostaria+de+mais+informa%C3%A7%C3%B5es.&type=phone_number&app_absent=0"
@@ -337,8 +414,8 @@
 
     <!-- Planos de Gestão -->
     <section id="planos">
-      <h3>Planos de Gestão</h3>
-      <p>Gestão Tráfego Pago</p>
+      <h3>Planos de Gestão de Tráfego Pago</h3>
+      <p>Invista onde seu cliente está e alcance novos resultados com campanhas otimizadas.</p>
       <div class="cards-container">
         <div class="card">
           <h4>🚀 Starter</h4>
@@ -360,7 +437,8 @@
         <div class="card" style="border-color: var(--cor-destaque)">
           <h4>
             ⭐ Pro
-            <small style="color: var(--cor-destaque); font-size: 0.9rem"
+            <small
+              style="color: var(--cor-destaque); font-size: 0.9rem"
               >POPULAR</small
             >
           </h4>
@@ -399,11 +477,59 @@
         </div>
       </div>
     </section>
+    
+    <!-- Implementação de CRM (NOVA SEÇÃO) -->
+    <section id="crm">
+      <h3>Integração CRM</h3>
+      <p>Otimize suas vendas e relacionamento com clientes com a implementação de um sistema de CRM completo.</p>
+      <div class="cards-container">
+        <div class="card" style="min-height: 350px;">
+          <h4>⚡ Implementação de Vendas</h4>
+          <span>R$ 2.000 a R$ 6.000 (preço único)</span>
+          <ul>
+            <li>Análise e Mapeamento de Processos de Venda</li>
+            <li>Setup e Configuração da Plataforma (ferramenta não inclusa)</li>
+            <li>Integração com Canais de Comunicação (WhatsApp, Email)</li>
+            <li>Desenho de Automações de Follow-up</li>
+            <li>Treinamento de Equipe e Suporte Inicial</li>
+          </ul>
+          <a
+            href="https://api.whatsapp.com/send/?phone=5581995387708&text=Ol%C3%A1%21+Tenho+interesse+na+Implementa%C3%A7%C3%A3o+de+CRM.+Gostaria+de+um+or%C3%A7amento+personalizado.&type=phone_number&app_absent=0"
+            class="card-btn"
+            >Solicitar Orçamento</a
+          >
+        </div>
+      </div>
+    </section>
 
+    <!-- Gestão de Conteúdo (NOVA SEÇÃO) -->
+    <section id="conteudo">
+      <h3>Gestão de Conteúdo Profissional</h3>
+      <p>Criação estratégica e gerenciamento de conteúdo para suas redes sociais (Instagram, Facebook).</p>
+      <div class="cards-container">
+        <div class="card" style="min-height: 350px;">
+          <h4>✍️ Plano Mensal de Conteúdo</h4>
+          <span>R$ 1.000 a R$ 3.000/mês (sob consulta)</span>
+          <ul>
+            <li>Criação de Linha Editorial Estratégica</li>
+            <li>Produção de artes e legendas (12 a 24 posts/mês)</li>
+            <li>Programação e Agendamento de Publicações</li>
+            <li>Gestão de Interação e Comunidade (Respostas básicas)</li>
+            <li>Planejamento de Stories e Reels</li>
+          </ul>
+          <a
+            href="https://api.whatsapp.com/send/?phone=5581995387708&text=Ol%C3%A1%21+Tenho+interesse+na+Gest%C3%A3o+de+Conte%C3%Bado+Mensal.+Gostaria+de+um+or%C3%A7amento+personalizado.&type=phone_number&app_absent=0"
+            class="card-btn"
+            >Solicitar Orçamento</a
+          >
+        </div>
+      </div>
+    </section>
+    
     <!-- Produção Drone -->
     <section id="producao">
       <h3>🎥 Imagens + Vídeos com Drone + Edições + Entrega</h3>
-      <p>Conteúdos profissionais para suas redes sociais</p>
+      <p>Conteúdos visuais de alta qualidade para suas redes sociais ou marketing institucional.</p>
       <div class="cards-container">
         <div class="card">
           <h4>📸 Pacote Básico</h4>
@@ -455,27 +581,32 @@
 
     <!-- Google Meu Negócio (GMN) -->
     <section id="google">
-      <h3>Google Meu Negócio</h3>
-      <p>Otimização completa para seu negócio aparecer no Google</p>
+      <h3>Google Meu Negócio (GMN)</h3>
+      <p>Otimização completa para seu negócio aparecer nas buscas locais do Google e Google Maps.</p>
 
       <div class="cards-container">
-        <div class="card">
+        <!-- CARD ATUALIZADO (Anual Parcelado GMN) -->
+        <div class="card" style="border-color: var(--cor-destaque)">
           <h4>🏆 Plano Anual GMN</h4>
-          <span>R$ 4.799/ano</span>
+          <span>R$ 1.880/12x</span>
           <ul>
+            <li>Total à Vista: R$ 1.880,00</li>
+            <li>Parcelado: 12 x de R$ 156,66</li>
             <li>Otimização completa do perfil</li>
             <li>Gestão de avaliações</li>
-            <li>Posts semanais</li>
+            <li>Inclusão das artes</li>
             <li>Site institucional incluso</li>
             <li>Relatórios mensais</li>
           </ul>
           <a
-            href="https://api.whatsapp.com/send/?phone=5581995387708&text=Olá! Tenho interesse no plano Plano Anual GMN (R$4.799/ano). Gostaria de mais informações.&type=phone_number&app_absent=0"
+            href="https://api.whatsapp.com/send/?phone=5581995387708&text=Olá! Tenho interesse no plano Anual Parcelado GMN (R$ 1.880,00 ou 12x R$ 156,66). Gostaria de mais informações.&type=phone_number&app_absent=0"
             class="card-btn"
             >Quero o Plano Anual</a
           >
         </div>
-
+        
+        <!-- CARD REMOVIDO: Plano Anual GMN (R$ 4.799/ano) -->
+        
         <div class="card">
           <h4>⚡ Otimização 30 Dias GMN</h4>
           <span>R$ 499</span>
@@ -494,7 +625,7 @@
 
         <div class="card">
           <h4>📅 Plano 3 Meses GMN</h4>
-          <span>R$ 1.275 </span>
+          <span>R$ 1.275</span>
           <ul>
             <li>Setup completo</li>
             <li>Gestão trimestral</li>
@@ -511,99 +642,137 @@
     </section>
 
     <!-- Consultoria -->
-<section id="consultoria">
-  <h3>💼 Consultoria</h3>
-  <p>Aprenda a criar e gerenciar campanhas digitais do zero com acompanhamento especializado</p>
-  <div class="cards-container">
-    <div class="card">
-      <h4>📊 Consultoria Completa</h4>
-      <span>Últimas vagas</span>
-      <ul>
-        <li>Como criar campanhas do zero</li>
-        <li>Diferença e escolha do objetivo de campanha</li>
-        <li>Estrutura: Campanha, conjunto, anúncio</li>
-        <li>Padrão de nomenclatura</li>
-        <li>ABO vs CBO (tipos de orçamento)</li>
-        <li>Estrutura e segmentação</li>
-        <li>Como conectar BM, Instagram e WhatsApp</li>
-        <li>Contingência e estruturação de conta</li>
-        <li>Definição de público ideal
-          <ul style="margin-left: 1rem; list-style-type: disc;">
-            <li>Segmentado</li>
-            <li>Envolvimento</li>
-            <li>Aberto</li>
+    <section id="consultoria">
+      <h3>💼 Consultoria</h3>
+      <p>
+        Aprenda a criar e gerenciar campanhas digitais do zero com
+        acompanhamento especializado.
+      </p>
+      <div class="cards-container">
+        <div class="card">
+          <h4>📊 Consultoria Completa</h4>
+          <span>Últimas vagas</span>
+          <ul>
+            <li>Como criar campanhas do zero</li>
+            <li>Diferença e escolha do objetivo de campanha</li>
+            <li>Estrutura: Campanha, conjunto, anúncio</li>
+            <li>Padrão de nomenclatura</li>
+            <li>ABO vs CBO (tipos de orçamento)</li>
+            <li>Estrutura e segmentação</li>
+            <li>Como conectar BM, Instagram e WhatsApp</li>
+            <li>Contingência e estruturação de conta</li>
+            <li>
+              Definição de público ideal
+              <ul style="margin-left: 1rem; list-style-type: disc">
+                <li>Segmentado</li>
+                <li>Envolvimento</li>
+                <li>Aberto</li>
+              </ul>
+            </li>
+            <li>Temperatura do lead (frio e quente)</li>
+            <li>Videoview (criação de públicos personalizados por % de vídeo assistido)</li>
+            <li>Call estratégica de 1h30 a 2h</li>
+            <li>Acompanhamento por 7 dias via WhatsApp</li>
+            <li>Empresário envia as imagens e vídeos</li>
           </ul>
-        </li>
-        <li>Temperatura do lead (frio e quente)</li>
-        <li>Videoview (criação de públicos personalizados por % de vídeo assistido)</li>
-        <li>Call estratégica de 1h30 a 2h</li>
-        <li>Acompanhamento por 7 dias via WhatsApp</li>
-        <li>Empresário envia as imagens e vídeos</li>
-      </ul>
-      <a
-        href="https://api.whatsapp.com/send/?phone=5581995387708&text=Ol%C3%A1%21+Tenho+interesse+na+Consultoria+Completa+Gostaria+de+mais+informa%C3%A7%C3%B5es.&type=phone_number&app_absent=0"
-        class="card-btn"
-        >Quero a Consultoria</a
-      >
-    </div>
-  </div>
-</section>
+          <a
+            href="https://api.whatsapp.com/send/?phone=5581995387708&text=Ol%C3%A1%21+Tenho+interesse+na+Consultoria+Completa+Gostaria+de+mais+informa%C3%A7%C3%B5es.&type=phone_number&app_absent=0"
+            class="card-btn"
+            >Quero a Consultoria</a
+          >
+        </div>
+      </div>
+    </section>
 
-   <!-- Contato -->
-<section id="contato">
-  <h3>Entre em Contato</h3>
-  <p>Preencha o formulário e tire suas dúvidas</p>
+    <!-- Contato -->
+    <section id="contato">
+      <h3>Entre em Contato</h3>
+      <p>Preencha o formulário e tire suas dúvidas ou solicite um orçamento detalhado.</p>
 
-  <form id="form-contato">
-    <label for="nome">Nome da Empresa</label>
-    <input
-      id="nome"
-      type="text"
-      placeholder="Digite o nome da sua empresa"
-      required
-    />
+      <form id="form-contato">
+        <div class="input-group">
+          <label for="nome">Nome da Empresa</label>
+          <input
+            id="nome"
+            type="text"
+            placeholder="Digite o nome da sua empresa"
+            required
+          />
+        </div>
+        
+        <div class="input-group">
+          <label for="servico">Serviço de Interesse</label>
+          <select id="servico" required>
+            <option>Gestão de Tráfego Pago</option>
+            <option>Imagens + Vídeos com Drone + Edições + Entrega</option>
+            <option>Google Meu Negócio</option>
+            <option>Gestão de Conteúdo</option>
+            <option>Implementação de CRM</option>
+            <option>Consultoria</option>
+            <option>Todos os Serviços</option>
+          </select>
+        </div>
+        
+        <!-- CAMPO DE FILIAIS -->
+        <div class="checkbox-group">
+            <input type="checkbox" id="filiais" />
+            <label for="filiais">Possuímos 2 ou mais filiais (acréscimo de 30% no valor do plano).</label>
+        </div>
 
-    <label for="servico">Serviço de Interesse</label>
-    <select id="servico" required>
-      <option>Gestão de Tráfego Pago</option>
-      <option>Imagens + Vídeos com Drone + Edições + Entrega</option>
-      <option>Google Meu Negócio</option>
-      <option>Consultoria</option>
-      <option>Todos os Serviços</option>
-    </select>
+        <div class="input-group">
+          <label for="mensagem">Mensagem / Observações (opcional)</label>
+          <textarea
+            id="mensagem"
+            placeholder="Conte-nos sobre seu projeto ou dúvidas específicas (opcional)"
+          ></textarea>
+        </div>
 
-    <label for="mensagem">Mensagem / Observações (opcional)</label>
-    <textarea
-      id="mensagem"
-      placeholder="Conte-nos sobre seu projeto (opcional)"
-    ></textarea>
+        <button type="submit">💬 Enviar pelo WhatsApp</button>
+      </form>
 
-    <button type="submit">💬 Enviar pelo WhatsApp</button>
-  </form>
+      <script>
+        const form = document.getElementById("form-contato");
+        
+        // Função para garantir o scroll suave ao clicar nos links internos
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+        
+        // Lógica de envio do formulário
+        form.addEventListener("submit", function (e) {
+          e.preventDefault();
 
-  <script>
-    const form = document.getElementById("form-contato");
-    form.addEventListener("submit", function (e) {
-      e.preventDefault();
+          const nome = document.getElementById("nome").value.trim();
+          const servico = document.getElementById("servico").value;
+          const mensagem = document.getElementById("mensagem").value.trim();
+          const temFiliais = document.getElementById("filiais").checked; 
 
-      const nome = document.getElementById("nome").value.trim();
-      const servico = document.getElementById("servico").value;
-      const mensagem = document.getElementById("mensagem").value.trim();
+          // Monta a mensagem para o WhatsApp, utilizando codificação de URL para quebras de linha (%0A)
+          let texto = `Ol%C3%A1%21+Tenho+interesse+nos+servi%C3%A7os+da+Cozzi+Media.%0A`;
+          texto += `Nome+da+empresa%3A+${encodeURIComponent(nome)}%0A`;
+          texto += `Servi%C3%A7o+de+interesse%3A+${encodeURIComponent(servico)}`;
+          
+          if (temFiliais) {
+            texto += `%0AFiliais%3A+SIM+(Acr%C3%A9scimo+de+30%25+no+valor+do+plano)`;
+          } else {
+            texto += `%0AFiliais%3A+N%C3%83O`;
+          }
 
-      // Monta a mensagem para o WhatsApp
-      let texto = `Ol%C3%A1%21+Tenho+interesse+nos+servi%C3%A7os+da+Cozzi+Media.%0A`;
-      texto += `Nome da empresa: ${encodeURIComponent(nome)}%0A`;
-      texto += `Serviço de interesse: ${encodeURIComponent(servico)}`;
 
-      if (mensagem) {
-        texto += `%0AMensagem/Observações: ${encodeURIComponent(mensagem)}`;
-      }
+          if (mensagem) {
+            texto += `%0A%0AMensagem%2FObserva%C3%A7%C3%B5es%3A+${encodeURIComponent(mensagem)}`;
+          }
 
-      const url = `https://api.whatsapp.com/send/?phone=5581995387708&text=${texto}&type=phone_number&app_absent=0`;
-      window.open(url, "_blank");
-    });
-  </script>
-</section>
+          const url = `https://api.whatsapp.com/send/?phone=5581995387708&text=${texto}&type=phone_number&app_absent=0`;
+          window.open(url, "_blank");
+        });
+      </script>
+    </section>
 
     <footer>
       <h4>Cozzi Media</h4>
@@ -611,14 +780,11 @@
       <p>© 2022 Cozzi Media. Todos os direitos reservados.</p>
     </footer>
 
-<div
-  class="whatsapp-btn"
-  onclick="window.location.href='https://api.whatsapp.com/send/?phone=5581995387708&text=Opa%2C+vim+pelo+site';"
->
-  💬
-</div>
-
+    <div
+      class="whatsapp-btn"
+      onclick="window.location.href='https://api.whatsapp.com/send/?phone=5581995387708&text=Opa%2C+vim+pelo+site';"
+    >
+      💬
+    </div>
   </body>
 </html>
-
-
