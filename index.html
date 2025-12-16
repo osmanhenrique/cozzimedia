@@ -144,8 +144,9 @@
         box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
       }
       
-      #crm .card, #conteudo .card {
-          min-height: 350px; /* Ajuste para cartões com menos conteúdo */
+      /* Ajuste para cartões com menos conteúdo, agora apenas para a seção de Conteúdo */
+      #conteudo .card { 
+          min-height: 350px; 
       }
 
       .card:hover {
@@ -588,13 +589,14 @@
       <h3>🎥 Imagens + Vídeos com Drone + Edições + Entrega </h3>
       <p>Conteúdos visuais de alta qualidade para suas redes sociais ou marketing institucional.</p>
       <div class="cards-container">
+        <!-- PACIENTE BÁSICO (ATUALIZADO) -->
         <div class="card">
           <h4>📸 Pacote Básico</h4>
           <span>R$ 349</span>
           <ul>
             <li>3 vídeos (até 1 minuto)</li>
             <li>3 fotos</li>
-            <li>Edição básica</li>
+            <li>Entrega de conteúdos via Google Drive</li>
           </ul>
           <a
             href="https://api.whatsapp.com/send/?phone=5581995387708&text=Olá! Tenho interesse no Pacote Básico (R$ 349). Gostaria de mais informações.&type=phone_number&app_absent=0"
@@ -603,6 +605,7 @@
           >
         </div>
 
+        <!-- PACIENTE INTERMEDIÁRIO (ATUALIZADO) -->
         <div class="card">
           <h4>🎬 Pacote Intermediário</h4>
           <span>R$ 649</span>
@@ -610,6 +613,7 @@
             <li>5 vídeos (até 1 minuto e meio)</li>
             <li>5 fotos</li>
             <li>Edição básica</li>
+            <li>Entrega de conteúdos via Google Drive</li>
           </ul>
           <a
             href="https://api.whatsapp.com/send/?phone=5581995387708&text=Olá! Tenho interesse no Pacote Intermediário (R$ 649). Gostaria de mais informações.&type=phone_number&app_absent=0"
@@ -618,6 +622,7 @@
           >
         </div>
 
+        <!-- PACIENTE PROFISSIONAL (ATUALIZADO) -->
         <div class="card">
           <h4>🎥 Pacote Profissional</h4>
           <span>R$ 859</span>
@@ -626,6 +631,7 @@
             <li>5 fotos</li>
             <li>Edição dinâmica</li>
             <li>Vídeo institucional para redes sociais</li>
+            <li>Entrega de conteúdos via Google Drive</li>
           </ul>
           <a
             href="https://api.whatsapp.com/send/?phone=5581995387708&text=Olá! Tenho interesse no Pacote Profissional (R$ 859). Gostaria de mais informações.&type=phone_number&app_absent=0"
@@ -703,30 +709,6 @@
       </div>
     </section>
     
-    <!-- 6. Implementação de CRM -->
-    <section id="crm">
-      <h3>Integração CRM</h3>
-      <p>Otimize suas vendas e relacionamento com clientes com a implementação de um sistema de CRM completo.</p>
-      <div class="cards-container">
-        <div class="card" style="min-height: 350px;">
-          <h4>⚡ Implementação de Vendas</h4>
-          <span>R$ 2.000 a R$ 6.000 (preço único)</span>
-          <ul>
-            <li>Análise e Mapeamento de Processos de Venda</li>
-            <li>Setup e Configuração da Plataforma (ferramenta não inclusa)</li>
-            <li>Integração com Canais de Comunicação (WhatsApp, Email)</li>
-            <li>Desenho de Automações de Follow-up</li>
-            <li>Treinamento de Equipe e Suporte Inicial</li>
-          </ul>
-          <a
-            href="https://api.whatsapp.com/send/?phone=5581995387708&text=Ol%C3%A1%21+Tenho+interesse+na+Implementa%C3%A7%C3%A3o+de+CRM.+Gostaria+de+um+or%C3%A7amento+personalizado.&type=phone_number&app_absent=0"
-            class="card-btn"
-            >Solicitar Orçamento</a
-          >
-        </div>
-      </div>
-    </section>
-
     <!-- Contato -->
     <section id="contato">
       <h3>Entre em Contato</h3>
@@ -750,7 +732,6 @@
             <option>Imagens + Vídeos com Drone + Edições + Entrega</option>
             <option>Google Meu Negócio</option>
             <option>Gestão de Conteúdo</option>
-            <option>Implementação de CRM</option>
             <option>Consultoria</option>
             <option>Todos os Serviços</option>
           </select>
