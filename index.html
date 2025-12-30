@@ -3,812 +3,1160 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Cozzi Media</title>
+    <title>Cozzi Media | Escale Seu Negócio</title>
+    <meta name="description" content="Gestão de Tráfego Pago, Google Meu Negócio e Produção Audiovisual. Transforme sua presença digital." />
     <link
       rel="icon"
       type="image/png"
       href="https://i.postimg.cc/wBsHdKMn/logo-Copia.jpg"
       onerror="this.onerror=null; this.href='https://placehold.co/32x32/01d4ff/000?text=CM'"
     />
+    <!-- Fontes -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+    
     <style>
       :root {
-        --cor-fundo: #0b0f16;
-        --cor-card: #111827;
-        --cor-borda: #1e293b;
-        --cor-texto: #f1f5f9;
-        --cor-destaque: #01d4ff;
-        --cor-secundaria: #94a3b8;
+        --primary: #01d4ff;
+        --primary-glow: rgba(1, 212, 255, 0.5);
+        --secondary: #39eaff;
+        --bg-dark: #0b0f16;
+        --bg-card: rgba(17, 24, 39, 0.7);
+        --bg-card-hover: rgba(30, 41, 59, 0.9);
+        --text-main: #f1f5f9;
+        --text-muted: #94a3b8;
+        --border: rgba(255, 255, 255, 0.1);
+        --gradient: linear-gradient(135deg, #01d4ff 0%, #39eaff 100%);
       }
 
       * {
         box-sizing: border-box;
         margin: 0;
         padding: 0;
+        scroll-behavior: smooth;
       }
 
       body {
         font-family: "Inter", sans-serif;
-        background: var(--cor-fundo);
-        color: var(--cor-texto);
+        background-color: var(--bg-dark);
+        background-image: 
+          radial-gradient(circle at 15% 50%, rgba(1, 212, 255, 0.08), transparent 25%),
+          radial-gradient(circle at 85% 30%, rgba(57, 234, 255, 0.05), transparent 25%);
+        color: var(--text-main);
+        line-height: 1.6;
+        overflow-x: hidden;
       }
 
+      /* Utilitários */
+      .container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 1.5rem;
+      }
+
+      .text-gradient {
+        background: var(--gradient);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+      }
+      
+      /* Ajuste para o menu fixo não cobrir o título ao clicar */
+      section {
+        scroll-margin-top: 100px;
+      }
+
+      .btn {
+        display: inline-block;
+        background: var(--primary);
+        color: #000;
+        font-weight: 700;
+        padding: 1rem 2rem;
+        border-radius: 50px;
+        text-decoration: none;
+        transition: all 0.3s ease;
+        box-shadow: 0 4px 15px rgba(1, 212, 255, 0.3);
+        border: none;
+        cursor: pointer;
+        text-align: center;
+      }
+
+      .btn:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 8px 25px rgba(1, 212, 255, 0.5);
+        background: var(--secondary);
+      }
+
+      .btn-outline {
+        background: transparent;
+        border: 2px solid var(--primary);
+        color: var(--primary);
+        box-shadow: none;
+      }
+
+      .btn-outline:hover {
+        background: var(--primary);
+        color: #000;
+      }
+
+      .section-title {
+        text-align: center;
+        font-size: clamp(2rem, 4vw, 2.5rem);
+        font-weight: 800;
+        margin-bottom: 1rem;
+      }
+
+      .section-subtitle {
+        text-align: center;
+        color: var(--text-muted);
+        font-size: 1.1rem;
+        max-width: 600px;
+        margin: 0 auto 4rem auto;
+      }
+
+      /* Header */
       header {
+        position: fixed;
+        top: 0;
+        width: 100%;
+        background: rgba(11, 15, 22, 0.85);
+        backdrop-filter: blur(10px);
+        z-index: 100;
+        border-bottom: 1px solid var(--border);
+        padding: 1rem 0;
+      }
+
+      nav {
         display: flex;
         justify-content: space-between;
         align-items: center;
-        padding: 1.5rem 3rem;
-        position: sticky;
-        top: 0;
-        background: var(--cor-fundo);
-        z-index: 10;
-        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
       }
 
-      header h1 {
-        color: var(--cor-destaque);
-        font-size: 1.6rem;
-        font-weight: 700;
-        cursor: pointer;
-      }
-
-      header a {
-        background: var(--cor-destaque);
-        color: #000;
-        text-decoration: none;
-        font-weight: 600;
-        padding: 0.6rem 1rem;
-        border-radius: 8px;
-        transition: background 0.3s;
-      }
-      
-      header a:hover {
-          background: #39eaff;
-      }
-
-      .hero {
-        text-align: center;
-        padding: 6rem 1rem 4rem;
-      }
-
-      .hero h2 {
-        font-size: clamp(1.8rem, 5vw, 2.5rem);
+      .logo {
+        font-size: 1.5rem;
         font-weight: 800;
-        line-height: 1.3;
+        color: var(--text-main);
+        text-decoration: none;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
       }
 
-      .hero h2 span {
-        color: var(--cor-destaque);
+      .logo span { color: var(--primary); }
+
+      .nav-links {
+        display: none;
+      }
+
+      @media(min-width: 768px) {
+        .nav-links {
+          display: flex;
+          align-items: center;
+          gap: 2rem;
+        }
+        /* Ajuste para não afetar o botão */
+        .nav-links a:not(.btn) {
+          color: var(--text-muted);
+          text-decoration: none;
+          font-weight: 500;
+          transition: color 0.3s;
+        }
+        .nav-links a:not(.btn):hover { color: var(--primary); }
+        
+        /* AJUSTE SOLICITADO: Botão do menu com cor azul escuro 
+        */
+        .nav-links .btn {
+            background-color: #001a24 !important; /* Azul escuro fundo */
+            color: #ffffff !important; /* Texto branco */
+            border: 1px solid var(--primary); /* Borda fina ciano para destaque */
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+        }
+        
+        .nav-links .btn:hover {
+            background-color: var(--primary) !important;
+            color: #000 !important;
+            box-shadow: 0 8px 25px rgba(1, 212, 255, 0.4);
+        }
+      }
+
+      /* Hero Section */
+      .hero {
+        padding: 8rem 0 4rem;
+        text-align: center;
+        position: relative;
+      }
+
+      .hero h1 {
+        font-size: clamp(2.5rem, 6vw, 4rem);
+        font-weight: 800;
+        line-height: 1.2;
+        margin-bottom: 1.5rem;
       }
 
       .hero p {
-        color: var(--cor-secundaria);
-        margin-top: 1rem;
-        font-size: clamp(1rem, 2vw, 1.1rem);
+        font-size: 1.2rem;
+        color: var(--text-muted);
         max-width: 700px;
-        margin-left: auto;
-        margin-right: auto;
+        margin: 0 auto 2.5rem;
       }
 
-      .hero a {
-        display: inline-block;
-        margin-top: 2rem;
-        background: var(--cor-destaque);
-        color: #000;
-        text-decoration: none;
-        font-weight: 600;
-        padding: 0.9rem 1.8rem;
-        border-radius: 10px;
-        transition: 0.3s;
-      }
-
-      .hero a:hover {
-        opacity: 0.8;
-      }
-
-      section {
-        padding: 4rem 1rem;
-        text-align: center;
-      }
-
-      section h3 {
-        font-size: clamp(1.6rem, 4vw, 2rem);
-        margin-bottom: 0.5rem;
-        color: var(--cor-destaque);
-      }
-
-      section p {
-        color: var(--cor-secundaria);
-        margin-bottom: 3rem;
-        font-size: 1.1rem;
-      }
-
-      .cards-container {
+      .hero-badges {
         display: flex;
-        flex-wrap: wrap;
         justify-content: center;
+        gap: 1.5rem;
+        flex-wrap: wrap;
+        margin-top: 3rem;
+        font-size: 0.9rem;
+        color: var(--text-muted);
+      }
+      
+      .hero-badges span {
+          display: flex;
+          align-items: center;
+          gap: 0.5rem;
+      }
+
+      /* Social Proof */
+      .social-proof {
+        padding: 2rem 0;
+        border-top: 1px solid var(--border);
+        border-bottom: 1px solid var(--border);
+        background: rgba(255,255,255,0.02);
+        margin-bottom: 4rem;
+      }
+      
+      .proof-container {
+          display: flex;
+          flex-wrap: wrap;
+          justify-content: center;
+          gap: 2rem;
+          text-align: center;
+      }
+
+      .stat-item h4 {
+          font-size: 2rem;
+          color: var(--primary);
+          font-weight: 800;
+      }
+      .stat-item p {
+          font-size: 0.9rem;
+          color: var(--text-muted);
+      }
+
+      /* Cards Grid System */
+      .pricing-section {
+        padding: 4rem 0;
+      }
+
+      .cards-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
         gap: 2rem;
+        justify-content: center;
       }
 
       .card {
-        background: var(--cor-card);
-        border: 1px solid var(--cor-borda);
-        border-radius: 12px;
-        padding: 2rem;
-        text-align: left;
-        width: 300px;
+        background: var(--bg-card);
+        border: 1px solid var(--border);
+        border-radius: 20px;
+        padding: 2.5rem 2rem;
         display: flex;
         flex-direction: column;
-        justify-content: space-between;
-        transition: 0.3s;
-        min-height: 450px;
-        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
-      }
-      
-      /* Ajuste para cartões com menos conteúdo, agora apenas para a seção de Conteúdo */
-      #conteudo .card { 
-          min-height: 350px; 
+        transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        position: relative;
+        overflow: hidden;
       }
 
       .card:hover {
-        border-color: var(--cor-destaque);
-        transform: translateY(-5px); /* Efeito mais visível */
-        box-shadow: 0 8px 15px rgba(1, 212, 255, 0.15); /* Sombra do destaque */
+        transform: translateY(-10px);
+        background: var(--bg-card-hover);
+        border-color: rgba(1, 212, 255, 0.3);
       }
 
-      .card h4 {
-        font-size: 1.4rem;
-        color: var(--cor-texto);
+      /* Destaque / Mais Vendido */
+      .card.featured {
+        border: 2px solid var(--primary);
+        background: rgba(1, 212, 255, 0.03);
+        box-shadow: 0 0 30px rgba(1, 212, 255, 0.1);
+      }
+
+      /* AJUSTE SOLICITADO: Ribbon Centralizada */
+      .ribbon {
+        position: absolute;
+        top: 0;
+        left: 50%;
+        transform: translateX(-50%);
+        right: auto;
+        background: var(--gradient);
+        color: #001a24;
+        font-weight: 800;
+        padding: 0.5rem 1.5rem;
+        border-bottom-left-radius: 15px;
+        border-bottom-right-radius: 15px;
+        font-size: 0.75rem;
+        box-shadow: 0 4px 15px rgba(1, 212, 255, 0.3);
+        z-index: 10;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        width: auto;
+        white-space: nowrap;
+      }
+
+      .card-header {
+        margin-bottom: 2rem;
+        border-bottom: 1px solid var(--border);
+        padding-bottom: 1.5rem;
+      }
+      
+      /* TAG DE GESTÃO (NOVO) */
+      .card-tag {
+        display: inline-block;
+        background: var(--primary);
+        color: #000;
+        padding: 0.4rem 1rem;
+        border-radius: 50px;
+        font-size: 0.8rem;
+        font-weight: 800;
+        text-transform: uppercase;
+        margin-bottom: 1rem;
+        box-shadow: 0 0 10px rgba(1, 212, 255, 0.4);
+      }
+
+      .card h3 {
+        font-size: 1.5rem;
         margin-bottom: 0.5rem;
       }
 
-      .card span {
-        color: var(--cor-destaque);
-        font-size: 1.2rem;
-        font-weight: 700;
+      .price {
+        font-size: 2rem;
+        font-weight: 800;
+        color: var(--text-main);
+      }
+      
+      .price small {
+          font-size: 1rem;
+          font-weight: 400;
+          color: var(--text-muted);
+      }
+
+      .card-desc {
+        color: var(--text-muted);
+        font-size: 0.9rem;
+        margin-top: 0.5rem;
       }
 
       .card ul {
         list-style: none;
-        padding: 0;
-        margin: 1rem 0 1.5rem;
+        margin-bottom: 2rem;
         flex-grow: 1;
       }
 
       .card li {
-        color: var(--cor-secundaria);
-        margin: 0.5rem 0;
+        margin-bottom: 0.8rem;
+        display: flex;
+        align-items: flex-start;
+        gap: 0.7rem;
         font-size: 0.95rem;
+        color: #cbd5e1;
       }
 
       .card li::before {
-        content: "✔";
-        color: var(--cor-destaque);
-        margin-right: 0.4rem;
+        content: "✓";
+        color: var(--primary);
         font-weight: bold;
+        flex-shrink: 0;
       }
       
-      /* Estilo para a lista aninhada na Consultoria */
+      /* Estilo para listas aninhadas (sem checkmark) */
       .card ul ul {
-        margin: 0.5rem 0 0.5rem 1rem;
-        list-style-type: disc;
-        flex-grow: 0;
-      }
-
-      .card ul ul li::before {
-        content: ""; /* Remove o ícone "✔" dos itens aninhados */
-      }
-
-      .card a.card-btn {
-        display: block;
-        text-align: center;
-        background: var(--cor-destaque);
-        color: #000;
-        padding: 0.9rem;
-        border-radius: 8px;
-        font-weight: 600;
-        text-decoration: none;
-        transition: background 0.3s;
-        margin-top: auto;
-      }
-
-      .card a.card-btn:hover {
-        background: #39eaff;
-      }
-
-      form {
-        max-width: 480px;
-        margin: auto;
-        background: var(--cor-card);
-        padding: 2rem;
-        border-radius: 12px;
-        border: 1px solid var(--cor-borda);
-        text-align: left;
-        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
-      }
-
-      form label {
-        display: block;
-        margin-bottom: 0.3rem;
-        font-weight: 600;
-        color: var(--cor-texto);
-      }
-
-      form .input-group {
-        margin-bottom: 1rem;
-      }
-      
-      form .checkbox-group {
-          display: flex;
-          align-items: flex-start;
-          margin-bottom: 1rem;
-          padding: 0.8rem;
-          border-radius: 8px;
-          background: #1e293b;
-          color: var(--cor-secundaria);
-          font-size: 0.9rem;
-      }
-      
-      form input[type="checkbox"] {
-          width: auto;
-          margin-right: 0.7rem;
-          margin-top: 3px;
-          flex-shrink: 0;
-          cursor: pointer;
-      }
-      
-      form .checkbox-group label {
           margin-bottom: 0;
-          font-weight: 400;
-          color: var(--cor-secundaria);
-          cursor: pointer;
-      }
-
-      form input,
-      form select,
-      form textarea {
-        width: 100%;
-        padding: 0.8rem;
-        margin-bottom: 1rem;
-        border-radius: 8px;
-        border: 1px solid var(--cor-borda);
-        background: #1e293b;
-        color: white;
+          margin-top: 0.5rem;
+          padding-left: 0.5rem;
       }
       
-      form select {
-          appearance: none;
-          background: #1e293b url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%2394a3b8'%3E%3Cpath d='M7 10l5 5 5-5z'/%3E%3C/svg%3E") no-repeat right 0.8rem center;
-          background-size: 1em;
-          cursor: pointer;
+      .card ul ul li {
+          font-size: 0.9rem;
+          color: var(--text-muted);
+          margin-bottom: 0.4rem;
+          display: block;
+          padding-left: 1.5rem;
+          position: relative;
+      }
+      
+      .card ul ul li::before {
+          content: "•";
+          color: var(--text-muted);
+          position: absolute;
+          left: 0;
+          font-weight: normal;
+      }
+      
+      /* AJUSTE SOLICITADO: Botões dos cards centralizados 
+         Alterado de width: 100% para auto + margin auto
+      */
+      .card-btn {
+          width: auto;
+          min-width: 80%; /* Garante um tamanho mínimo bonito */
+          max-width: 90%;
+          margin: 0 auto; /* Centraliza horizontalmente */
+          display: block;
+          
+          padding: 1rem;
+          border-radius: 12px;
+          background: rgba(255, 255, 255, 0.1);
+          color: white;
+          text-align: center;
+          text-decoration: none;
+          font-weight: 600;
+          transition: 0.3s;
+          border: 1px solid transparent;
+      }
+      
+      .card.featured .card-btn,
+      .card:hover .card-btn {
+          background: var(--primary);
+          color: #000;
+          box-shadow: 0 4px 15px rgba(1, 212, 255, 0.3);
       }
 
-      form textarea {
-        min-height: 120px;
-        resize: vertical;
+      /* FAQ Section */
+      .faq-section {
+        padding: 4rem 0;
+        background: rgba(255,255,255,0.02);
       }
 
-      form button {
+      .accordion {
+        max-width: 800px;
+        margin: 0 auto;
+      }
+
+      .accordion-item {
+        border-bottom: 1px solid var(--border);
+        margin-bottom: 1rem;
+      }
+
+      .accordion-header {
         width: 100%;
-        background: var(--cor-destaque);
-        color: #000;
+        background: none;
         border: none;
-        padding: 1rem;
-        border-radius: 8px;
-        font-size: 1rem;
+        padding: 1.5rem 0;
+        text-align: left;
+        color: var(--text-main);
+        font-size: 1.1rem;
         font-weight: 600;
         cursor: pointer;
-        transition: background 0.3s;
-      }
-      
-      form button:hover {
-          background: #39eaff;
-      }
-
-      footer {
-        text-align: center;
-        padding: 3rem 1rem;
-        background: var(--cor-fundo);
-        color: var(--cor-secundaria);
-        border-top: 1px solid var(--cor-borda);
-      }
-
-      footer h4 {
-        color: var(--cor-destaque);
-        margin-bottom: 0.5rem;
-      }
-
-      .whatsapp-btn {
-        position: fixed;
-        bottom: 25px;
-        right: 25px;
-        background: var(--cor-destaque);
-        color: #000;
-        width: 55px;
-        height: 55px;
-        border-radius: 50%;
         display: flex;
+        justify-content: space-between;
         align-items: center;
-        justify-content: center;
-        font-size: 24px;
-        box-shadow: 0 0 15px rgba(1, 212, 255, 0.4);
-        cursor: pointer;
+      }
+
+      .accordion-header::after {
+        content: '+';
+        font-size: 1.5rem;
+        color: var(--primary);
         transition: 0.3s;
       }
 
-      .whatsapp-btn:hover {
-        transform: scale(1.1);
-        background: #39eaff;
+      .accordion-header.active::after {
+        transform: rotate(45deg);
+      }
+
+      .accordion-content {
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.3s ease-out;
+        color: var(--text-muted);
       }
       
-      /* Responsividade */
-
-      @media (min-width: 1025px) {
-        /* Garante 4 cards em GMN em telas grandes */
-        #google .cards-container {
-            flex-wrap: nowrap;
-            overflow-x: auto;
-        }
-        #google .card {
-             flex-shrink: 0;
-        }
+      .accordion-content p {
+          padding-bottom: 1.5rem;
       }
 
-      @media (max-width: 1024px) {
-        .hero {
-          padding-top: 4.5rem;
-        }
+      /* Formulário */
+      .contact-section {
+        padding: 6rem 0;
+      }
 
-        header {
-          padding: 1rem 1.2rem;
-        }
+      .contact-form {
+        max-width: 600px;
+        margin: 0 auto;
+        background: var(--bg-card);
+        padding: 3rem;
+        border-radius: 20px;
+        border: 1px solid var(--border);
+        box-shadow: 0 20px 50px rgba(0,0,0,0.3);
+        text-align: left; /* ALINHAMENTO À ESQUERDA */
+      }
+      
+      /* AJUSTE ESPECÍFICO: Centralizar cabeçalho dos cards de Consultoria */
+      #consultoria .card-header {
+          text-align: center;
+      }
+
+      .form-group {
+        margin-bottom: 1.5rem;
+      }
+
+      .form-group label {
+        display: block;
+        margin-bottom: 0.5rem;
+        font-weight: 500;
+        font-size: 0.9rem;
+      }
+
+      /* UPDATED FORM CONTROLS - WHITE BG, BLACK TEXT, LEFT ALIGN */
+      .form-control {
+        width: 100%;
+        padding: 1rem;
+        background: #f8fafc; /* Light background */
+        border: 1px solid rgba(255,255,255,0.1);
+        border-radius: 10px;
+        color: #0f172a; /* Black/Dark text */
+        font-family: inherit;
+        transition: 0.3s;
+        text-align: left; /* ALINHAMENTO À ESQUERDA */
+      }
+      
+      .form-control:focus {
+          background: #ffffff;
+          border-color: var(--primary);
+          outline: none;
+      }
+
+      .form-control::placeholder {
+          color: #94a3b8; /* Darker placeholder for contrast */
+      }
+      
+      /* Ensure select options are readable */
+      option {
+          background: #ffffff;
+          color: #000;
+      }
+      
+      /* CHECKBOX ALIGNMENT FIX */
+      .checkbox-wrapper {
+          display: flex;
+          align-items: center; /* Alinha verticalmente ao centro */
+          justify-content: flex-start; /* ALINHAMENTO À ESQUERDA */
+          gap: 12px;
+          background: rgba(255,255,255,0.05);
+          padding: 1rem;
+          border-radius: 8px;
+          margin-bottom: 1.5rem;
+          border: 1px solid transparent;
+          transition: 0.3s;
+      }
+      
+      .checkbox-wrapper:hover {
+          border-color: rgba(255,255,255,0.1);
+          background: rgba(255,255,255,0.08);
+      }
+      
+      .checkbox-wrapper input {
+          width: 20px;
+          height: 20px;
+          cursor: pointer;
+          margin: 0; /* Remove margens padrão */
+          accent-color: var(--primary); /* Cor do tema */
+          flex-shrink: 0; /* Impede que o checkbox encolha */
+      }
+      
+      .checkbox-wrapper label {
+          margin: 0;
+          font-size: 0.95rem;
+          color: var(--text-muted);
+          cursor: pointer;
+          line-height: 1.4;
+      }
+
+      /* Footer */
+      footer {
+        text-align: center;
+        padding: 3rem 0;
+        border-top: 1px solid var(--border);
+        font-size: 0.9rem;
+        color: var(--text-muted);
+      }
+
+      /* Whatsapp Button */
+      .floating-wa {
+        position: fixed;
+        bottom: 30px;
+        right: 30px;
+        width: 60px;
+        height: 60px;
+        background: #25D366;
+        border-radius: 50%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        box-shadow: 0 4px 15px rgba(37, 211, 102, 0.4);
+        z-index: 999;
+        transition: 0.3s;
+        cursor: pointer;
+      }
+
+      .floating-wa:hover {
+        transform: scale(1.1);
+      }
+      
+      .floating-wa svg {
+          width: 35px;
+          height: 35px;
+          fill: white;
+      }
+      
+      /* Back to Top Button */
+      .back-to-top {
+          position: fixed;
+          bottom: 100px;
+          right: 38px; /* Centralizado em relação ao botão do Whats (60px vs 44px) */
+          width: 44px;
+          height: 44px;
+          background: rgba(11, 15, 22, 0.9);
+          border: 1px solid var(--primary);
+          color: var(--primary);
+          border-radius: 50%;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          z-index: 998;
+          text-decoration: none;
+          transition: all 0.3s ease;
+          opacity: 0;
+          pointer-events: none;
+          box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+      }
+      
+      .back-to-top.visible {
+          opacity: 1;
+          pointer-events: auto;
+      }
+      
+      .back-to-top:hover {
+          background: var(--primary);
+          color: #000;
+          transform: translateY(-3px);
+          box-shadow: 0 0 15px rgba(1, 212, 255, 0.4);
+      }
+      
+      .back-to-top svg {
+          width: 20px;
+          height: 20px;
+          fill: currentColor;
       }
 
       @media (max-width: 768px) {
-        header {
-            padding: 1rem;
-        }
-        
-        section {
-            padding: 3rem 0.5rem;
-        }
-        
-        .cards-container {
-          flex-direction: column;
-          align-items: center;
-        }
-
-        .card {
-          width: 95%;
-          max-width: 420px;
-          min-height: auto;
-        }
-        
-        #google .cards-container {
-          flex-wrap: wrap;
-          overflow: visible;
-          padding-bottom: 1rem;
-        }
-        
-        form {
-            max-width: 95%;
-        }
+        .hero h1 { font-size: 2.5rem; }
+        .contact-form { padding: 1.5rem; }
+      }
+      
+      /* Animação de entrada */
+      .fade-in {
+          opacity: 0;
+          transform: translateY(30px);
+          transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+      }
+      
+      .fade-in.visible {
+          opacity: 1;
+          transform: translateY(0);
       }
     </style>
   </head>
   <body>
+    
+    <!-- Navbar -->
     <header>
-      <h1>Cozzi Media</h1>
-      <a href="#contato">Fale Conosco</a>
+      <div class="container">
+        <nav>
+          <a href="#" class="logo">
+            Cozzi<span>Media</span>
+          </a>
+          <div class="nav-links">
+            <a href="#trafego">Tráfego</a>
+            <a href="#gmn">Google</a>
+            <a href="#drone">Drone</a>
+            <a href="#consultoria">Consultoria</a>
+            <a href="#contato" class="btn" style="padding: 0.5rem 1.5rem; font-size: 0.9rem;">Fale Conosco</a>
+          </div>
+        </nav>
+      </div>
     </header>
 
+    <!-- Hero Section -->
     <section class="hero">
-      <h2>Transforme Sua Presença Digital com <span>Cozzi Media</span></h2>
-      <p>
-        Gestão profissional de programação de mídias, tráfego pago, automação e
-        produção de conteúdo que gera resultados reais.
-      </p>
-      <a
-        href="https://api.whatsapp.com/send/?phone=5581995387708&text=Ol%C3%A1%21+Tenho+interesse+no+plano+Solicitar+Proposta+%28%29.+Gostaria+de+mais+informa%C3%A7%C3%B5es.&type=phone_number&app_absent=0"
-        >💬 Solicitar Proposta</a
-      >
-    </section>
-
-    <!-- 1. Planos de Gestão de Tráfego Pago -->
-    <section id="planos">
-      <h3>Planos de Gestão de Tráfego Pago</h3>
-      <p>Invista onde seu cliente está e alcance novos resultados com campanhas otimizadas.</p>
-      <div class="cards-container">
-        <!-- PLANO ESSENCIAL -->
-        <div class="card">
-          <h4>🚀 Plano Essencial</h4>
-          <span>R$ 497/mês</span>
-          <p class="text-sm mt-2 text-gray-400">
-             Ideal para quem precisa de algo temporário, com suporte leve e presença mínima no tráfego.
-          </p>
-          <ul>
-            <li>Suporte via grupo de WhatsApp</li>
-            <li>Planejamento estratégico</li>
-            <li>Relatório mensal</li>
-            <li>Gestão de tráfego pago (Meta Ads)</li>
-          </ul>
-          <a
-            href="https://api.whatsapp.com/send/?phone=5581995387708&text=Ol%C3%A1%21+Tenho+interesse+no+plano+Essencial+%28R%24+497%2Fm%C3%AAs%29.+Gostaria+de+mais+informa%C3%A7%C3%B5es.&type=phone_number&app_absent=0"
-            class="card-btn"
-            >Quero o Essencial</a
-          >
-        </div>
+      <div class="container">
+        <h1>Transforme Cliques em <br><span class="text-gradient">Vendas Reais</span></h1>
+        <p>Acelere o crescimento da sua empresa com estratégias validadas de Tráfego Pago, Gestão de Conteúdo e Otimização Google.</p>
         
-        <!-- PLANO STARTER -->
-        <div class="card">
-          <h4>🚀 Plano Starter</h4>
-          <span>R$ 997/mês</span>
-          <p class="text-sm mt-2 text-gray-400">
-             Ideal para quem precisa do essencial bem-feito, com automação e tráfego funcionando todos os dias.
-          </p>
-          <ul>
-            <li>Automação de pré-atendimento no Instagram</li>
-            <li>Suporte via grupo de WhatsApp (Starter)</li>
-            <li>Planejamento estratégico</li>
-            <li>Relatórios semanais</li>
-            <li>Gestão de tráfego pago (Meta Ads)</li>
-          </ul>
-          <a
-            href="https://api.whatsapp.com/send/?phone=5581995387708&text=Ol%C3%A1%21+Tenho+interesse+no+plano+Starter+%28R%24+997%2Fm%C3%AAs%29.+Gostaria+de+mais+informa%C3%A7%C3%B5es.&type=phone_number&app_absent=0"
-            class="card-btn"
-            >Quero o Starter</a
-          >
+        <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
+            <a href="#trafego" class="btn">Ver Nossos Planos</a>
+            <a href="#contato" class="btn">Fale Conosco</a>
         </div>
 
-        <!-- PLANO PRO -->
-        <div class="card" style="border-color: var(--cor-destaque)">
-          <h4>
-            ⭐ Plano Pro
-            <small
-              style="color: var(--cor-destaque); font-size: 0.9rem"
-              >POPULAR</small
-            >
-          </h4>
-          <span>R$ 1.497/mês</span> 
-           <p class="text-sm mt-2 text-gray-400">
-            Para negócios que querem crescer com conteúdo constante e tráfego em duas plataformas.
-          </p>
-          <ul>
-            <li>Tudo do Starter</li>
-            <li>Gestão de tráfego Meta Ads + Google Ads</li>
-            <li>Programação de mídias</li>
-            <li>12 posts mensais</li>
-            <li>Suporte via grupo de WhatsApp (Pro)</li>
-          </ul>
-          <a
-            href="https://api.whatsapp.com/send/?phone=5581995387708&text=Ol%C3%A1%21+Tenho+interesse+no+plano+Pro+%28R%24+1.497%2Fm%C3%AAs%29.+Gostaria+de+mais+informa%C3%A7%C3%B5es.&type=phone_number&app_absent=0"
-            class="card-btn"
-            >Quero o Pro</a
-          >
-        </div>
-
-        <!-- PLANO PREMIUM -->
-        <div class="card">
-          <h4>👑 Plano Premium</h4>
-          <span>R$ 1.997/mês</span>
-          <p class="text-sm mt-2 text-gray-400">
-            Perfeito para empresas que querem mais volume, mais presença e acompanhamento mais próximo.
-          </p>
-          <ul>
-            <li>Tudo do Pro</li>
-            <li>Landing Page</li>
-            <li>24 posts mensais</li>
-            <li>Suporte intensivo via grupo de WhatsApp</li>
-          </ul>
-          <a
-            href="https://api.whatsapp.com/send/?phone=5581995387708&text=Ol%C3%A1%21+Tenho+interesse+no+plano+Premium+%28R%24+1.997%2Fm%C3%AAs%29.+Gostaria+de+mais+informa%C3%A7%C3%B5es.&type=phone_number&app_absent=0"
-            class="card-btn"
-            >Quero o Premium</a
-          >
+        <div class="hero-badges">
+            <span>🚀 +100 Clientes Atendidos</span>
+            <span>💎 Meta Business Partner</span>
+            <span>📈 ROI Focado</span>
         </div>
       </div>
     </section>
 
-    <!-- 2. Google Meu Negócio (GMN) -->
-    <section id="google">
-      <h3>Google Meu Negócio (GMN)</h3>
-      <p>Otimização completa para seu negócio aparecer nas buscas locais do Google e Google Maps.</p>
+    <!-- Social Proof / Stats -->
+    <div class="social-proof">
+        <div class="container proof-container">
+            <div class="stat-item">
+                <h4>+5 Milhões</h4>
+                <p>Investidos em Anúncios</p>
+            </div>
+            <div class="stat-item">
+                <h4>+100</h4>
+                <p>Empresas Escaladas</p>
+            </div>
+            <div class="stat-item">
+                <h4>24/7</h4>
+                <p>Monitoramento Ativo</p>
+            </div>
+        </div>
+    </div>
 
-      <div class="cards-container">
-        <!-- PLANO ANUAL GMN (ATUALIZADO) -->
-        <div class="card" style="border-color: var(--cor-destaque)">
-          <h4>🏆 Plano Anual GMN</h4>
-          <span>R$ 1.880 à vista</span>
-          <ul>
-            <li>ou 12x de R$ 156,66</li>
-            <li>Otimização completa do perfil</li>
-            <li>Gestão contínua de avaliações</li>
-            <li>Inclusão de artes e atualizações visuais</li>
-            <li>Site institucional incluso</li>
-            <li>Relatórios mensais detalhados</li>
-            <li>Publicações semanais (promoções, novidades, ofertas)</li>
-            <li>Ajuste periódico de categorias, serviços e produtos</li>
-            <li>Monitoramento de concorrentes locais</li>
-            <li>Acompanhamento de métricas (ligações, rotas, visitas, cliques)</li>
-            <li>Correção de informações incorretas ao longo do ano</li>
-            <li>Suporte para dúvidas e ajustes rápidos</li>
-            <li>Melhoria contínua do SEO local</li>
-          </ul>
-          <a
-            href="https://api.whatsapp.com/send/?phone=5581995387708&text=Olá! Tenho interesse no Plano Anual GMN (R$ 1.880 à vista ou 12x de R$ 156,66). Gostaria de mais informações.&type=phone_number&app_absent=0"
-            class="card-btn"
-            >👉 Quero o Plano Anual</a
-          >
-        </div>
-        
-        <!-- OTIMIZAÇÃO 30 DIAS GMN (ATUALIZADO) -->
-        <div class="card">
-          <h4>⚡ Otimização 30 Dias GMN</h4>
-          <span>R$ 499 (único)</span>
-          <ul>
-            <li>Cadastro e verificação da ficha</li>
-            <li>Otimização de fotos (seleção e organização)</li>
-            <li>Descrição otimizada com foco em SEO local</li>
-            <li>Ajuste de categorias, atributos e serviços</li>
-            <li>Configuração inicial de produtos/serviços</li>
-            <li>Correção de inconsistências no NAP (Nome, Endereço, Telefone)</li>
-            <li>Sugestão de melhorias futuras para posicionamento</li>
-            <li>Entrega de checklist final da otimização</li>
-          </ul>
-          <a
-            href="https://api.whatsapp.com/send/?phone=5581995387708&text=Olá! Tenho interesse na Otimização 30 Dias GMN (R$499). Gostaria de mais informações.&type=phone_number&app_absent=0"
-            class="card-btn"
-            >👉 Quero a Otimização</a
-          >
-        </div>
+    <!-- 1. Tráfego Pago -->
+    <section id="trafego" class="pricing-section">
+      <div class="container">
+        <h2 class="section-title">Tráfego <span class="text-gradient">Pago</span></h2>
+        <p class="section-subtitle">Escolha o nível de aceleração que seu negócio precisa hoje.</p>
 
-        <!-- PLANO 3 MESES GMN (ATUALIZADO) -->
-        <div class="card">
-          <h4>📅 Plano 3 Meses GMN</h4>
-          <span>R$ 1.275</span>
-          <ul>
-            <li>Setup completo da ficha</li>
-            <li>Atualizações semanais (posts, fotos e ajustes internos)</li>
-            <li>Monitoramento e resposta de avaliações</li>
-            <li>Revisão mensal de categorias e atributos</li>
-            <li>Ajustes estratégicos conforme desempenho</li>
-            <li>Relatório mensal simples</li>
-            <li>Suporte básico para dúvidas</li>
-            <li>Acompanhamento de métricas essenciais (ligações, rotas, visualizações)</li>
-          </ul>
-          <a
-            href="https://api.whatsapp.com/send/?phone=5581995387708&text=Olá! Tenho interesse no plano Plano 3 Meses GMN (R$1.275). Gostaria de mais informações.&type=phone_number&app_absent=0"
-            class="card-btn"
-            >👉 Quero o Plano 3 Meses</a
-          >
-        </div>
-      </div>
-    </section>
-    
-    <!-- 3. Produção Drone -->
-    <section id="producao">
-      <h3>🎥 Imagens + Vídeos com Drone + Edições + Entrega </h3>
-      <p>Conteúdos visuais de alta qualidade para suas redes sociais ou marketing institucional.</p>
-      <div class="cards-container">
-        <!-- PACIENTE BÁSICO (ATUALIZADO) -->
-        <div class="card">
-          <h4>📸 Pacote Básico</h4>
-          <span>R$ 349</span>
-          <ul>
-            <li>3 vídeos (até 1 minuto)</li>
-            <li>3 fotos</li>
-            <li>Entrega de conteúdos via Google Drive</li>
-          </ul>
-          <a
-            href="https://api.whatsapp.com/send/?phone=5581995387708&text=Olá! Tenho interesse no Pacote Básico (R$ 349). Gostaria de mais informações.&type=phone_number&app_absent=0"
-            class="card-btn"
-            >Quero o Básico</a
-          >
-        </div>
+        <div class="cards-grid">
+          <!-- ESSENCIAL -->
+          <div class="card fade-in">
+            <div class="card-header">
+              <h3>Essencial</h3>
+              <div class="price">R$ 497<small>/mês</small></div>
+              <p class="card-desc">Para quem está começando e precisa de presença digital básica.</p>
+            </div>
+            <ul>
+              <li>Gestão Meta Ads (Instagram/Facebook)</li>
+              <li>Planejamento estratégico inicial</li>
+              <li>Relatório mensal de performance</li>
+              <li>Suporte via grupo de WhatsApp</li>
+            </ul>
+            <a href="https://api.whatsapp.com/send/?phone=5581995387708&text=Quero+o+Plano+Essencial" target="_blank" class="card-btn">Começar Agora</a>
+          </div>
 
-        <!-- PACIENTE INTERMEDIÁRIO (ATUALIZADO) -->
-        <div class="card">
-          <h4>🎬 Pacote Intermediário</h4>
-          <span>R$ 649</span>
-          <ul>
-            <li>5 vídeos (até 1 minuto e meio)</li>
-            <li>5 fotos</li>
-            <li>Edição básica</li>
-            <li>Entrega de conteúdos via Google Drive</li>
-          </ul>
-          <a
-            href="https://api.whatsapp.com/send/?phone=5581995387708&text=Olá! Tenho interesse no Pacote Intermediário (R$ 649). Gostaria de mais informações.&type=phone_number&app_absent=0"
-            class="card-btn"
-            >Quero o Intermediário</a
-          >
-        </div>
+          <!-- STARTER -->
+          <div class="card fade-in">
+            <div class="card-header">
+              <h3>Starter</h3>
+              <div class="price">R$ 997<small>/mês</small></div>
+              <p class="card-desc">Automação e consistência para pequenos negócios.</p>
+            </div>
+            <ul>
+              <li>Gestão Meta Ads completa</li>
+              <li><strong>Automação de Pré-atendimento</strong></li>
+              <li>Relatórios semanais</li>
+              <li>Planejamento estratégico mensal</li>
+              <li>Suporte dedicado (Starter)</li>
+            </ul>
+            <a href="https://api.whatsapp.com/send/?phone=5581995387708&text=Quero+o+Plano+Starter" target="_blank" class="card-btn">Escolher Starter</a>
+          </div>
 
-        <!-- PACIENTE PROFISSIONAL (ATUALIZADO) -->
-        <div class="card">
-          <h4>🎥 Pacote Profissional</h4>
-          <span>R$ 859</span>
-          <ul>
-            <li>5 vídeos (até 1 minuto e meio)</li>
-            <li>5 fotos</li>
-            <li>Edição dinâmica</li>
-            <li>Vídeo institucional para redes sociais</li>
-            <li>Entrega de conteúdos via Google Drive</li>
-          </ul>
-          <a
-            href="https://api.whatsapp.com/send/?phone=5581995387708&text=Olá! Tenho interesse no Pacote Profissional (R$ 859). Gostaria de mais informações.&type=phone_number&app_absent=0"
-            class="card-btn"
-            >Quero o Profissional</a
-          >
+          <!-- PRO (DESTAQUE) -->
+          <div class="card featured fade-in">
+            <div class="ribbon">MAIS VENDIDO</div>
+            <div class="card-header">
+              <h3>Pro</h3>
+              <div class="price">R$ 1.497<small>/mês</small></div>
+              <p class="card-desc">A escolha das empresas que buscam escala agressiva.</p>
+            </div>
+            <ul>
+              <li><strong>Gestão Meta Ads + Google Ads</strong></li>
+              <li>Programação de mídias completa</li>
+              <li><strong>12 posts/mês inclusos</strong></li>
+              <li>Suporte Prioritário Pro</li>
+              <li>Reunião mensal de alinhamento</li>
+            </ul>
+            <a href="https://api.whatsapp.com/send/?phone=5581995387708&text=Quero+o+Plano+Pro+(Mais+Vendido)" target="_blank" class="card-btn">Quero Escalar 🚀</a>
+          </div>
+
+          <!-- PREMIUM -->
+          <div class="card fade-in">
+            <div class="card-header">
+              <h3>Premium</h3>
+              <div class="price">R$ 1.997<small>/mês</small></div>
+              <p class="card-desc">Para quem não aceita nada menos que a liderança de mercado.</p>
+            </div>
+            <ul>
+              <li>Tudo do plano Pro</li>
+              <li><strong>Landing Page Inclusa</strong></li>
+              <li><strong>24 posts/mês inclusos</strong></li>
+              <li>Consultoria de vendas para time comercial</li>
+              <li>Suporte Intensivo VIP</li>
+            </ul>
+            <a href="https://api.whatsapp.com/send/?phone=5581995387708&text=Quero+o+Plano+Premium" target="_blank" class="card-btn">Contratar Premium</a>
+          </div>
         </div>
       </div>
     </section>
 
-    <!-- 4. Consultoria -->
-    <section id="consultoria">
-      <h3>💼 Consultoria</h3>
-      <p>
-        Aprenda a criar e gerenciar campanhas digitais do zero com
-        acompanhamento especializado.
-      </p>
-      <div class="cards-container">
-        <div class="card">
-          <h4>📊 Consultoria Completa</h4>
-          <span>Últimas vagas</span>
-          <ul>
-            <li>Como criar campanhas do zero</li>
-            <li>Diferença e escolha do objetivo de campanha</li>
-            <li>Estrutura: Campanha, conjunto, anúncio</li>
-            <li>Padrão de nomenclatura</li>
-            <li>ABO vs CBO (tipos de orçamento)</li>
-            <li>Estrutura e segmentação</li>
-            <li>Como conectar BM, Instagram e WhatsApp</li>
-            <li>Contingência e estruturação de conta</li>
-            <li>
-              Definição de público ideal
-              <ul style="margin-left: 1rem; list-style-type: disc">
-                <li>Segmentado</li>
-                <li>Envolvimento</li>
-                <li>Aberto</li>
-              </ul>
-            </li>
-            <li>Temperatura do lead (frio e quente)</li>
-            <li>Videoview (criação de públicos personalizados por % de vídeo assistido)</li>
-            <li>Call estratégica de 1h30 a 2h</li>
-            <li>Acompanhamento por 7 dias via WhatsApp</li>
-            <li>Empresário envia as imagens e vídeos</li>
-          </ul>
-          <a
-            href="https://api.whatsapp.com/send/?phone=5581995387708&text=Ol%C3%A1%21+Tenho+interesse+na+Consultoria+Completa+Gostaria+de+mais+informa%C3%A7%C3%B5es.&type=phone_number&app_absent=0"
-            class="card-btn"
-            >Quero a Consultoria</a
-          >
+    <!-- 2. Google Meu Negócio -->
+    <section id="gmn" class="pricing-section" style="background-color: #0d121c;">
+      <div class="container">
+        <h2 class="section-title">Google <span class="text-gradient">Local</span></h2>
+        <p class="section-subtitle">Seja encontrado primeiro quando seus clientes procurarem pelo seu serviço.</p>
+
+        <div class="cards-grid">
+            <!-- OTIMIZAÇÃO PONTUAL -->
+            <div class="card fade-in">
+                <div class="card-header">
+                  <h3>Flash 30 Dias</h3>
+                  <div class="price">R$ 499<small> (único)</small></div>
+                  <p class="card-desc">Ideal para configurar a casa e começar certo.</p>
+                </div>
+                <ul>
+                  <li>Cadastro e verificação da ficha</li>
+                  <li>SEO Local (Palavras-chave e Descrição)</li>
+                  <li>Otimização de Fotos e Produtos</li>
+                  <li>Correção de erros de cadastro</li>
+                  <li>Checklist final de entrega</li>
+                </ul>
+                <a href="https://api.whatsapp.com/send/?phone=5581995387708&text=Quero+Otimizacao+30+Dias" target="_blank" class="card-btn">Contratar Setup</a>
+            </div>
+
+            <!-- PLANO ANUAL (DESTAQUE) -->
+            <div class="card featured fade-in">
+                <div class="ribbon">MELHOR OFERTA</div>
+                <div class="card-header">
+                  <h3>Plano Anual</h3>
+                  <div class="price">R$ 156<small>,66/mês</small></div>
+                  <p class="card-desc">Total R$ 1.880. Gestão completa o ano todo.</p>
+                </div>
+                <ul>
+                  <li><strong>Site Institucional Incluso</strong></li>
+                  <li>Gestão contínua de avaliações</li>
+                  <li>Publicações semanais (Ofertas/Novidades)</li>
+                  <li>Relatórios de ligações e rotas</li>
+                  <li>Monitoramento de concorrentes</li>
+                </ul>
+                <a href="https://api.whatsapp.com/send/?phone=5581995387708&text=Quero+o+Plano+Anual+GMN" target="_blank" class="card-btn">Garantir Oferta</a>
+            </div>
+            
+            <!-- TRIMESTRAL -->
+            <div class="card fade-in">
+                <div class="card-header">
+                  <h3>Trimestral</h3>
+                  <div class="price">R$ 1.275<small> /trimestre</small></div>
+                  <p class="card-desc">Acompanhamento de médio prazo para consolidar.</p>
+                </div>
+                <ul>
+                  <li>Setup completo da ficha</li>
+                  <li>Atualizações semanais</li>
+                  <li>Resposta a avaliações</li>
+                  <li>Ajustes estratégicos de SEO</li>
+                  <li>Relatório de performance</li>
+                </ul>
+                <a href="https://api.whatsapp.com/send/?phone=5581995387708&text=Quero+o+Plano+Trimestral" target="_blank" class="card-btn">Contratar Trimestre</a>
+            </div>
         </div>
       </div>
     </section>
 
-    <!-- 5. Gestão de Conteúdo Profissional -->
-    <section id="conteudo">
-      <h3>Gestão de Conteúdo Profissional</h3>
-      <p>Criação estratégica e gerenciamento de conteúdo para suas redes sociais (Instagram, Facebook).</p>
-      <div class="cards-container">
-        <div class="card" style="min-height: 350px;">
-          <h4>✍️ Plano Mensal de Conteúdo</h4>
-          <span>R$ 1.000 a R$ 3.000/mês (sob consulta)</span>
-          <ul>
-            <li>Criação de Linha Editorial Estratégica</li>
-            <li>Produção de artes e legendas (12 a 24 posts/mês)</li>
-            <li>Programação e Agendamento de Publicações</li>
-            <li>Gestão de Interação e Comunidade (Respostas básicas)</li>
-            <li>Planejamento de Stories e Reels</li>
-          </ul>
-          <a
-            href="https://api.whatsapp.com/send/?phone=5581995387708&text=Ol%C3%A1%21+Tenho+interesse+na+Gest%C3%A3o+de+Conte%C3%Bado+Mensal.+Gostaria+de+um+or%C3%A7amento+personalizado.&type=phone_number&app_absent=0"
-            class="card-btn"
-            >Solicitar Orçamento</a
-          >
+    <!-- 3. Drone & Audiovisual -->
+    <section id="drone" class="pricing-section">
+        <div class="container">
+            <h2 class="section-title">Produção <span class="text-gradient">Audiovisual</span></h2>
+            <p class="section-subtitle">Imagens de drone e edição profissional que valorizam sua marca.</p>
+            
+            <div class="cards-grid">
+                <div class="card fade-in">
+                    <div class="card-header">
+                        <h3>Básico</h3>
+                        <div class="price">R$ 349</div>
+                    </div>
+                    <ul>
+                        <li>3 vídeos aéreos (até 1 min)</li>
+                        <li>3 fotos em alta resolução</li>
+                        <li>Entrega via Drive (sem edição complexa)</li>
+                    </ul>
+                    <a href="https://api.whatsapp.com/send/?phone=5581995387708&text=Interesse+Drone+Basico" target="_blank" class="card-btn">Solicitar</a>
+                </div>
+
+                <div class="card fade-in">
+                    <div class="card-header">
+                        <h3>Intermediário</h3>
+                        <div class="price">R$ 649</div>
+                    </div>
+                    <ul>
+                        <li>5 vídeos (até 1:30 min)</li>
+                        <li>5 fotos em alta resolução</li>
+                        <li><strong>Edição Básica inclusa</strong></li>
+                    </ul>
+                    <a href="https://api.whatsapp.com/send/?phone=5581995387708&text=Interesse+Drone+Intermediario" target="_blank" class="card-btn">Solicitar</a>
+                </div>
+
+                <div class="card fade-in" style="border-color: var(--secondary)">
+                    <div class="card-header">
+                        <h3>Profissional</h3>
+                        <div class="price">R$ 859</div>
+                    </div>
+                    <ul>
+                        <li>5 vídeos premium</li>
+                        <li>5 fotos editadas</li>
+                        <li><strong>Edição Dinâmica (Reels/TikTok)</strong></li>
+                        <li>Vídeo Institucional completo</li>
+                    </ul>
+                    <a href="https://api.whatsapp.com/send/?phone=5581995387708&text=Interesse+Drone+Profissional" target="_blank" class="card-btn">Solicitar</a>
+                </div>
+            </div>
         </div>
-      </div>
     </section>
-    
-    <!-- Contato -->
-    <section id="contato">
-      <h3>Entre em Contato</h3>
-      <p>Preencha o formulário e tire suas dúvidas ou solicite um orçamento detalhado.</p>
 
-      <form id="form-contato">
-        <div class="input-group">
-          <label for="nome">Nome da Empresa</label>
-          <input
-            id="nome"
-            type="text"
-            placeholder="Digite o nome da sua empresa"
-            required
-          />
+    <!-- 4. Consultoria (Estratégia e Conteúdo) -->
+    <section id="consultoria" class="pricing-section" style="background: #0d121c;">
+        <div class="container">
+            <h2 class="section-title">Consultoria</h2>
+            <p class="section-subtitle">Expertise e acompanhamento para escalar seus resultados.</p>
+
+            <div class="cards-grid">
+                <!-- Consultoria Completa -->
+                <div class="card fade-in">
+                    <div class="card-header">
+                        <h3>🎓 Consultoria Completa</h3>
+                        <div class="price" style="font-size: 1.5rem;">Vagas Limitadas</div>
+                        <p class="card-desc">Mentoria prática e estratégica</p>
+                    </div>
+                    <ul>
+                        <li>Como criar campanhas do zero</li>
+                        <li>Diferença e escolha do objetivo de campanha</li>
+                        <li>Estrutura: Campanha, conjunto, anúncio</li>
+                        <li>Padrão de nomenclatura e organização</li>
+                        <li>ABO vs CBO (estratégias de orçamento)</li>
+                        <li>Estrutura e segmentação avançada</li>
+                        <li>Como conectar BM, Instagram e WhatsApp</li>
+                        <li>Contingência e estruturação de conta</li>
+                        <li>
+                            Definição de público ideal:
+                            <ul>
+                                <li>Segmentado</li>
+                                <li>Envolvimento</li>
+                                <li>Aberto</li>
+                            </ul>
+                        </li>
+                        <li>Temperatura do lead (frio e quente)</li>
+                        <li>Videoview (públicos por % de vídeo)</li>
+                        <li>Call estratégica de 1h30 a 2h</li>
+                        <li>Acompanhamento por 7 dias via WhatsApp</li>
+                        <li>Empresário envia as imagens e vídeos</li>
+                    </ul>
+                    <a href="https://api.whatsapp.com/send/?phone=5581995387708&text=Interesse+Consultoria+Completa" class="card-btn">Quero Aprender</a>
+                </div>
+
+                <!-- Gestão de Social Media -->
+                <div class="card fade-in">
+                    <div class="card-header">
+                        <!-- Botão/Tag de Gestão -->
+                        <div class="card-tag">Gestão</div>
+                        <h3>Social Media</h3>
+                        <div class="price" style="font-size: 1.5rem;">Sob Consulta</div>
+                        <p class="card-desc">De R$ 1.000 a R$ 3.000/mês</p>
+                    </div>
+                    <ul>
+                        <li>Linha Editorial Estratégica</li>
+                        <li>Design de Artes e Legendas</li>
+                        <li>Agendamento de Posts</li>
+                        <li>Planejamento de Stories</li>
+                    </ul>
+                    <a href="https://api.whatsapp.com/send/?phone=5581995387708&text=Orcamento+Social+Media" class="card-btn">Pedir Orçamento</a>
+                </div>
+            </div>
         </div>
-        
-        <div class="input-group">
-          <label for="servico">Serviço de Interesse</label>
-          <select id="servico" required>
-            <option>Gestão de Tráfego Pago</option>
-            <option>Imagens + Vídeos com Drone + Edições + Entrega</option>
-            <option>Google Meu Negócio</option>
-            <option>Gestão de Conteúdo</option>
-            <option>Consultoria</option>
-            <option>Todos os Serviços</option>
-          </select>
+    </section>
+
+    <!-- FAQ Section -->
+    <section class="faq-section">
+        <div class="container">
+            <h2 class="section-title">Perguntas Frequentes</h2>
+            <div class="accordion">
+                <div class="accordion-item">
+                    <button class="accordion-header">O valor dos anúncios está incluso na mensalidade?</button>
+                    <div class="accordion-content">
+                        <p>Não. Os valores apresentados são referentes à nossa prestação de serviço (estratégia, criação e otimização). O valor investido nas plataformas (Facebook/Google) é pago diretamente por você através do seu cartão ou boleto, definimos juntos o orçamento ideal.</p>
+                    </div>
+                </div>
+                <div class="accordion-item">
+                    <button class="accordion-header">Existe fidelidade nos contratos?</button>
+                    <div class="accordion-content">
+                        <p>Trabalhamos com contratos flexíveis. Acreditamos na retenção através de resultados. No entanto, para estratégias de SEO e Tráfego, recomendamos um período mínimo de 3 meses para maturação das campanhas.</p>
+                    </div>
+                </div>
+                <div class="accordion-item">
+                    <button class="accordion-header">Como funciona o Plano Anual GMN?</button>
+                    <div class="accordion-content">
+                        <p>O Plano Anual oferece o melhor custo-benefício. Você paga um valor único (ou parcelado) e nós cuidamos da sua ficha no Google o ano inteiro, garantindo que ela esteja sempre atualizada, respondendo clientes e postando novidades semanalmente.</p>
+                    </div>
+                </div>
+                <div class="accordion-item">
+                    <button class="accordion-header">Vocês atendem empresas de qual nicho?</button>
+                    <div class="accordion-content">
+                        <p>Atendemos diversos nichos, desde comércios locais (restaurantes, clínicas, lojas) até prestadores de serviços e infoprodutores. Nossa metodologia é adaptável ao objetivo do seu negócio.</p>
+                    </div>
+                </div>
+            </div>
         </div>
-        
-        <!-- CAMPO DE FILIAIS -->
-        <div class="checkbox-group">
-            <input type="checkbox" id="filiais" />
-            <label for="filiais">Possuímos 2 ou mais filiais (acréscimo de 30% no valor do plano).</label>
+    </section>
+
+    <!-- Formulário de Contato -->
+    <section id="contato" class="contact-section">
+        <div class="container">
+            <h2 class="section-title">Vamos Alavancar seu Negócio?</h2>
+            <p class="section-subtitle">Ou preencha o formulário abaixo para receber nosso contato.</p>
+            
+            <form id="sales-form" class="contact-form fade-in">
+                
+                <div class="form-group">
+                    <label>Nome</label>
+                    <input type="text" id="nome_pessoa" class="form-control" placeholder="Seu nome completo" required>
+                </div>
+
+                <div class="form-group">
+                    <label>Telefone</label>
+                    <input type="tel" id="telefone" class="form-control" placeholder="(11) 9 1234-5678" required>
+                </div>
+
+                <div class="form-group">
+                    <label>Empresa</label>
+                    <input type="text" id="empresa" class="form-control" placeholder="Nome da sua empresa" required>
+                </div>
+                
+                <div class="form-group">
+                    <label>Instagram da Empresa</label>
+                    <input type="text" id="instagram" class="form-control" placeholder="@suaempresa" required>
+                </div>
+
+                <div class="form-group">
+                    <label>Cidade / Estado</label>
+                    <input type="text" id="cidade" class="form-control" placeholder="Sao Paulo, SP" required>
+                </div>
+                
+                <div class="form-group">
+                    <label>Qual serviço te interessa?</label>
+                    <select id="interesse" class="form-control" required>
+                        <option value="" disabled selected>Selecione o serviço</option>
+                        <option value="Trafego Pago">Gestão de Tráfego Pago</option>
+                        <option value="Google Meu Negocio">Google Meu Negócio</option>
+                        <option value="Drone/Video">Drone e Vídeos</option>
+                        <option value="Social Media">Gestão de Social Media</option>
+                        <option value="Consultoria">Consultoria</option>
+                        <option value="Combo">Quero um Combo</option>
+                    </select>
+                </div>
+
+                <div class="checkbox-wrapper">
+                    <input type="checkbox" id="filiais">
+                    <label for="filiais">Possuo 2 ou mais filiais (+30% no valor)</label>
+                </div>
+
+                <div class="form-group">
+                    <label>Mensagem</label>
+                    <textarea id="msg" class="form-control" rows="3" placeholder="Conte mais sobre seu negócio e objetivos..."></textarea>
+                </div>
+
+                <button type="submit" class="btn" style="width: 100%;">Enviar mensagem</button>
+            </form>
         </div>
-
-        <div class="input-group">
-          <label for="mensagem">Mensagem / Observações (opcional)</label>
-          <textarea
-            id="mensagem"
-            placeholder="Conte-nos sobre seu projeto ou dúvidas específicas (opcional)"
-          ></textarea>
-        </div>
-
-        <button type="submit">💬 Enviar pelo WhatsApp</button>
-      </form>
-
-      <script>
-        const form = document.getElementById("form-contato");
-        
-        // Função para garantir o scroll suave ao clicar nos links internos
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                document.querySelector(this.getAttribute('href')).scrollIntoView({
-                    behavior: 'smooth'
-                });
-            });
-        });
-        
-        // Lógica de envio do formulário
-        form.addEventListener("submit", function (e) {
-          e.preventDefault();
-
-          const nome = document.getElementById("nome").value.trim();
-          const servico = document.getElementById("servico").value;
-          const mensagem = document.getElementById("mensagem").value.trim();
-          const temFiliais = document.getElementById("filiais").checked; 
-
-          // Monta a mensagem para o WhatsApp, utilizando codificação de URL para quebras de linha (%0A)
-          let texto = `Ol%C3%A1%21+Tenho+interesse+nos+servi%C3%A7os+da+Cozzi+Media.%0A`;
-          texto += `Nome+da+empresa%3A+${encodeURIComponent(nome)}%0A`;
-          texto += `Servi%C3%A7o+de+interesse%3A+${encodeURIComponent(servico)}`;
-          
-          if (temFiliais) {
-            texto += `%0AFiliais%3A+SIM+(Acr%C3%A9scimo+de+30%25+no+valor+do+plano)`;
-          } else {
-            texto += `%0AFiliais%3A+N%C3%83O`;
-          }
-
-
-          if (mensagem) {
-            texto += `%0A%0AMensagem%2FObserva%C3%A7%C3%B5es%3A+${encodeURIComponent(mensagem)}`;
-          }
-
-          const url = `https://api.whatsapp.com/send/?phone=5581995387708&text=${texto}&type=phone_number&app_absent=0`;
-          window.open(url, "_blank");
-        });
-      </script>
     </section>
 
     <footer>
-      <h4>Cozzi Media</h4>
-      <p>Transformando sua presença digital em resultados reais</p>
-      <p>© 2022 Cozzi Media. Todos os direitos reservados.</p>
+        <div class="container">
+            <p class="logo" style="justify-content: center; margin-bottom: 1rem;">Cozzi<span>Media</span></p>
+            <p>© 2025 Cozzi Media. Todos os direitos reservados.</p>
+            <p style="margin-top: 0.5rem; opacity: 0.6;">Transformando presença digital em lucro.</p>
+        </div>
     </footer>
+    
+    <!-- Botão Voltar ao Topo -->
+    <a href="#" class="back-to-top" id="backToTop" aria-label="Voltar ao topo">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512"><!-- Font Awesome Free 5.15.4 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) --><path d="M352 352c-8.188 0-16.38-3.125-22.62-9.375L192 205.3l-137.4 137.4c-12.5 12.5-32.75 12.5-45.25 0s-12.5-32.75 0-45.25l160-160c12.5-12.5 32.75-12.5 45.25 0l160 160c12.5 12.5 12.5 32.75 0 45.25C368.4 348.9 360.2 352 352 352z"/></svg>
+    </a>
 
-    <div
-      class="whatsapp-btn"
-      onclick="window.location.href='https://api.whatsapp.com/send/?phone=5581995387708&text=Opa%2C+vim+pelo+site';"
-    >
-      💬
-    </div>
+    <!-- Botão Flutuante -->
+    <a href="https://api.whatsapp.com/send/?phone=5581995387708&text=Olá,+estou+no+site+e+tenho+dúvidas." target="_blank" class="floating-wa">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!-- Font Awesome Free 5.15.4 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) --><path d="M380.9 97.1C339 55.1 283.2 32 223.9 32c-122.4 0-222 99.6-222 222 0 39.1 10.2 77.3 29.6 111L0 480l117.7-30.9c32.4 17.7 68.9 27 106.1 27h.1c122.3 0 224.1-99.6 224.1-222 0-59.3-25.2-115-67.1-157zm-157 341.6c-33.2 0-65.7-8.9-94-25.7l-6.7-4-69.8 18.3L72 359.2l-4.4-7c-18.5-29.4-28.2-63.3-28.2-98.2 0-101.7 82.8-184.5 184.6-184.5 49.3 0 95.6 19.2 130.4 54.1 34.8 34.9 56.2 81.2 56.1 130.5 0 101.8-84.9 184.6-186.6 184.6zm101.2-138.2c-5.5-2.8-32.8-16.2-37.9-18-5.1-1.9-8.8-2.8-12.5 2.8-3.7 5.6-14.3 18-17.6 21.8-3.2 3.7-6.5 4.2-12 1.4-32.6-16.3-54-29.1-75.5-66-5.7-9.8 5.7-9.1 16.3-30.3 1.8-3.7.9-6.9-.5-9.7-1.4-2.8-12.5-30.1-17.1-41.2-4.5-10.8-9.1-9.3-12.5-9.5-3.2-.2-6.9-.2-10.6-.2-3.7 0-9.7 1.4-14.8 6.9-5.1 5.6-19.4 19-19.4 46.3 0 27.3 19.9 53.7 22.6 57.4 2.8 3.7 39.1 59.7 94.8 83.8 35.2 15.2 49 16.5 66.6 13.9 10.7-1.6 32.8-13.4 37.4-26.4 4.6-13 4.6-24.1 3.2-26.4-1.3-2.5-5-3.9-10.5-6.6z"/></svg>
+    </a>
+
+    <script>
+      // Accordion Logic
+      const accordions = document.querySelectorAll('.accordion-header');
+      accordions.forEach(acc => {
+        acc.addEventListener('click', function() {
+          this.classList.toggle('active');
+          const panel = this.nextElementSibling;
+          if (panel.style.maxHeight) {
+            panel.style.maxHeight = null;
+          } else {
+            panel.style.maxHeight = panel.scrollHeight + "px";
+          }
+        });
+      });
+
+      // Form Logic to WhatsApp
+      document.getElementById('sales-form').addEventListener('submit', function(e) {
+        e.preventDefault();
+        
+        // Coletando os novos campos
+        const nome = document.getElementById('nome_pessoa').value;
+        const telefone = document.getElementById('telefone').value;
+        const empresa = document.getElementById('empresa').value;
+        const instagram = document.getElementById('instagram').value;
+        const cidade = document.getElementById('cidade').value;
+        const interesseSelect = document.getElementById('interesse');
+        const interesse = interesseSelect.options[interesseSelect.selectedIndex].text; // Pega o texto visível da opção
+        const msg = document.getElementById('msg').value;
+        const filiais = document.getElementById('filiais').checked ? "Sim (+30%)" : "Não";
+
+        // Montando a mensagem
+        const text = `*Nova Solicitação via Site*%0A%0A👤 *Nome:* ${nome}%0A📞 *Telefone:* ${telefone}%0A🏢 *Empresa:* ${empresa}%0A📱 *Instagram:* ${instagram}%0A📍 *Cidade/UF:* ${cidade}%0A🎯 *Interesse:* ${interesse}%0A🏢 *Filiais:* ${filiais}%0A📝 *Mensagem:* ${msg}`;
+        
+        window.open(`https://api.whatsapp.com/send/?phone=5581995387708&text=${text}`, '_blank');
+      });
+
+      // Scroll Animation (Intersection Observer)
+      const observerOptions = {
+        threshold: 0.1
+      };
+
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+          }
+        });
+      }, observerOptions);
+
+      document.querySelectorAll('.fade-in').forEach(el => {
+        observer.observe(el);
+      });
+      
+      // Back to Top Logic
+      const backToTopBtn = document.getElementById('backToTop');
+    
+      window.addEventListener('scroll', () => {
+        // Mostra o botão se rolar mais de 300px
+        if (window.scrollY > 300) {
+            backToTopBtn.classList.add('visible');
+        } else {
+            backToTopBtn.classList.remove('visible');
+        }
+      });
+    
+      backToTopBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+        window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+        });
+      });
+    </script>
   </body>
 </html>
