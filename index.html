@@ -11,7 +11,6 @@
       href="https://i.postimg.cc/wBsHdKMn/logo-Copia.jpg"
       onerror="this.onerror=null; this.href='https://placehold.co/32x32/01d4ff/000?text=CM'"
     />
-    <!-- Fontes -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
@@ -172,7 +171,7 @@
         .nav-links {
           display: flex !important; /* Força display flex no desktop */
           align-items: center;
-          gap: 1.5rem; /* Espaçamento maior entre links */
+          gap: 1.2rem; /* Espaçamento ajustado para caber novos itens */
           position: static;
           background: transparent;
           width: auto;
@@ -186,7 +185,7 @@
           color: var(--text-muted);
           text-decoration: none;
           font-weight: 500;
-          font-size: 1rem; /* Fonte do menu aumentada */
+          font-size: 0.95rem; /* Fonte do menu levemente ajustada */
           transition: color 0.3s;
           padding: 0;
           border-bottom: none;
@@ -562,35 +561,6 @@
         box-shadow: 0 20px 50px rgba(0,0,0,0.3);
         text-align: left; /* ALINHAMENTO À ESQUERDA (MANTIDO) */
       }
-      
-      /* AJUSTE: Removida a centralização forçada dos itens de lista */
-      /* Os itens agora herdarão o alinhamento padrão à esquerda (.card li) */
-
-      /* AJUSTE ESPECÍFICO: Tamanho do card de Consultoria */
-      /* Para ficarem com largura visual igual aos outros, e não esticados */
-      #consultoria .card {
-          max-width: 380px;
-          margin: 0 auto;
-          width: 100%;
-      }
-      
-      /* Ajuste para sub-listas da Consultoria voltarem ao padrão (esquerda) */
-      #consultoria .card ul ul {
-          padding-left: 0.5rem;
-          text-align: left;
-      }
-      
-      #consultoria .card ul ul li {
-          justify-content: flex-start;
-          display: block;
-          padding-left: 1.5rem;
-      }
-      
-      #consultoria .card ul ul li::before {
-          content: "•";
-          position: absolute;
-          left: 0;
-      }
 
       .form-group {
         margin-bottom: 1.5rem;
@@ -773,7 +743,6 @@
   </head>
   <body>
     
-    <!-- Navbar -->
     <header>
       <div class="container">
         <nav>
@@ -781,7 +750,6 @@
             Cozzi<span>Media</span>
           </a>
           
-          <!-- Mobile Menu Icon (Hamburger) -->
           <div class="menu-toggle" id="mobile-menu">
             <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                 <line x1="3" y1="12" x2="21" y2="12"></line>
@@ -794,8 +762,9 @@
             <a href="#inicio">Início</a>
             <a href="#trafego">Tráfego</a>
             <a href="#gmn">Google Local</a>
-            <a href="#google-empresas">Google Empresa</a>
             <a href="#drone">Drone</a>
+            <a href="#artes">Artes</a>
+            <a href="#resultados">Resultados</a>
             <a href="#consultoria">Consultoria</a>
             <a href="#contato" class="btn" style="padding: 0.5rem 1.5rem; font-size: 0.9rem;">Fale Conosco</a>
           </div>
@@ -803,7 +772,6 @@
       </div>
     </header>
 
-    <!-- Hero Section -->
     <section class="hero" id="inicio">
       <div class="container">
         <h1>Transforme Cliques em <br><span class="text-gradient">Vendas Reais</span></h1>
@@ -822,7 +790,6 @@
       </div>
     </section>
 
-    <!-- Social Proof / Stats -->
     <div class="social-proof">
         <div class="container proof-container">
             <div class="stat-item">
@@ -840,14 +807,12 @@
         </div>
     </div>
 
-    <!-- 1. Tráfego Pago -->
     <section id="trafego" class="pricing-section">
       <div class="container">
         <h2 class="section-title">Tráfego <span class="text-gradient">Pago</span></h2>
         <p class="section-subtitle">Escolha o nível de aceleração que seu negócio precisa hoje.</p>
 
         <div class="cards-grid">
-          <!-- ESSENCIAL -->
           <div class="card fade-in">
             <div class="card-header">
               <h3>Plano Essencial</h3>
@@ -867,11 +832,9 @@
             <a href="https://api.whatsapp.com/send/?phone=5581995387708&text=Quero+o+Plano+Essencial" target="_blank" class="card-btn">Começar Agora</a>
           </div>
 
-          <!-- PRO (DESTAQUE) -->
           <div class="card featured fade-in">
             <div class="card-header">
-              <!-- Tag Centralizada -->
-              <div class="card-tag" style="background: var(--gradient); color: #000;">MAIS VENDIDO</div>
+              <div class="card-tag">MAIS VENDIDO</div>
               <h3>Plano Pro</h3>
               <div class="price">R$ 1.499<small>/mês</small></div>
               <p class="card-desc">Para empresas que querem escalar vendas com consistência e automação.</p>
@@ -889,11 +852,9 @@
             <p style="font-size: 0.9rem; color: #cbd5e1; margin-bottom: 1.5rem; border-top: 1px solid rgba(1, 212, 255, 0.2); padding-top: 1rem;">
                 👉 Ideal para negócios que já vendem e querem aumentar faturamento de forma previsível.
             </p>
-            <!-- Emoji removido aqui -->
             <a href="https://api.whatsapp.com/send/?phone=5581995387708&text=Quero+o+Plano+Pro+(Mais+Vendido)" target="_blank" class="card-btn">Quero Escalar</a>
           </div>
 
-          <!-- PREMIUM -->
           <div class="card fade-in">
             <div class="card-header">
               <h3>Plano Premium</h3>
@@ -916,10 +877,8 @@
       </div>
     </section>
 
-    <!-- NEW SECTION: Setup Meta Ads -->
     <section id="setup-meta" class="pricing-section" style="background-color: #0d121c; padding-top: 0; padding-bottom: 4rem;">
       <div class="container">
-          <!-- Card Único e Largo para o Setup -->
           <div class="card setup-card fade-in" style="max-width: 900px; margin: 0 auto; border-color: var(--secondary);">
               <div class="card-header">
                   <h3>Setup Profissional Meta Ads</h3>
@@ -927,7 +886,6 @@
                   <p class="card-desc" style="max-width: 600px; margin: 0.5rem auto;">Para quem precisa estruturar tudo corretamente antes de anunciar e evitar bloqueios.</p>
               </div>
               
-              <!-- Lista em Grid (2 colunas em telas médias/grandes) -->
               <ul>
                   <li>Criação de nova Página no Facebook</li>
                   <li>Nome da página alinhado ao Instagram</li>
@@ -957,14 +915,12 @@
       </div>
     </section>
 
-    <!-- 2. Google Meu Negócio -->
     <section id="gmn" class="pricing-section">
       <div class="container">
         <h2 class="section-title">Google <span class="text-gradient">Local</span></h2>
         <p class="section-subtitle">Seja encontrado primeiro quando seus clientes procurarem pelo seu serviço.</p>
 
         <div class="cards-grid">
-            <!-- OTIMIZAÇÃO PONTUAL -->
             <div class="card fade-in">
                 <div class="card-header">
                   <h3>Flash 30 Dias</h3>
@@ -981,11 +937,9 @@
                 <a href="https://api.whatsapp.com/send/?phone=5581995387708&text=Quero+Otimizacao+30+Dias" target="_blank" class="card-btn">Contratar Setup</a>
             </div>
 
-            <!-- PLANO ANUAL (DESTAQUE) -->
             <div class="card featured fade-in">
                 <div class="card-header">
-                  <!-- Tag Centralizada -->
-                  <div class="card-tag" style="background: var(--gradient); color: #000;">MELHOR OFERTA</div>
+                  <div class="card-tag">MELHOR OFERTA</div>
                   <h3>Plano Anual</h3>
                   <div class="price">R$ 156<small>,66/mês</small></div>
                   <p class="card-desc">Total R$ 1.880. Gestão completa o ano todo.</p>
@@ -1000,7 +954,6 @@
                 <a href="https://api.whatsapp.com/send/?phone=5581995387708&text=Quero+o+Plano+Anual+GMN" target="_blank" class="card-btn">Garantir Oferta</a>
             </div>
             
-            <!-- TRIMESTRAL -->
             <div class="card fade-in">
                 <div class="card-header">
                   <h3>Trimestral</h3>
@@ -1020,15 +973,12 @@
       </div>
     </section>
 
-    <!-- NOVO MÓDULO: Google Empresas -->
-    <section id="google-empresas" class="pricing-section">
+    <section id="google-empresas" class="pricing-section" style="background-color: #0d121c;">
       <div class="container">
         <h2 class="section-title">Google <span class="text-gradient">Empresas</span></h2>
         <p class="section-subtitle">Soluções corporativas completas para consolidar sua autoridade digital e dominar o mercado local.</p>
 
         <div class="cards-grid">
-            
-            <!-- 1. PLANO BÁSICO -->
             <div class="card fade-in">
                 <div class="card-header">
                   <h3>PLANO BÁSICO</h3>
@@ -1045,7 +995,6 @@
                 <a href="https://api.whatsapp.com/send/?phone=5581995387708&text=Interesse+Google+Empresas+Basico" target="_blank" class="card-btn">Contratar Básico</a>
             </div>
 
-            <!-- 2. OTIMIZAÇÃO ÚNICA -->
             <div class="card fade-in">
                 <div class="card-header">
                   <h3>OTIMIZAÇÃO ÚNICA</h3>
@@ -1064,11 +1013,9 @@
                 <a href="https://api.whatsapp.com/send/?phone=5581995387708&text=Interesse+Otimizacao+Unica" target="_blank" class="card-btn">Contratar Otimização</a>
             </div>
 
-            <!-- 3. OTIMIZAÇÃO + RECORRÊNCIA (DESTAQUE) -->
             <div class="card featured fade-in">
                 <div class="card-header">
-                  <!-- Tag Centralizada no Topo -->
-                  <div class="card-tag" style="background: var(--gradient); color: #000;">MELHOR OFERTA</div>
+                  <div class="card-tag">MELHOR OFERTA</div>
                   <h3>OTIMIZAÇÃO + RECORRÊNCIA</h3>
                   <p style="text-decoration: line-through; color: #a5b4fc; font-size: 0.9rem; margin-bottom: -5px;">De R$ 2.690,00</p>
                   <div class="price">R$ 2.421<small> (Pix)</small></div>
@@ -1081,22 +1028,18 @@
                   <li>Acompanhamento de métricas e melhorias</li>
                   <li><strong>Bônus:</strong> Landing Page + Link Bio + Placa QR Code</li>
                 </ul>
-                <!-- Emoji removido aqui -->
                 <a href="https://api.whatsapp.com/send/?phone=5581995387708&text=Interesse+Otimizacao+Recorrencia" target="_blank" class="card-btn">Quero Dominar o Google</a>
             </div>
-            
         </div>
       </div>
     </section>
 
-    <!-- 3. Drone & Audiovisual -->
-    <section id="drone" class="pricing-section" style="background-color: #0d121c;">
+    <section id="drone" class="pricing-section">
         <div class="container">
             <h2 class="section-title">Produção <span class="text-gradient">Audiovisual</span></h2>
             <p class="section-subtitle">Imagens de drone e edição profissional que valorizam sua marca.</p>
             
             <div class="cards-grid">
-                <!-- BÁSICO -->
                 <div class="card fade-in">
                     <div class="card-header">
                         <h3>Básico</h3>
@@ -1110,11 +1053,9 @@
                     <a href="https://api.whatsapp.com/send/?phone=5581995387708&text=Interesse+Drone+Basico" target="_blank" class="card-btn">Solicitar</a>
                 </div>
 
-                <!-- INTERMEDIÁRIO (AGORA DESTAQUE) -->
                 <div class="card featured fade-in">
                     <div class="card-header">
-                        <!-- Tag Centralizada -->
-                        <div class="card-tag" style="background: var(--gradient); color: #000;">MAIS VENDIDO</div>
+                        <div class="card-tag">MAIS VENDIDO</div>
                         <h3>Intermediário</h3>
                         <div class="price">R$ 649</div>
                     </div>
@@ -1126,7 +1067,6 @@
                     <a href="https://api.whatsapp.com/send/?phone=5581995387708&text=Interesse+Drone+Intermediario" target="_blank" class="card-btn">Solicitar</a>
                 </div>
 
-                <!-- PROFISSIONAL -->
                 <div class="card fade-in" style="border-color: var(--secondary)">
                     <div class="card-header">
                         <h3>Profissional</h3>
@@ -1144,42 +1084,57 @@
         </div>
     </section>
 
-    <!-- 4. Consultoria (Estratégia e Conteúdo) -->
+    <section id="artes" class="pricing-section" style="background-color: #0d121c;">
+        <div class="container">
+            <h2 class="section-title">Design de <span class="text-gradient">Artes</span></h2>
+            <p class="section-subtitle">Identidade visual profissional para suas redes sociais com foco em conversão.</p>
+            
+            <div class="cards-grid">
+                <div class="card featured fade-in" style="max-width: 550px; margin: 0 auto;">
+                    <div class="card-tag">FOCO EM PACOTE</div>
+                    <div class="card-header">
+                        <h3>Pacotes Digitais</h3>
+                        <div class="price">R$ 65<small>/arte</small></div>
+                        <p class="card-desc">Design estratégico para elevar o nível do seu perfil.</p>
+                    </div>
+                    <ul>
+                        <li><strong>No pacote mínimo de 10 artes</strong></li>
+                        <li>Artes para Feed, Stories ou Carrossel</li>
+                        <li>Opção de Post único personalizado</li>
+                        <li>Criação focada em conversão visual</li>
+                    </ul>
+                    <div style="padding: 1rem; background: rgba(255,255,255,0.05); border-radius: 10px; margin-bottom: 1.5rem;">
+                        <p style="font-size: 0.95rem; color: var(--text-muted);">
+                            <strong>Artes Avulsas:</strong> Para 1 ou 2 unidades, o valor é <strong>R$ 80 por arte</strong>. Priorizamos o fechamento por pacote para garantir a consistência do seu branding.
+                        </p>
+                    </div>
+                    <a href="https://api.whatsapp.com/send/?phone=5581995387708&text=Quero+contratar+o+pacote+de+artes" target="_blank" class="card-btn">Quero meu Pacote</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <section id="consultoria" class="pricing-section">
         <div class="container">
             <h2 class="section-title">Consultoria</h2>
             <p class="section-subtitle">Expertise e acompanhamento para escalar seus resultados.</p>
 
             <div class="cards-grid">
-                <!-- Consultoria Completa -->
-                <div class="card fade-in">
+                <div class="card fade-in" style="max-width: 450px; margin: 0 auto;">
                     <div class="card-header">
                         <h3>🎓 Consultoria Completa</h3>
                         <div class="price" style="font-size: 1.5rem;">Vagas Limitadas</div>
                         <p class="card-desc">Mentoria prática e estratégica</p>
                     </div>
-                    <ul>
+                    <ul style="text-align: left;">
                         <li>Como criar campanhas do zero</li>
-                        <li>Diferença e escolha do objetivo de campanha</li>
                         <li>Estrutura: Campanha, conjunto, anúncio</li>
-                        <li>Padrão de nomenclatura e organização</li>
                         <li>ABO vs CBO (estratégias de orçamento)</li>
-                        <li>Estrutura e segmentação avançada</li>
-                        <li>Como conectar BM, Instagram e WhatsApp</li>
                         <li>Contingência e estruturação de conta</li>
-                        <li>
-                            Definição de público ideal:
-                            <ul>
-                                <li>Segmentado</li>
-                                <li>Envolvimento</li>
-                                <li>Aberto</li>
-                            </ul>
-                        </li>
-                        <li>Temperatura do lead (frio e quente)</li>
-                        <li>Videoview (públicos por % de vídeo)</li>
-                        <li>Call estratégica de 1h30 a 2h</li>
+                        <li>Definição de público (Segmentado, Envolvimento, Aberto)</li>
+                        <li>Temperatura do lead e Videoview</li>
+                        <li><strong>Call estratégica de 1h30 a 2h</strong></li>
                         <li>Acompanhamento por 7 dias via WhatsApp</li>
-                        <li>Empresário envia as imagens e vídeos</li>
                     </ul>
                     <a href="https://api.whatsapp.com/send/?phone=5581995387708&text=Interesse+Consultoria+Completa" class="card-btn">Quero Aprender</a>
                 </div>
@@ -1187,7 +1142,66 @@
         </div>
     </section>
 
-    <!-- FAQ Section -->
+    <section id="resultados" class="pricing-section" style="background-color: #0d121c;">
+        <div class="container">
+            <h2 class="section-title">Resultados que <span class="text-gradient">Falam por Si</span></h2>
+            <p class="section-subtitle">Cases reais de clientes que transformaram seus negócios com nossas estratégias</p>
+            
+            <div class="cards-grid" style="grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));">
+                <div class="card fade-in">
+                    <h4 style="color: var(--primary); margin-bottom: 0.5rem; font-size: 1.1rem;">🛍️ Moda Feminina</h4>
+                    <p><strong>ROI de 420%</strong></p>
+                    <p class="card-desc" style="font-size: 0.9rem;">Em 3 meses com Meta Ads, R$ 15k gerou R$ 78k em vendas.</p>
+                </div>
+                <div class="card fade-in">
+                    <h4 style="color: var(--primary); margin-bottom: 0.5rem; font-size: 1.1rem;">🦷 Clínica Odonto</h4>
+                    <p><strong>+150 agendamentos/mês</strong></p>
+                    <p class="card-desc" style="font-size: 0.9rem;">Via Google Meu Negócio, ticket médio de R$ 1.200 (R$ 180k/mês).</p>
+                </div>
+                <div class="card fade-in">
+                    <h4 style="color: var(--primary); margin-bottom: 0.5rem; font-size: 1.1rem;">🍽️ Restaurante Gourmet</h4>
+                    <p><strong>+80% no faturamento</strong></p>
+                    <p class="card-desc" style="font-size: 0.9rem;">Estratégia integrada de Tráfego + Google Local em 6 meses.</p>
+                </div>
+                <div class="card fade-in">
+                    <h4 style="color: var(--primary); margin-bottom: 0.5rem; font-size: 1.1rem;">🏋️ Academia Funcional</h4>
+                    <p><strong>200+ matrículas</strong></p>
+                    <p class="card-desc" style="font-size: 0.9rem;">Em 4 meses, CAC de R$ 45 por lead qualificado via Meta Ads.</p>
+                </div>
+                <div class="card fade-in">
+                    <h4 style="color: var(--primary); margin-bottom: 0.5rem; font-size: 1.1rem;">🏠 Arquitetura</h4>
+                    <p><strong>R$ 320k em contratos</strong></p>
+                    <p class="card-desc" style="font-size: 0.9rem;">Gerados via Google Ads e Landing Page otimizada em 5 meses.</p>
+                </div>
+                <div class="card fade-in">
+                    <h4 style="color: var(--primary); margin-bottom: 0.5rem; font-size: 1.1rem;">💇 Salão de Beleza</h4>
+                    <p><strong>3x mais agendamentos</strong></p>
+                    <p class="card-desc" style="font-size: 0.9rem;">Com automação via WhatsApp e campanhas segmentadas no Instagram.</p>
+                </div>
+                <div class="card fade-in">
+                    <h4 style="color: var(--primary); margin-bottom: 0.5rem; font-size: 1.1rem;">🚗 Concessionária</h4>
+                    <p><strong>47 carros vendidos</strong></p>
+                    <p class="card-desc" style="font-size: 0.9rem;">Em 2 meses via Meta Ads + Remarketing (ticket médio R$ 65k).</p>
+                </div>
+                <div class="card fade-in">
+                    <h4 style="color: var(--primary); margin-bottom: 0.5rem; font-size: 1.1rem;">📚 Infoprodutor</h4>
+                    <p><strong>R$ 480k em lançamento</strong></p>
+                    <p class="card-desc" style="font-size: 0.9rem;">Funil completo com Tráfego Pago + Webinar + Remarketing estratégico.</p>
+                </div>
+                <div class="card fade-in">
+                    <h4 style="color: var(--primary); margin-bottom: 0.5rem; font-size: 1.1rem;">🏨 Pousada</h4>
+                    <p><strong>95% de ocupação</strong></p>
+                    <p class="card-desc" style="font-size: 0.9rem;">Na alta temporada com Google Ads + Meta Ads + Google Meu Negócio.</p>
+                </div>
+            </div>
+
+            <div style="text-align: center; margin-top: 4rem;" class="fade-in">
+                <h3 style="margin-bottom: 1.5rem;">Pronto para ser o próximo case de sucesso?</h3>
+                <a href="#contato" class="btn">Quero Resultados Assim</a>
+            </div>
+        </div>
+    </section>
+
     <section class="faq-section">
         <div class="container">
             <h2 class="section-title">Perguntas Frequentes</h2>
@@ -1195,32 +1209,25 @@
                 <div class="accordion-item">
                     <button class="accordion-header">O valor dos anúncios está incluso na mensalidade?</button>
                     <div class="accordion-content">
-                        <p>Não. Os valores apresentados são referentes à nossa prestação de serviço (estratégia, criação e otimização). O valor investido nas plataformas (Facebook/Google) é pago diretamente por você através do seu cartão ou boleto, definimos juntos o orçamento ideal.</p>
+                        <p>Não. Os valores apresentados são referentes à nossa prestação de serviço (estratégia, criação e otimização). O valor investido nas plataformas (Facebook/Google) é pago diretamente por você.</p>
                     </div>
                 </div>
                 <div class="accordion-item">
                     <button class="accordion-header">Existe fidelidade nos contratos?</button>
                     <div class="accordion-content">
-                        <p>Trabalhamos com contratos flexíveis. Acreditamos na retenção através de resultados. No entanto, para estratégias de SEO e Tráfego, recomendamos um período mínimo de 3 meses para maturação das campanhas.</p>
+                        <p>Trabalhamos com contratos flexíveis. Recomendamos um período mínimo de 3 meses para maturação das campanhas e melhores resultados.</p>
                     </div>
                 </div>
                 <div class="accordion-item">
                     <button class="accordion-header">Como funciona o Plano Anual GMN?</button>
                     <div class="accordion-content">
-                        <p>O Plano Anual oferece o melhor custo-benefício. Você paga um valor único (ou parcelado) e nós cuidamos da sua ficha no Google o ano inteiro, garantindo que ela esteja sempre atualizada, respondendo clientes e postando novidades semanalmente.</p>
-                    </div>
-                </div>
-                <div class="accordion-item">
-                    <button class="accordion-header">Vocês atendem empresas de qual nicho?</button>
-                    <div class="accordion-content">
-                        <p>Atendemos diversos nichos, desde comércios locais (restaurantes, clínicas, lojas) até prestadores de serviços e infoprodutores. Nossa metodologia é adaptável ao objetivo do seu negócio.</p>
+                        <p>O Plano Anual oferece o melhor custo-benefício. Cuidamos da sua ficha no Google o ano inteiro, garantindo atualizações e resposta a clientes semanalmente.</p>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Formulário de Contato -->
     <section id="contato" class="contact-section">
         <div class="container">
             <h2 class="section-title">Vamos Alavancar seu Negócio?</h2>
@@ -1260,6 +1267,7 @@
                         <option value="Trafego Pago">Gestão de Tráfego Pago</option>
                         <option value="Google Meu Negocio">Google Meu Negócio</option>
                         <option value="Drone/Video">Drone e Vídeos</option>
+                        <option value="Artes">Artes Digitais</option>
                         <option value="Consultoria">Consultoria</option>
                         <option value="Combo">Quero um Combo</option>
                     </select>
@@ -1283,21 +1291,19 @@
     <footer>
         <div class="container">
             <p class="logo" style="justify-content: center; margin-bottom: 1rem;">Cozzi<span>Media</span></p>
-            <p>© 2026 Cozzi Media. Todos os direitos reservados.</p>
+            <p>© 2022 Cozzi Media. Todos os direitos reservados.</p>
             <p style="margin-top: 0.5rem; opacity: 0.6;">Transformando presença digital em lucro.</p>
         </div>
     </footer>
 
-    <!-- Scroll Top Button -->
     <div class="scroll-top" onclick="window.scrollTo({top: 0, behavior: 'smooth'});">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512"><!-- Font Awesome Free 5.15.4 by @fontawesome -->
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512">
             <path d="M352 352c-8.188 0-16.38-3.125-22.62-9.375L192 205.3l-137.4 137.4c-12.5 12.5-32.75 12.5-45.25 0s-12.5-32.75 0-45.25l160-160c12.5-12.5 32.75-12.5 45.25 0l160 160c12.5 12.5 12.5 32.75 0 45.25C368.4 348.9 360.2 352 352 352z"/>
         </svg>
     </div>
 
-    <!-- Botão Flutuante -->
     <a href="https://api.whatsapp.com/send/?phone=5581995387708&text=Olá,+estou+no+site+e+tenho+dúvidas." target="_blank" class="floating-wa">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!-- Font Awesome Free 5.15.4 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) --><path d="M380.9 97.1C339 55.1 283.2 32 223.9 32c-122.4 0-222 99.6-222 222 0 39.1 10.2 77.3 29.6 111L0 480l117.7-30.9c32.4 17.7 68.9 27 106.1 27h.1c122.3 0 224.1-99.6 224.1-222 0-59.3-25.2-115-67.1-157zm-157 341.6c-33.2 0-65.7-8.9-94-25.7l-6.7-4-69.8 18.3L72 359.2l-4.4-7c-18.5-29.4-28.2-63.3-28.2-98.2 0-101.7 82.8-184.5 184.6-184.5 49.3 0 95.6 19.2 130.4 54.1 34.8 34.9 56.2 81.2 56.1 130.5 0 101.8-84.9 184.6-186.6 184.6zm101.2-138.2c-5.5-2.8-32.8-16.2-37.9-18-5.1-1.9-8.8-2.8-12.5 2.8-3.7 5.6-14.3 18-17.6 21.8-3.2 3.7-6.5 4.2-12 1.4-32.6-16.3-54-29.1-75.5-66-5.7-9.8 5.7-9.1 16.3-30.3 1.8-3.7.9-6.9-.5-9.7-1.4-2.8-12.5-30.1-17.1-41.2-4.5-10.8-9.1-9.3-12.5-9.5-3.2-.2-6.9-.2-10.6-.2-3.7 0-9.7 1.4-14.8 6.9-5.1 5.6-19.4 19-19.4 46.3 0 27.3 19.9 53.7 22.6 57.4 2.8 3.7 39.1 59.7 94.8 83.8 35.2 15.2 49 16.5 66.6 13.9 10.7-1.6 32.8-13.4 37.4-26.4 4.6-13 4.6-24.1 3.2-26.4-1.3-2.5-5-3.9-10.5-6.6z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M380.9 97.1C339 55.1 283.2 32 223.9 32c-122.4 0-222 99.6-222 222 0 39.1 10.2 77.3 29.6 111L0 480l117.7-30.9c32.4 17.7 68.9 27 106.1 27h.1c122.3 0 224.1-99.6 224.1-222 0-59.3-25.2-115-67.1-157zm-157 341.6c-33.2 0-65.7-8.9-94-25.7l-6.7-4-69.8 18.3L72 359.2l-4.4-7c-18.5-29.4-28.2-63.3-28.2-98.2 0-101.7 82.8-184.5 184.6-184.5 49.3 0 95.6 19.2 130.4 54.1 34.8 34.9 56.2 81.2 56.1 130.5 0 101.8-84.9 184.6-186.6 184.6zm101.2-138.2c-5.5-2.8-32.8-16.2-37.9-18-5.1-1.9-8.8-2.8-12.5 2.8-3.7 5.6-14.3 18-17.6 21.8-3.2 3.7-6.5 4.2-12 1.4-32.6-16.3-54-29.1-75.5-66-5.7-9.8 5.7-9.1 16.3-30.3 1.8-3.7.9-6.9-.5-9.7-1.4-2.8-12.5-30.1-17.1-41.2-4.5-10.8-9.1-9.3-12.5-9.5-3.2-.2-6.9-.2-10.6-.2-3.7 0-9.7 1.4-14.8 6.9-5.1 5.6-19.4 19-19.4 46.3 0 27.3 19.9 53.7 22.6 57.4 2.8 3.7 39.1 59.7 94.8 83.8 35.2 15.2 49 16.5 66.6 13.9 10.7-1.6 32.8-13.4 37.4-26.4 4.6-13 4.6-24.1 3.2-26.4-1.3-2.5-5-3.9-10.5-6.6z"/></svg>
     </a>
 
     <script>
@@ -1321,12 +1327,8 @@
 
       mobileMenu.addEventListener('click', () => {
         navLinks.classList.toggle('active');
-        
-        // Optional: Toggle visual style of button (e.g. rotate)
-        // mobileMenu.classList.toggle('is-active');
       });
 
-      // Close menu when clicking a link
       document.querySelectorAll('.nav-links a').forEach(link => {
           link.addEventListener('click', () => {
               navLinks.classList.remove('active');
@@ -1346,29 +1348,23 @@
       // Form Logic to WhatsApp
       document.getElementById('sales-form').addEventListener('submit', function(e) {
         e.preventDefault();
-        
-        // Coletando os novos campos
         const nome = document.getElementById('nome_pessoa').value;
         const telefone = document.getElementById('telefone').value;
         const empresa = document.getElementById('empresa').value;
         const instagram = document.getElementById('instagram').value;
         const cidade = document.getElementById('cidade').value;
         const interesseSelect = document.getElementById('interesse');
-        const interesse = interesseSelect.options[interesseSelect.selectedIndex].text; // Pega o texto visível da opção
+        const interesse = interesseSelect.options[interesseSelect.selectedIndex].text;
         const msg = document.getElementById('msg').value;
         const filiais = document.getElementById('filiais').checked ? "Sim (+30%)" : "Não";
 
-        // Montando a mensagem
         const text = `*Nova Solicitação via Site*%0A%0A👤 *Nome:* ${nome}%0A📞 *Telefone:* ${telefone}%0A🏢 *Empresa:* ${empresa}%0A📱 *Instagram:* ${instagram}%0A📍 *Cidade/UF:* ${cidade}%0A🎯 *Interesse:* ${interesse}%0A🏢 *Filiais:* ${filiais}%0A📝 *Mensagem:* ${msg}`;
         
         window.open(`https://api.whatsapp.com/send/?phone=5581995387708&text=${text}`, '_blank');
       });
 
       // Scroll Animation (Intersection Observer)
-      const observerOptions = {
-        threshold: 0.1
-      };
-
+      const observerOptions = { threshold: 0.1 };
       const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
           if (entry.isIntersecting) {
