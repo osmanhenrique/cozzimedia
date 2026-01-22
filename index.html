@@ -15,6 +15,23 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
     
+    <!-- Tailwind CSS (Configurado para não resetar o estilo existente) -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        corePlugins: {
+          preflight: false, // Desativa o reset padrão para não quebrar o CSS antigo
+        },
+        theme: {
+          extend: {
+            colors: {
+              neon: '#01d4ff',
+            }
+          }
+        }
+      }
+    </script>
+
     <style>
       :root {
         --primary: #01d4ff;
@@ -27,6 +44,16 @@
         --text-muted: #94a3b8;
         --border: rgba(255, 255, 255, 0.1);
         --gradient: linear-gradient(135deg, #01d4ff 0%, #39eaff 100%);
+      }
+
+      /* Variáveis para o Modo Claro */
+      body.light-mode {
+        --bg-dark: #f8fafc;
+        --bg-card: rgba(255, 255, 255, 0.8);
+        --bg-card-hover: #ffffff;
+        --text-main: #0f172a; /* Texto escuro */
+        --text-muted: #64748b;
+        --border: rgba(0, 0, 0, 0.1);
       }
 
       * {
@@ -45,7 +72,8 @@
         color: var(--text-main);
         line-height: 1.6;
         overflow-x: hidden;
-        font-size: 16px; /* Tamanho base padrão garantido */
+        font-size: 16px;
+        transition: background-color 0.3s ease, color 0.3s ease;
       }
 
       /* Utilitários */
@@ -62,7 +90,6 @@
         background-clip: text;
       }
       
-      /* Ajuste para o menu fixo não cobrir o título ao clicar */
       section {
         scroll-margin-top: 100px;
       }
@@ -80,7 +107,7 @@
         border: none;
         cursor: pointer;
         text-align: center;
-        font-size: 1rem; /* Texto do botão mais legível */
+        font-size: 1rem;
       }
 
       .btn:hover {
@@ -103,7 +130,7 @@
 
       .section-title {
         text-align: center;
-        font-size: clamp(2.2rem, 5vw, 3rem); /* Títulos um pouco mais encorpados */
+        font-size: clamp(2.2rem, 5vw, 3rem);
         font-weight: 800;
         margin-bottom: 1rem;
       }
@@ -111,7 +138,7 @@
       .section-subtitle {
         text-align: center;
         color: var(--text-muted);
-        font-size: 1.2rem; /* Aumentado de 1.1rem */
+        font-size: 1.2rem;
         max-width: 650px;
         margin: 0 auto 4rem auto;
       }
@@ -126,24 +153,29 @@
         z-index: 100;
         border-bottom: 1px solid var(--border);
         padding: 1rem 0;
+        transition: background-color 0.3s ease, border-color 0.3s ease;
+      }
+      
+      body.light-mode header {
+        background: rgba(255, 255, 255, 0.85);
       }
 
       nav {
         display: flex;
         justify-content: space-between;
         align-items: center;
-        position: relative; /* Importante para o menu mobile absoluto */
+        position: relative;
       }
 
       .logo {
-        font-size: 1.6rem; /* Aumentado levemente */
+        font-size: 1.6rem;
         font-weight: 800;
         color: var(--text-main);
         text-decoration: none;
         display: flex;
         align-items: center;
         gap: 0.5rem;
-        z-index: 101; /* Garante que o logo fique sobre o menu mobile */
+        z-index: 101;
       }
 
       .logo span { color: var(--primary); }
@@ -157,21 +189,21 @@
         z-index: 101;
       }
 
-      /* Desktop Nav Links (Default hidden on mobile logic below) */
+      /* Desktop Nav Links */
       .nav-links {
-        display: none; /* Escondido por padrão no mobile */
+        display: none;
       }
 
       /* Desktop Styles */
       @media(min-width: 768px) {
         .menu-toggle {
-            display: none; /* Esconde o botão no desktop */
+            display: none;
         }
 
         .nav-links {
-          display: flex !important; /* Força display flex no desktop */
+          display: flex !important;
           align-items: center;
-          gap: 1.2rem; /* Espaçamento ajustado para caber novos itens */
+          gap: 1.2rem;
           position: static;
           background: transparent;
           width: auto;
@@ -185,7 +217,7 @@
           color: var(--text-muted);
           text-decoration: none;
           font-weight: 500;
-          font-size: 0.95rem; /* Fonte do menu levemente ajustada */
+          font-size: 0.95rem;
           transition: color 0.3s;
           padding: 0;
           border-bottom: none;
@@ -207,13 +239,13 @@
         }
 
         .nav-links.active {
-            display: flex; /* Mostra quando ativo */
+            display: flex;
             flex-direction: column;
             position: absolute;
-            top: 100%; /* Logo abaixo do header */
+            top: 100%;
             left: 0;
             width: 100%;
-            background: rgba(11, 15, 22, 0.98); /* Fundo bem escuro */
+            background: rgba(11, 15, 22, 0.98);
             backdrop-filter: blur(15px);
             padding: 2rem;
             border-bottom: 1px solid var(--border);
@@ -222,14 +254,22 @@
             box-shadow: 0 10px 30px rgba(0,0,0,0.5);
             animation: slideDown 0.3s ease forwards;
         }
+        
+        body.light-mode .nav-links.active {
+            background: rgba(255, 255, 255, 0.98);
+        }
 
         .nav-links a {
             color: var(--text-main);
             text-decoration: none;
-            font-size: 1.2rem; /* Links maiores no mobile */
+            font-size: 1.2rem;
             padding: 0.5rem;
             display: block;
             border-bottom: 1px solid rgba(255,255,255,0.05);
+        }
+        
+        body.light-mode .nav-links a {
+             border-bottom: 1px solid rgba(0,0,0,0.05);
         }
 
         .nav-links a:last-child {
@@ -237,7 +277,7 @@
         }
 
         .nav-links .btn {
-            width: 100%; /* Botão full width no mobile */
+            width: 100%;
             margin-top: 1rem;
         }
         
@@ -249,20 +289,20 @@
 
       /* Hero Section */
       .hero {
-        padding: 9rem 0 5rem; /* Mais respiro vertical */
+        padding: 9rem 0 5rem;
         text-align: center;
         position: relative;
       }
 
       .hero h1 {
-        font-size: clamp(2.8rem, 6vw, 4.5rem); /* Título Hero maior */
+        font-size: clamp(2.8rem, 6vw, 4.5rem);
         font-weight: 800;
         line-height: 1.2;
         margin-bottom: 1.5rem;
       }
 
       .hero p {
-        font-size: 1.25rem; /* Texto de apoio aumentado */
+        font-size: 1.25rem;
         color: var(--text-muted);
         max-width: 750px;
         margin: 0 auto 2.5rem;
@@ -274,7 +314,7 @@
         gap: 2rem;
         flex-wrap: wrap;
         margin-top: 3rem;
-        font-size: 1rem; /* Badges mais legíveis */
+        font-size: 1rem;
         color: var(--text-muted);
       }
       
@@ -291,6 +331,7 @@
         border-bottom: 1px solid var(--border);
         background: rgba(255,255,255,0.02);
         margin-bottom: 4rem;
+        transition: border-color 0.3s ease;
       }
       
       .proof-container {
@@ -302,7 +343,7 @@
       }
 
       .stat-item h4 {
-          font-size: 2.5rem; /* Números maiores */
+          font-size: 2.5rem;
           color: var(--primary);
           font-weight: 800;
       }
@@ -318,7 +359,7 @@
 
       .cards-grid {
         display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); /* Cards levemente mais largos */
+        grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
         gap: 2.5rem;
         justify-content: center;
       }
@@ -332,7 +373,7 @@
         flex-direction: column;
         transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         position: relative;
-        overflow: visible; /* ALTERADO: visible para não cortar a tag flutuante */
+        overflow: visible;
       }
 
       .card:hover {
@@ -341,16 +382,14 @@
         border-color: rgba(1, 212, 255, 0.3);
       }
 
-      /* Destaque / Mais Vendido */
       .card.featured {
         border: 2px solid var(--primary);
         background: rgba(1, 212, 255, 0.03);
         box-shadow: 0 0 30px rgba(1, 212, 255, 0.1);
-        position: relative; /* Necessário para o posicionamento absoluto da tag */
-        overflow: visible; /* Permite que a tag saia um pouco do card se precisar */
+        position: relative;
+        overflow: visible;
       }
 
-      /* Estilos Antigos Ribbon (Mantido caso precise, mas oculto visualmente ou não usado) */
       .ribbon {
         display: none; 
       }
@@ -360,20 +399,20 @@
         border-bottom: 1px solid var(--border);
         padding-bottom: 1rem;
         text-align: center;
-        padding-top: 1rem; /* Espaço extra para não colar no topo */
+        padding-top: 1rem;
+        transition: border-color 0.3s ease;
       }
       
-      /* TAG DE GESTÃO / DESTAQUE CENTRALIZADO (NOVO FORMATO FLUTUANTE) */
       .card-tag {
         position: absolute;
-        top: -15px; /* Sobe a tag para ficar na linha da borda */
+        top: -15px;
         left: 50%;
         transform: translateX(-50%);
         background: var(--gradient);
         color: #000;
         padding: 0.5rem 1.5rem;
         border-radius: 50px;
-        font-size: 0.85rem; /* Fonte da tag */
+        font-size: 0.85rem;
         font-weight: 800;
         text-transform: uppercase;
         box-shadow: 0 4px 15px rgba(1, 212, 255, 0.4);
@@ -383,25 +422,25 @@
       }
 
       .card h3 {
-        font-size: 1.6rem; /* Aumentado de 1.5rem */
+        font-size: 1.6rem;
         margin-bottom: 0.5rem;
       }
 
       .price {
-        font-size: 2.2rem; /* Aumentado de 2rem */
+        font-size: 2.2rem;
         font-weight: 800;
         color: var(--text-main);
       }
       
       .price small {
-          font-size: 1.1rem; /* Aumentado de 1rem */
+          font-size: 1.1rem;
           font-weight: 400;
           color: var(--text-muted);
       }
 
       .card-desc {
         color: var(--text-muted);
-        font-size: 1rem; /* Aumentado de 0.9rem */
+        font-size: 1rem;
         margin-top: 0.5rem;
       }
 
@@ -416,8 +455,8 @@
         display: flex;
         align-items: flex-start;
         gap: 0.5rem; 
-        font-size: 1rem; /* Aumentado de 0.95rem para 16px padrão */
-        color: #cbd5e1;
+        font-size: 1rem;
+        color: var(--text-muted);
         line-height: 1.5;
       }
 
@@ -429,16 +468,15 @@
         font-size: 1.1rem;
       }
       
-      /* Estilo Específico para o Card de Setup (Duas Colunas em telas maiores) */
       .card.setup-card {
-        max-width: 800px; /* Mais largo para caber as colunas */
+        max-width: 800px;
         margin: 0 auto;
       }
       
       .card.setup-card ul {
         display: grid;
         grid-template-columns: 1fr;
-        gap: 0 1.5rem; /* Gap horizontal entre colunas */
+        gap: 0 1.5rem;
       }
       
       @media(min-width: 768px) {
@@ -447,7 +485,6 @@
         }
       }
       
-      /* Estilo para listas aninhadas (sem checkmark) */
       .card ul ul {
           margin-bottom: 0;
           margin-top: 0.5rem;
@@ -455,10 +492,10 @@
       }
       
       .card ul ul li {
-          font-size: 0.95rem; /* Sublista levemente menor, mas legível */
+          font-size: 0.95rem;
           color: var(--text-muted);
           margin-bottom: 0.4rem;
-          display: block; /* Remove o flex para usar list-style nativo se quiser, ou manter custom */
+          display: block;
           padding-left: 1.5rem;
           position: relative;
       }
@@ -476,13 +513,18 @@
           padding: 1rem;
           border-radius: 12px;
           background: rgba(255, 255, 255, 0.1);
-          color: white;
+          color: var(--text-main);
           text-align: center;
           text-decoration: none;
           font-weight: 600;
           transition: 0.3s;
           border: 1px solid transparent;
-          font-size: 1.05rem; /* Botão do card maior */
+          font-size: 1.05rem;
+      }
+
+      body.light-mode .card-btn {
+          background: rgba(0,0,0,0.05);
+          color: #000;
       }
       
       .card.featured .card-btn,
@@ -506,6 +548,7 @@
       .accordion-item {
         border-bottom: 1px solid var(--border);
         margin-bottom: 1rem;
+        transition: border-color 0.3s ease;
       }
 
       .accordion-header {
@@ -515,7 +558,7 @@
         padding: 1.5rem 0;
         text-align: left;
         color: var(--text-main);
-        font-size: 1.2rem; /* Perguntas maiores */
+        font-size: 1.2rem;
         font-weight: 600;
         cursor: pointer;
         display: flex;
@@ -539,7 +582,7 @@
         overflow: hidden;
         transition: max-height 0.3s ease-out;
         color: var(--text-muted);
-        font-size: 1.05rem; /* Respostas maiores */
+        font-size: 1.05rem;
       }
       
       .accordion-content p {
@@ -559,7 +602,8 @@
         border-radius: 20px;
         border: 1px solid var(--border);
         box-shadow: 0 20px 50px rgba(0,0,0,0.3);
-        text-align: left; /* ALINHAMENTO À ESQUERDA (MANTIDO) */
+        text-align: left;
+        transition: border-color 0.3s ease, background-color 0.3s ease;
       }
 
       .form-group {
@@ -568,27 +612,30 @@
 
       .form-group label {
         display: block;
-        margin-bottom: 0.4rem; /* Espaço ajustado para respirar um pouco, mas manter conexão */
-        font-weight: 800;      /* Negrito forte */
-        font-size: 0.8rem;     /* Aumentado de 0.75rem */
-        text-transform: uppercase; /* Letras Maiúsculas */
-        letter-spacing: 1px;   /* Espaçamento entre letras */
-        color: var(--text-muted); /* Cor levemente cinza para não brigar com o input */
-        margin-left: 2px;      /* Leve recuo para alinhar com a borda arredondada do input */
+        margin-bottom: 0.4rem;
+        font-weight: 800;
+        font-size: 0.8rem;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        color: var(--text-muted);
+        margin-left: 2px;
       }
 
-      /* UPDATED FORM CONTROLS - WHITE BG, BLACK TEXT, LEFT ALIGN */
       .form-control {
         width: 100%;
         padding: 1rem;
-        background: #f8fafc; /* Light background */
+        background: #f8fafc;
         border: 1px solid rgba(255,255,255,0.1);
         border-radius: 10px;
-        color: #0f172a; /* Black/Dark text */
+        color: #0f172a;
         font-family: inherit;
         transition: 0.3s;
-        text-align: left; /* ALINHAMENTO À ESQUERDA */
-        font-size: 1rem; /* Texto do input tamanho padrão */
+        text-align: left;
+        font-size: 1rem;
+      }
+      
+      body.light-mode .form-control {
+          border: 1px solid #cbd5e1;
       }
       
       .form-control:focus {
@@ -598,20 +645,18 @@
       }
 
       .form-control::placeholder {
-          color: #94a3b8; /* Darker placeholder for contrast */
+          color: #94a3b8;
       }
       
-      /* Ensure select options are readable */
       option {
           background: #ffffff;
           color: #000;
       }
       
-      /* CHECKBOX ALIGNMENT FIX */
       .checkbox-wrapper {
           display: flex;
-          align-items: center; /* Alinha verticalmente ao centro */
-          justify-content: flex-start; /* ALINHAMENTO À ESQUERDA */
+          align-items: center;
+          justify-content: flex-start;
           gap: 12px;
           background: rgba(255,255,255,0.05);
           padding: 1rem;
@@ -619,6 +664,10 @@
           margin-bottom: 1.5rem;
           border: 1px solid transparent;
           transition: 0.3s;
+      }
+      
+      body.light-mode .checkbox-wrapper {
+          background: rgba(0,0,0,0.05);
       }
       
       .checkbox-wrapper:hover {
@@ -630,14 +679,14 @@
           width: 20px;
           height: 20px;
           cursor: pointer;
-          margin: 0; /* Remove margens padrão */
-          accent-color: var(--primary); /* Cor do tema */
-          flex-shrink: 0; /* Impede que o checkbox encolha */
+          margin: 0;
+          accent-color: var(--primary);
+          flex-shrink: 0;
       }
       
       .checkbox-wrapper label {
           margin: 0;
-          font-size: 1rem; /* Aumentado */
+          font-size: 1rem;
           color: var(--text-muted);
           cursor: pointer;
           line-height: 1.4;
@@ -648,8 +697,9 @@
         text-align: center;
         padding: 3rem 0;
         border-top: 1px solid var(--border);
-        font-size: 1rem; /* Rodapé mais legível */
+        font-size: 1rem;
         color: var(--text-muted);
+        transition: border-color 0.3s ease;
       }
 
       /* Whatsapp Button */
@@ -683,7 +733,7 @@
       /* Scroll To Top Button */
       .scroll-top {
         position: fixed;
-        bottom: 110px; /* Acima do botão do WhatsApp */
+        bottom: 110px;
         right: 35px;
         width: 50px;
         height: 50px;
@@ -759,14 +809,33 @@
           </div>
 
           <div class="nav-links">
-            <a href="#inicio">Início</a>
-            <a href="#trafego">Tráfego</a>
-            <a href="#gmn">Google Local</a>
-            <a href="#drone">Drone</a>
-            <a href="#artes">Artes</a>
-            <a href="#resultados">Resultados</a>
-            <a href="#consultoria">Consultoria</a>
-            <a href="#contato" class="btn" style="padding: 0.5rem 1.5rem; font-size: 0.9rem;">Fale Conosco</a>
+            <a href="#inicio" data-i18n="nav_home">Início</a>
+            <a href="#trafego" data-i18n="nav_traffic">Tráfego</a>
+            <a href="#gmn" data-i18n="nav_local">Google Local</a>
+            <a href="#drone" data-i18n="nav_drone">Drone</a>
+            <a href="#artes" data-i18n="nav_arts">Artes</a>
+            <a href="#resultados" data-i18n="nav_results">Resultados</a>
+            <a href="#consultoria" data-i18n="nav_consulting">Consultoria</a>
+
+            <!-- Componente Barra de Controle (Novo Design Separado) -->
+            <div class="flex items-center gap-3 ml-6">
+                <!-- Language Selector (Cápsula) -->
+                <div class="flex items-center px-4 py-1.5 rounded-full bg-[rgba(255,255,255,0.03)] border border-[var(--border)] backdrop-blur-md transition-all duration-300 hover:border-[var(--primary)] hover:bg-[rgba(1,212,255,0.05)] cursor-pointer select-none group" onclick="toggleLanguage()">
+                    <span id="lang-pt" class="text-xs font-bold text-neon transition-colors tracking-wider">PT</span>
+                    <span class="mx-2 text-[var(--text-muted)] text-[10px] opacity-50">|</span>
+                    <span id="lang-en" class="text-xs font-bold text-[var(--text-muted)] group-hover:text-[var(--text-main)] hover:!text-neon transition-colors tracking-wider">EN</span>
+                </div>
+
+                <!-- Theme Toggle (Círculo) -->
+                <button id="theme-toggle" class="flex items-center justify-center w-9 h-9 rounded-full bg-[rgba(255,255,255,0.03)] border border-[var(--border)] backdrop-blur-md transition-all duration-300 hover:border-[var(--primary)] hover:bg-[var(--primary)] group shadow-lg shadow-transparent hover:shadow-[0_0_15px_rgba(1,212,255,0.4)]" aria-label="Alternar Tema">
+                    <!-- Sun Icon (Hidden by default in dark) -->
+                    <svg id="icon-sun" class="w-5 h-5 text-yellow-400 hidden group-hover:text-white transition-transform duration-300 group-hover:rotate-90" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"></path></svg>
+                    <!-- Moon Icon (Visible in dark) -->
+                    <svg id="icon-moon" class="w-5 h-5 text-[var(--primary)] group-hover:text-white transition-transform duration-300 group-hover:-rotate-12" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"></path></svg>
+                </button>
+            </div>
+            <!-- Fim do Componente -->
+
           </div>
         </nav>
       </div>
@@ -774,18 +843,18 @@
 
     <section class="hero" id="inicio">
       <div class="container">
-        <h1>Transforme Cliques em <br><span class="text-gradient">Vendas Reais</span></h1>
-        <p>Acelere o crescimento da sua empresa com estratégias validadas de Tráfego Pago, Gestão de Conteúdo e Otimização Google.</p>
+        <h1 data-i18n="hero_title">Transforme Cliques em <br><span class="text-gradient">Vendas Reais</span></h1>
+        <p data-i18n="hero_subtitle">Acelere o crescimento da sua empresa com estratégias validadas de Tráfego Pago, Gestão de Conteúdo e Otimização Google.</p>
         
         <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
-            <a href="#trafego" class="btn">Ver Nossos Planos</a>
-            <a href="#contato" class="btn">Fale Conosco</a>
+            <a href="#trafego" class="btn" data-i18n="hero_cta_plans">Ver Nossos Planos</a>
+            <a href="#contato" class="btn" data-i18n="hero_cta_contact">Fale Conosco</a>
         </div>
 
         <div class="hero-badges">
-            <span>🚀 +100 Clientes Atendidos</span>
-            <span>💎 Meta Business Partner</span>
-            <span>📈 ROI Focado</span>
+            <span data-i18n="hero_badge_clients">🚀 +100 Clientes Atendidos</span>
+            <span data-i18n="hero_badge_meta">💎 Meta Business Partner</span>
+            <span data-i18n="hero_badge_roi">📈 ROI Focado</span>
         </div>
       </div>
     </section>
@@ -793,85 +862,85 @@
     <div class="social-proof">
         <div class="container proof-container">
             <div class="stat-item">
-                <h4>+5 Milhões</h4>
-                <p>Investidos em Anúncios</p>
+                <h4 data-i18n="proof_invested">+5 Milhões</h4>
+                <p data-i18n="proof_invested_label">Investidos em Anúncios</p>
             </div>
             <div class="stat-item">
-                <h4>+100</h4>
-                <p>Empresas Escaladas</p>
+                <h4 data-i18n="proof_companies">+100</h4>
+                <p data-i18n="proof_companies_label">Empresas Escaladas</p>
             </div>
             <div class="stat-item">
-                <h4>24/7</h4>
-                <p>Monitoramento Ativo</p>
+                <h4 data-i18n="proof_monitoring">24/7</h4>
+                <p data-i18n="proof_monitoring_label">Monitoramento Ativo</p>
             </div>
         </div>
     </div>
 
     <section id="trafego" class="pricing-section">
       <div class="container">
-        <h2 class="section-title">Tráfego <span class="text-gradient">Pago</span></h2>
-        <p class="section-subtitle">Escolha o nível de aceleração que seu negócio precisa hoje.</p>
+        <h2 class="section-title" data-i18n="section_traffic_title">Tráfego <span class="text-gradient">Pago</span></h2>
+        <p class="section-subtitle" data-i18n="section_traffic_subtitle">Escolha o nível de aceleração que seu negócio precisa hoje.</p>
 
         <div class="cards-grid">
           <div class="card fade-in">
             <div class="card-header">
-              <h3>Plano Essencial</h3>
-              <div class="price">R$ 699<small>/mês</small></div>
-              <p class="card-desc">Para quem está começando e precisa gerar presença digital com estratégia.</p>
+              <h3 data-i18n="plan_essencial_title">Plano Essencial</h3>
+              <div class="price" data-i18n="plan_essencial_price">R$ 699<small>/mês</small></div>
+              <p class="card-desc" data-i18n="plan_essencial_desc">Para quem está começando e precisa gerar presença digital com estratégia.</p>
             </div>
             <ul>
-              <li>Gestão de Meta Ads (Instagram e Facebook)</li>
-              <li>Planejamento estratégico inicial</li>
-              <li>Otimização básica de campanhas</li>
-              <li>Relatório mensal de desempenho</li>
-              <li>Suporte via grupo de WhatsApp</li>
+              <li data-i18n="plan_essencial_item1">Gestão de Meta Ads (Instagram e Facebook)</li>
+              <li data-i18n="plan_essencial_item2">Planejamento estratégico inicial</li>
+              <li data-i18n="plan_essencial_item3">Otimização básica de campanhas</li>
+              <li data-i18n="plan_essencial_item4">Relatório mensal de desempenho</li>
+              <li data-i18n="plan_essencial_item5">Suporte via grupo de WhatsApp</li>
             </ul>
-            <p style="font-size: 0.9rem; color: var(--text-muted); margin-bottom: 1.5rem; border-top: 1px solid var(--border); padding-top: 1rem;">
+            <p style="font-size: 0.9rem; color: var(--text-muted); margin-bottom: 1.5rem; border-top: 1px solid var(--border); padding-top: 1rem;" data-i18n="plan_essencial_note">
                 👉 Ideal para pequenos negócios que querem começar a vender online com anúncios bem estruturados.
             </p>
-            <a href="https://api.whatsapp.com/send/?phone=5581995387708&text=Quero+o+Plano+Essencial" target="_blank" class="card-btn">Começar Agora</a>
+            <a href="https://api.whatsapp.com/send/?phone=5581995387708&text=Quero+o+Plano+Essencial" target="_blank" class="card-btn" data-i18n="btn_start_now">Começar Agora</a>
           </div>
 
           <div class="card featured fade-in">
             <div class="card-header">
-              <div class="card-tag">MAIS VENDIDO</div>
-              <h3>Plano Pro</h3>
-              <div class="price">R$ 1.499<small>/mês</small></div>
-              <p class="card-desc">Para empresas que querem escalar vendas com consistência e automação.</p>
+              <div class="card-tag" data-i18n="plan_pro_tag">MAIS VENDIDO</div>
+              <h3 data-i18n="plan_pro_title">Plano Pro</h3>
+              <div class="price" data-i18n="plan_pro_price">R$ 1.499<small>/mês</small></div>
+              <p class="card-desc" data-i18n="plan_pro_desc">Para empresas que querem escalar vendas com consistência e automação.</p>
             </div>
             <ul>
-              <li>Gestão completa de Meta Ads</li>
-              <li>Automação de pré-atendimento (Instagram / WhatsApp)</li>
-              <li>Planejamento mensal de campanhas</li>
-              <li>Programação de mídias</li>
-              <li><strong>12 posts/mês inclusos</strong></li>
-              <li>Relatórios semanais</li>
-              <li>Suporte prioritário</li>
-              <li>Reunião mensal estratégica</li>
+              <li data-i18n="plan_pro_item1">Gestão completa de Meta Ads</li>
+              <li data-i18n="plan_pro_item2">Automação de pré-atendimento (Instagram / WhatsApp)</li>
+              <li data-i18n="plan_pro_item3">Planejamento mensal de campanhas</li>
+              <li data-i18n="plan_pro_item4">Programação de mídias</li>
+              <li data-i18n="plan_pro_item5"><strong>12 posts/mês inclusos</strong></li>
+              <li data-i18n="plan_pro_item6">Relatórios semanais</li>
+              <li data-i18n="plan_pro_item7">Suporte prioritário</li>
+              <li data-i18n="plan_pro_item8">Reunião mensal estratégica</li>
             </ul>
-            <p style="font-size: 0.9rem; color: #cbd5e1; margin-bottom: 1.5rem; border-top: 1px solid rgba(1, 212, 255, 0.2); padding-top: 1rem;">
+            <p style="font-size: 0.9rem; color: #cbd5e1; margin-bottom: 1.5rem; border-top: 1px solid rgba(1, 212, 255, 0.2); padding-top: 1rem;" data-i18n="plan_pro_note">
                 👉 Ideal para negócios que já vendem e querem aumentar faturamento de forma previsível.
             </p>
-            <a href="https://api.whatsapp.com/send/?phone=5581995387708&text=Quero+o+Plano+Pro+(Mais+Vendido)" target="_blank" class="card-btn">Quero Escalar</a>
+            <a href="https://api.whatsapp.com/send/?phone=5581995387708&text=Quero+o+Plano+Pro+(Mais+Vendido)" target="_blank" class="card-btn" data-i18n="btn_scale">Quero Escalar</a>
           </div>
 
           <div class="card fade-in">
             <div class="card-header">
-              <h3>Plano Premium</h3>
-              <div class="price">R$ 1.999<small>/mês</small></div>
-              <p class="card-desc">Para marcas que buscam liderança e crescimento agressivo.</p>
+              <h3 data-i18n="plan_premium_title">Plano Premium</h3>
+              <div class="price" data-i18n="plan_premium_price">R$ 1.999<small>/mês</small></div>
+              <p class="card-desc" data-i18n="plan_premium_desc">Para marcas que buscam liderança e crescimento agressivo.</p>
             </div>
             <ul>
-              <li>Tudo do Plano Pro</li>
-              <li><strong>Gestão de Google Ads</strong></li>
-              <li><strong>Landing Page inclusa (foco em conversão)</strong></li>
-              <li><strong>24 posts/mês inclusos</strong></li>
-              <li>Suporte Intensivo VIP</li>
+              <li data-i18n="plan_premium_item1">Tudo do Plano Pro</li>
+              <li data-i18n="plan_premium_item2"><strong>Gestão de Google Ads</strong></li>
+              <li data-i18n="plan_premium_item3"><strong>Landing Page inclusa (foco em conversão)</strong></li>
+              <li data-i18n="plan_premium_item4"><strong>24 posts/mês inclusos</strong></li>
+              <li data-i18n="plan_premium_item5">Suporte Intensivo VIP</li>
             </ul>
-            <p style="font-size: 0.9rem; color: var(--text-muted); margin-bottom: 1.5rem; border-top: 1px solid var(--border); padding-top: 1rem;">
+            <p style="font-size: 0.9rem; color: var(--text-muted); margin-bottom: 1.5rem; border-top: 1px solid var(--border); padding-top: 1rem;" data-i18n="plan_premium_note">
                 👉 Ideal para empresas que querem dominar o mercado e escalar com estrutura profissional.
             </p>
-            <a href="https://api.whatsapp.com/send/?phone=5581995387708&text=Quero+o+Plano+Premium" target="_blank" class="card-btn">Contratar Premium</a>
+            <a href="https://api.whatsapp.com/send/?phone=5581995387708&text=Quero+o+Plano+Premium" target="_blank" class="card-btn" data-i18n="btn_hire_premium">Contratar Premium</a>
           </div>
         </div>
       </div>
@@ -881,35 +950,35 @@
       <div class="container">
           <div class="card setup-card fade-in" style="max-width: 900px; margin: 0 auto; border-color: var(--secondary);">
               <div class="card-header">
-                  <h3>Setup Profissional Meta Ads</h3>
-                  <div class="price">R$ 500<small> (único - Pix)</small></div>
-                  <p class="card-desc" style="max-width: 600px; margin: 0.5rem auto;">Para quem precisa estruturar tudo corretamente antes de anunciar e evitar bloqueios.</p>
+                  <h3 data-i18n="setup_title">Setup Profissional Meta Ads</h3>
+                  <div class="price" data-i18n="setup_price">R$ 500<small> (único - Pix)</small></div>
+                  <p class="card-desc" style="max-width: 600px; margin: 0.5rem auto;" data-i18n="setup_desc">Para quem precisa estruturar tudo corretamente antes de anunciar e evitar bloqueios.</p>
               </div>
               
               <ul>
-                  <li>Criação de nova Página no Facebook</li>
-                  <li>Nome da página alinhado ao Instagram</li>
-                  <li>Foto de perfil igual ao Instagram</li>
-                  <li>Biografia alinhada ao Instagram</li>
-                  <li>Categoria correta da página (Criador de conteúdo)</li>
-                  <li>Configuração do Meta Business (Gerenciador de Negócios)</li>
-                  <li>Configuração empresarial correta</li>
-                  <li>Cadastro e confirmação de e-mail</li>
-                  <li>Cadastro de endereço</li>
-                  <li>Cadastro de CPF ou CNPJ</li>
-                  <li>Vinculação correta entre Facebook e Instagram</li>
-                  <li>Validação do Instagram via código</li>
-                  <li>Organização de permissões e acessos</li>
-                  <li>Ativação de boas práticas de segurança</li>
-                  <li>Preparação completa para anúncios</li>
-                  <li>Criação / vinculação da conta de anúncios</li>
-                  <li>Configuração correta de fuso horário e moeda</li>
-                  <li>Teste de estrutura para impulsionamento</li>
-                  <li>Estrutura organizada para liberação futura de anúncios</li>
+                  <li data-i18n="setup_item1">Criação de nova Página no Facebook</li>
+                  <li data-i18n="setup_item2">Nome da página alinhado ao Instagram</li>
+                  <li data-i18n="setup_item3">Foto de perfil igual ao Instagram</li>
+                  <li data-i18n="setup_item4">Biografia alinhada ao Instagram</li>
+                  <li data-i18n="setup_item5">Categoria correta da página (Criador de conteúdo)</li>
+                  <li data-i18n="setup_item6">Configuração do Meta Business (Gerenciador de Negócios)</li>
+                  <li data-i18n="setup_item7">Configuração empresarial correta</li>
+                  <li data-i18n="setup_item8">Cadastro e confirmação de e-mail</li>
+                  <li data-i18n="setup_item9">Cadastro de endereço</li>
+                  <li data-i18n="setup_item10">Cadastro de CPF ou CNPJ</li>
+                  <li data-i18n="setup_item11">Vinculação correta entre Facebook e Instagram</li>
+                  <li data-i18n="setup_item12">Validação do Instagram via código</li>
+                  <li data-i18n="setup_item13">Organização de permissões e acessos</li>
+                  <li data-i18n="setup_item14">Ativação de boas práticas de segurança</li>
+                  <li data-i18n="setup_item15">Preparação completa para anúncios</li>
+                  <li data-i18n="setup_item16">Criação / vinculação da conta de anúncios</li>
+                  <li data-i18n="setup_item17">Configuração correta de fuso horário e moeda</li>
+                  <li data-i18n="setup_item18">Teste de estrutura para impulsionamento</li>
+                  <li data-i18n="setup_item19">Estrutura organizada para liberação futura de anúncios</li>
               </ul>
               
               <div style="text-align: center; margin-top: 2rem;">
-                  <a href="https://api.whatsapp.com/send/?phone=5581995387708&text=Quero+o+Setup+Profissional+Meta+Ads" target="_blank" class="card-btn" style="max-width: 300px; display: inline-block;">Começar Agora</a>
+                  <a href="https://api.whatsapp.com/send/?phone=5581995387708&text=Quero+o+Setup+Profissional+Meta+Ads" target="_blank" class="card-btn" style="max-width: 300px; display: inline-block;" data-i18n="btn_start_now">Começar Agora</a>
               </div>
           </div>
       </div>
@@ -917,57 +986,57 @@
 
     <section id="gmn" class="pricing-section">
       <div class="container">
-        <h2 class="section-title">Google <span class="text-gradient">Local</span></h2>
-        <p class="section-subtitle">Seja encontrado primeiro quando seus clientes procurarem pelo seu serviço.</p>
+        <h2 class="section-title" data-i18n="section_local_title">Google <span class="text-gradient">Local</span></h2>
+        <p class="section-subtitle" data-i18n="section_local_subtitle">Seja encontrado primeiro quando seus clientes procurarem pelo seu serviço.</p>
 
         <div class="cards-grid">
             <div class="card fade-in">
                 <div class="card-header">
-                  <h3>Flash 30 Dias</h3>
-                  <div class="price">R$ 499<small> (único)</small></div>
-                  <p class="card-desc">Ideal para configurar a casa e começar certo.</p>
+                  <h3 data-i18n="local_flash_title">Flash 30 Dias</h3>
+                  <div class="price" data-i18n="local_flash_price">R$ 499<small> (único)</small></div>
+                  <p class="card-desc" data-i18n="local_flash_desc">Ideal para configurar a casa e começar certo.</p>
                 </div>
                 <ul>
-                  <li>Cadastro e verificação da ficha</li>
-                  <li>SEO Local (Palavras-chave e Descrição)</li>
-                  <li>Otimização de Fotos e Produtos</li>
-                  <li>Correção de erros de cadastro</li>
-                  <li>Checklist final de entrega</li>
+                  <li data-i18n="local_flash_item1">Cadastro e verificação da ficha</li>
+                  <li data-i18n="local_flash_item2">SEO Local (Palavras-chave e Descrição)</li>
+                  <li data-i18n="local_flash_item3">Otimização de Fotos e Produtos</li>
+                  <li data-i18n="local_flash_item4">Correção de erros de cadastro</li>
+                  <li data-i18n="local_flash_item5">Checklist final de entrega</li>
                 </ul>
-                <a href="https://api.whatsapp.com/send/?phone=5581995387708&text=Quero+Otimizacao+30+Dias" target="_blank" class="card-btn">Contratar Setup</a>
+                <a href="https://api.whatsapp.com/send/?phone=5581995387708&text=Quero+Otimizacao+30+Dias" target="_blank" class="card-btn" data-i18n="btn_hire_setup">Contratar Setup</a>
             </div>
 
             <div class="card featured fade-in">
                 <div class="card-header">
-                  <div class="card-tag">MELHOR OFERTA</div>
-                  <h3>Plano Anual</h3>
-                  <div class="price">R$ 156<small>,66/mês</small></div>
-                  <p class="card-desc">Total R$ 1.880. Gestão completa o ano todo.</p>
+                  <div class="card-tag" data-i18n="local_annual_tag">MELHOR OFERTA</div>
+                  <h3 data-i18n="local_annual_title">Plano Anual</h3>
+                  <div class="price" data-i18n="local_annual_price">R$ 156<small>,66/mês</small></div>
+                  <p class="card-desc" data-i18n="local_annual_desc">Total R$ 1.880. Gestão completa o ano todo.</p>
                 </div>
                 <ul>
-                  <li><strong>Site Institucional Incluso</strong></li>
-                  <li>Gestão contínua de avaliações</li>
-                  <li>Publicações semanais (Ofertas/Novidades)</li>
-                  <li>Relatórios de ligações e rotas</li>
-                  <li>Monitoramento de concorrentes</li>
+                  <li data-i18n="local_annual_item1"><strong>Site Institucional Incluso</strong></li>
+                  <li data-i18n="local_annual_item2">Gestão contínua de avaliações</li>
+                  <li data-i18n="local_annual_item3">Publicações semanais (Ofertas/Novidades)</li>
+                  <li data-i18n="local_annual_item4">Relatórios de ligações e rotas</li>
+                  <li data-i18n="local_annual_item5">Monitoramento de concorrentes</li>
                 </ul>
-                <a href="https://api.whatsapp.com/send/?phone=5581995387708&text=Quero+o+Plano+Anual+GMN" target="_blank" class="card-btn">Garantir Oferta</a>
+                <a href="https://api.whatsapp.com/send/?phone=5581995387708&text=Quero+o+Plano+Anual+GMN" target="_blank" class="card-btn" data-i18n="btn_guarantee">Garantir Oferta</a>
             </div>
             
             <div class="card fade-in">
                 <div class="card-header">
-                  <h3>Trimestral</h3>
-                  <div class="price">R$ 1.275<small> /trimestre</small></div>
-                  <p class="card-desc">Acompanhamento de médio prazo para consolidar.</p>
+                  <h3 data-i18n="local_trim_title">Trimestral</h3>
+                  <div class="price" data-i18n="local_trim_price">R$ 1.275<small> /trimestre</small></div>
+                  <p class="card-desc" data-i18n="local_trim_desc">Acompanhamento de médio prazo para consolidar.</p>
                 </div>
                 <ul>
-                  <li>Setup completo da ficha</li>
-                  <li>Atualizações semanais</li>
-                  <li>Resposta a avaliações</li>
-                  <li>Ajustes estratégicos de SEO</li>
-                  <li>Relatório de performance</li>
+                  <li data-i18n="local_trim_item1">Setup completo da ficha</li>
+                  <li data-i18n="local_trim_item2">Atualizações semanais</li>
+                  <li data-i18n="local_trim_item3">Resposta a avaliações</li>
+                  <li data-i18n="local_trim_item4">Ajustes estratégicos de SEO</li>
+                  <li data-i18n="local_trim_item5">Relatório de performance</li>
                 </ul>
-                <a href="https://api.whatsapp.com/send/?phone=5581995387708&text=Quero+o+Plano+Trimestral" target="_blank" class="card-btn">Contratar Trimestre</a>
+                <a href="https://api.whatsapp.com/send/?phone=5581995387708&text=Quero+o+Plano+Trimestral" target="_blank" class="card-btn" data-i18n="btn_hire_trim">Contratar Trimestre</a>
             </div>
         </div>
       </div>
@@ -975,60 +1044,60 @@
 
     <section id="google-empresas" class="pricing-section" style="background-color: #0d121c;">
       <div class="container">
-        <h2 class="section-title">Google <span class="text-gradient">Empresas</span></h2>
-        <p class="section-subtitle">Soluções corporativas completas para consolidar sua autoridade digital e dominar o mercado local.</p>
+        <h2 class="section-title" data-i18n="section_g_emp_title">Google <span class="text-gradient">Empresas</span></h2>
+        <p class="section-subtitle" data-i18n="section_g_emp_subtitle">Soluções corporativas completas para consolidar sua autoridade digital e dominar o mercado local.</p>
 
         <div class="cards-grid">
             <div class="card fade-in">
                 <div class="card-header">
-                  <h3>PLANO BÁSICO</h3>
-                  <p style="text-decoration: line-through; color: var(--text-muted); font-size: 0.9rem; margin-bottom: -5px;">De R$ 497,00</p>
-                  <div class="price">R$ 437<small> (Pix)</small></div>
-                  <p class="card-desc">Ideal para começar sua presença no Google.</p>
+                  <h3 data-i18n="g_basic_title">PLANO BÁSICO</h3>
+                  <p style="text-decoration: line-through; color: var(--text-muted); font-size: 0.9rem; margin-bottom: -5px;" data-i18n="g_basic_old_price">De R$ 497,00</p>
+                  <div class="price" data-i18n="g_basic_price">R$ 437<small> (Pix)</small></div>
+                  <p class="card-desc" data-i18n="g_basic_desc">Ideal para começar sua presença no Google.</p>
                 </div>
                 <ul>
-                  <li>Criação de perfil</li>
-                  <li>Cadastro de até 5 serviços</li>
-                  <li>Cadastros de até 5 produtos</li>
-                  <li>4 postagens</li>
+                  <li data-i18n="g_basic_item1">Criação de perfil</li>
+                  <li data-i18n="g_basic_item2">Cadastro de até 5 serviços</li>
+                  <li data-i18n="g_basic_item3">Cadastros de até 5 produtos</li>
+                  <li data-i18n="g_basic_item4">4 postagens</li>
                 </ul>
-                <a href="https://api.whatsapp.com/send/?phone=5581995387708&text=Interesse+Google+Empresas+Basico" target="_blank" class="card-btn">Contratar Básico</a>
+                <a href="https://api.whatsapp.com/send/?phone=5581995387708&text=Interesse+Google+Empresas+Basico" target="_blank" class="card-btn" data-i18n="btn_hire_basic">Contratar Básico</a>
             </div>
 
             <div class="card fade-in">
                 <div class="card-header">
-                  <h3>OTIMIZAÇÃO ÚNICA</h3>
-                  <p style="text-decoration: line-through; color: var(--text-muted); font-size: 0.9rem; margin-bottom: -5px;">De R$ 999,00</p>
-                  <div class="price">R$ 850<small> (Pix)</small></div>
-                  <p class="card-desc">Ideal para empresas que ainda não estão bem posicionadas.</p>
+                  <h3 data-i18n="g_opt_title">OTIMIZAÇÃO ÚNICA</h3>
+                  <p style="text-decoration: line-through; color: var(--text-muted); font-size: 0.9rem; margin-bottom: -5px;" data-i18n="g_opt_old_price">De R$ 999,00</p>
+                  <div class="price" data-i18n="g_opt_price">R$ 850<small> (Pix)</small></div>
+                  <p class="card-desc" data-i18n="g_opt_desc">Ideal para empresas que ainda não estão bem posicionadas.</p>
                 </div>
                 <ul>
-                  <li>Otimização completa da ficha</li>
-                  <li>Pesquisa e aplicação de palavras-chave</li>
-                  <li>Link de avaliação + QR Code</li>
-                  <li>Link de Whatsapp rastreável</li>
-                  <li>5 postagens por semana</li>
-                  <li>Até 10 produtos e 10 serviços</li>
+                  <li data-i18n="g_opt_item1">Otimização completa da ficha</li>
+                  <li data-i18n="g_opt_item2">Pesquisa e aplicação de palavras-chave</li>
+                  <li data-i18n="g_opt_item3">Link de avaliação + QR Code</li>
+                  <li data-i18n="g_opt_item4">Link de Whatsapp rastreável</li>
+                  <li data-i18n="g_opt_item5">5 postagens por semana</li>
+                  <li data-i18n="g_opt_item6">Até 10 produtos e 10 serviços</li>
                 </ul>
-                <a href="https://api.whatsapp.com/send/?phone=5581995387708&text=Interesse+Otimizacao+Unica" target="_blank" class="card-btn">Contratar Otimização</a>
+                <a href="https://api.whatsapp.com/send/?phone=5581995387708&text=Interesse+Otimizacao+Unica" target="_blank" class="card-btn" data-i18n="btn_hire_opt">Contratar Otimização</a>
             </div>
 
             <div class="card featured fade-in">
                 <div class="card-header">
-                  <div class="card-tag">MELHOR OFERTA</div>
-                  <h3>OTIMIZAÇÃO + RECORRÊNCIA</h3>
-                  <p style="text-decoration: line-through; color: #a5b4fc; font-size: 0.9rem; margin-bottom: -5px;">De R$ 2.690,00</p>
-                  <div class="price">R$ 2.421<small> (Pix)</small></div>
-                  <p class="card-desc">Referente a 4 meses. Para quem quer subir no ranking constantemente.</p>
+                  <div class="card-tag" data-i18n="g_rec_tag">MELHOR OFERTA</div>
+                  <h3 data-i18n="g_rec_title">OTIMIZAÇÃO + RECORRÊNCIA</h3>
+                  <p style="text-decoration: line-through; color: #a5b4fc; font-size: 0.9rem; margin-bottom: -5px;" data-i18n="g_rec_old_price">De R$ 2.690,00</p>
+                  <div class="price" data-i18n="g_rec_price">R$ 2.421<small> (Pix)</small></div>
+                  <p class="card-desc" data-i18n="g_rec_desc">Referente a 4 meses. Para quem quer subir no ranking constantemente.</p>
                 </div>
                 <ul>
-                  <li><strong>Tudo da otimização única</strong></li>
-                  <li>5 postagens na semana</li>
-                  <li>Até 15 produtos e 15 serviços/mês</li>
-                  <li>Acompanhamento de métricas e melhorias</li>
-                  <li><strong>Bônus:</strong> Landing Page + Link Bio + Placa QR Code</li>
+                  <li data-i18n="g_rec_item1"><strong>Tudo da otimização única</strong></li>
+                  <li data-i18n="g_rec_item2">5 postagens na semana</li>
+                  <li data-i18n="g_rec_item3">Até 15 produtos e 15 serviços/mês</li>
+                  <li data-i18n="g_rec_item4">Acompanhamento de métricas e melhorias</li>
+                  <li data-i18n="g_rec_item5"><strong>Bônus:</strong> Landing Page + Link Bio + Placa QR Code</li>
                 </ul>
-                <a href="https://api.whatsapp.com/send/?phone=5581995387708&text=Interesse+Otimizacao+Recorrencia" target="_blank" class="card-btn">Quero Dominar o Google</a>
+                <a href="https://api.whatsapp.com/send/?phone=5581995387708&text=Interesse+Otimizacao+Recorrencia" target="_blank" class="card-btn" data-i18n="btn_dominate_google">Quero Dominar o Google</a>
             </div>
         </div>
       </div>
@@ -1036,49 +1105,49 @@
 
     <section id="drone" class="pricing-section">
         <div class="container">
-            <h2 class="section-title">Produção <span class="text-gradient">Audiovisual</span></h2>
-            <p class="section-subtitle">Imagens de drone e edição profissional que valorizam sua marca.</p>
+            <h2 class="section-title" data-i18n="section_drone_title">Produção <span class="text-gradient">Audiovisual</span></h2>
+            <p class="section-subtitle" data-i18n="section_drone_subtitle">Imagens de drone e edição profissional que valorizam sua marca.</p>
             
             <div class="cards-grid">
                 <div class="card fade-in">
                     <div class="card-header">
-                        <h3>Básico</h3>
-                        <div class="price">R$ 349</div>
+                        <h3 data-i18n="drone_basic_title">Básico</h3>
+                        <div class="price" data-i18n="drone_basic_price">R$ 349</div>
                     </div>
                     <ul>
-                        <li>3 vídeos aéreos (até 1 min)</li>
-                        <li>3 fotos em alta resolução</li>
-                        <li>Entrega via Drive (sem edição complexa)</li>
+                        <li data-i18n="drone_basic_item1">3 vídeos aéreos (até 1 min)</li>
+                        <li data-i18n="drone_basic_item2">3 fotos em alta resolução</li>
+                        <li data-i18n="drone_basic_item3">Entrega via Drive (sem edição complexa)</li>
                     </ul>
-                    <a href="https://api.whatsapp.com/send/?phone=5581995387708&text=Interesse+Drone+Basico" target="_blank" class="card-btn">Solicitar</a>
+                    <a href="https://api.whatsapp.com/send/?phone=5581995387708&text=Interesse+Drone+Basico" target="_blank" class="card-btn" data-i18n="btn_request">Solicitar</a>
                 </div>
 
                 <div class="card featured fade-in">
                     <div class="card-header">
-                        <div class="card-tag">MAIS VENDIDO</div>
-                        <h3>Intermediário</h3>
-                        <div class="price">R$ 649</div>
+                        <div class="card-tag" data-i18n="drone_inter_tag">MAIS VENDIDO</div>
+                        <h3 data-i18n="drone_inter_title">Intermediário</h3>
+                        <div class="price" data-i18n="drone_inter_price">R$ 649</div>
                     </div>
                     <ul>
-                        <li>5 vídeos (até 1:30 min)</li>
-                        <li>5 fotos em alta resolução</li>
-                        <li><strong>Edição Básica inclusa</strong></li>
+                        <li data-i18n="drone_inter_item1">5 vídeos (até 1:30 min)</li>
+                        <li data-i18n="drone_inter_item2">5 fotos em alta resolução</li>
+                        <li data-i18n="drone_inter_item3"><strong>Edição Básica inclusa</strong></li>
                     </ul>
-                    <a href="https://api.whatsapp.com/send/?phone=5581995387708&text=Interesse+Drone+Intermediario" target="_blank" class="card-btn">Solicitar</a>
+                    <a href="https://api.whatsapp.com/send/?phone=5581995387708&text=Interesse+Drone+Intermediario" target="_blank" class="card-btn" data-i18n="btn_request">Solicitar</a>
                 </div>
 
                 <div class="card fade-in" style="border-color: var(--secondary)">
                     <div class="card-header">
-                        <h3>Profissional</h3>
-                        <div class="price">R$ 859</div>
+                        <h3 data-i18n="drone_pro_title">Profissional</h3>
+                        <div class="price" data-i18n="drone_pro_price">R$ 859</div>
                     </div>
                     <ul>
-                        <li>5 vídeos premium</li>
-                        <li>5 fotos editadas</li>
-                        <li><strong>Edição Dinâmica (Reels/TikTok)</strong></li>
-                        <li>Vídeo Institucional completo</li>
+                        <li data-i18n="drone_pro_item1">5 vídeos premium</li>
+                        <li data-i18n="drone_pro_item2">5 fotos editadas</li>
+                        <li data-i18n="drone_pro_item3"><strong>Edição Dinâmica (Reels/TikTok)</strong></li>
+                        <li data-i18n="drone_pro_item4">Vídeo Institucional completo</li>
                     </ul>
-                    <a href="https://api.whatsapp.com/send/?phone=5581995387708&text=Interesse+Drone+Profissional" target="_blank" class="card-btn">Solicitar</a>
+                    <a href="https://api.whatsapp.com/send/?phone=5581995387708&text=Interesse+Drone+Profissional" target="_blank" class="card-btn" data-i18n="btn_request">Solicitar</a>
                 </div>
             </div>
         </div>
@@ -1086,29 +1155,29 @@
 
     <section id="artes" class="pricing-section" style="background-color: #0d121c;">
         <div class="container">
-            <h2 class="section-title">Design de <span class="text-gradient">Artes</span></h2>
-            <p class="section-subtitle">Identidade visual profissional para suas redes sociais com foco em conversão.</p>
+            <h2 class="section-title" data-i18n="section_arts_title">Design de <span class="text-gradient">Artes</span></h2>
+            <p class="section-subtitle" data-i18n="section_arts_subtitle">Identidade visual profissional para suas redes sociais com foco em conversão.</p>
             
             <div class="cards-grid">
                 <div class="card featured fade-in" style="max-width: 550px; margin: 0 auto;">
-                    <div class="card-tag">FOCO EM PACOTE</div>
+                    <div class="card-tag" data-i18n="arts_tag">FOCO EM PACOTE</div>
                     <div class="card-header">
-                        <h3>Pacotes Digitais</h3>
-                        <div class="price">R$ 65<small>/arte</small></div>
-                        <p class="card-desc">Design estratégico para elevar o nível do seu perfil.</p>
+                        <h3 data-i18n="arts_title">Pacotes Digitais</h3>
+                        <div class="price" data-i18n="arts_price">R$ 65<small>/arte</small></div>
+                        <p class="card-desc" data-i18n="arts_desc">Design estratégico para elevar o nível do seu perfil.</p>
                     </div>
                     <ul>
-                        <li><strong>No pacote mínimo de 10 artes</strong></li>
-                        <li>Artes para Feed, Stories ou Carrossel</li>
-                        <li>Opção de Post único personalizado</li>
-                        <li>Criação focada em conversão visual</li>
+                        <li data-i18n="arts_item1"><strong>No pacote mínimo de 10 artes</strong></li>
+                        <li data-i18n="arts_item2">Artes para Feed, Stories ou Carrossel</li>
+                        <li data-i18n="arts_item3">Opção de Post único personalizado</li>
+                        <li data-i18n="arts_item4">Criação focada em conversão visual</li>
                     </ul>
                     <div style="padding: 1rem; background: rgba(255,255,255,0.05); border-radius: 10px; margin-bottom: 1.5rem;">
-                        <p style="font-size: 0.95rem; color: var(--text-muted);">
+                        <p style="font-size: 0.95rem; color: var(--text-muted);" data-i18n="arts_note">
                             <strong>Artes Avulsas:</strong> Para 1 ou 2 unidades, o valor é <strong>R$ 80 por arte</strong>. Priorizamos o fechamento por pacote para garantir a consistência do seu branding.
                         </p>
                     </div>
-                    <a href="https://api.whatsapp.com/send/?phone=5581995387708&text=Quero+contratar+o+pacote+de+artes" target="_blank" class="card-btn">Quero meu Pacote</a>
+                    <a href="https://api.whatsapp.com/send/?phone=5581995387708&text=Quero+contratar+o+pacote+de+artes" target="_blank" class="card-btn" data-i18n="btn_want_package">Quero meu Pacote</a>
                 </div>
             </div>
         </div>
@@ -1116,27 +1185,27 @@
 
     <section id="consultoria" class="pricing-section">
         <div class="container">
-            <h2 class="section-title">Consultoria</h2>
-            <p class="section-subtitle">Expertise e acompanhamento para escalar seus resultados.</p>
+            <h2 class="section-title" data-i18n="section_consulting_title">Consultoria</h2>
+            <p class="section-subtitle" data-i18n="section_consulting_subtitle">Expertise e acompanhamento para escalar seus resultados.</p>
 
             <div class="cards-grid">
                 <div class="card fade-in" style="max-width: 450px; margin: 0 auto;">
                     <div class="card-header">
-                        <h3>🎓 Consultoria Completa</h3>
-                        <div class="price" style="font-size: 1.5rem;">Vagas Limitadas</div>
-                        <p class="card-desc">Mentoria prática e estratégica</p>
+                        <h3 data-i18n="cons_title">🎓 Consultoria Completa</h3>
+                        <div class="price" style="font-size: 1.5rem;" data-i18n="cons_price">Vagas Limitadas</div>
+                        <p class="card-desc" data-i18n="cons_desc">Mentoria prática e estratégica</p>
                     </div>
                     <ul style="text-align: left;">
-                        <li>Como criar campanhas do zero</li>
-                        <li>Estrutura: Campanha, conjunto, anúncio</li>
-                        <li>ABO vs CBO (estratégias de orçamento)</li>
-                        <li>Contingência e estruturação de conta</li>
-                        <li>Definição de público (Segmentado, Envolvimento, Aberto)</li>
-                        <li>Temperatura do lead e Videoview</li>
-                        <li><strong>Call estratégica de 1h30 a 2h</strong></li>
-                        <li>Acompanhamento por 7 dias via WhatsApp</li>
+                        <li data-i18n="cons_item1">Como criar campanhas do zero</li>
+                        <li data-i18n="cons_item2">Estrutura: Campanha, conjunto, anúncio</li>
+                        <li data-i18n="cons_item3">ABO vs CBO (estratégias de orçamento)</li>
+                        <li data-i18n="cons_item4">Contingência e estruturação de conta</li>
+                        <li data-i18n="cons_item5">Definição de público (Segmentado, Envolvimento, Aberto)</li>
+                        <li data-i18n="cons_item6">Temperatura do lead e Videoview</li>
+                        <li data-i18n="cons_item7"><strong>Call estratégica de 1h30 a 2h</strong></li>
+                        <li data-i18n="cons_item8">Acompanhamento por 7 dias via WhatsApp</li>
                     </ul>
-                    <a href="https://api.whatsapp.com/send/?phone=5581995387708&text=Interesse+Consultoria+Completa" class="card-btn">Quero Aprender</a>
+                    <a href="https://api.whatsapp.com/send/?phone=5581995387708&text=Interesse+Consultoria+Completa" class="card-btn" data-i18n="btn_learn">Quero Aprender</a>
                 </div>
             </div>
         </div>
@@ -1144,169 +1213,527 @@
 
     <section id="resultados" class="pricing-section" style="background-color: #0d121c;">
         <div class="container">
-            <h2 class="section-title">Resultados que <span class="text-gradient">Falam por Si</span></h2>
-            <p class="section-subtitle">Cases reais de clientes que transformaram seus negócios com nossas estratégias</p>
+            <h2 class="section-title" data-i18n="section_results_title">Resultados que <span class="text-gradient">Falam por Si</span></h2>
+            <p class="section-subtitle" data-i18n="section_results_subtitle">Cases reais de clientes que transformaram seus negócios com nossas estratégias</p>
             
             <div class="cards-grid" style="grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));">
                 <div class="card fade-in">
-                    <h4 style="color: var(--primary); margin-bottom: 0.5rem; font-size: 1.1rem;">🛍️ Moda Feminina</h4>
-                    <p><strong>ROI de 420%</strong></p>
-                    <p class="card-desc" style="font-size: 0.9rem;">Em 3 meses com Meta Ads, R$ 15k gerou R$ 78k em vendas.</p>
+                    <h4 style="color: var(--primary); margin-bottom: 0.5rem; font-size: 1.1rem;" data-i18n="res_fashion_title">🛍️ Moda Feminina</h4>
+                    <p data-i18n="res_fashion_roi"><strong>ROI de 420%</strong></p>
+                    <p class="card-desc" style="font-size: 0.9rem;" data-i18n="res_fashion_desc">Em 3 meses com Meta Ads, R$ 15k gerou R$ 78k em vendas.</p>
                 </div>
                 <div class="card fade-in">
-                    <h4 style="color: var(--primary); margin-bottom: 0.5rem; font-size: 1.1rem;">🦷 Clínica Odonto</h4>
-                    <p><strong>+150 agendamentos/mês</strong></p>
-                    <p class="card-desc" style="font-size: 0.9rem;">Via Google Meu Negócio, ticket médio de R$ 1.200 (R$ 180k/mês).</p>
+                    <h4 style="color: var(--primary); margin-bottom: 0.5rem; font-size: 1.1rem;" data-i18n="res_dentist_title">🦷 Clínica Odonto</h4>
+                    <p data-i18n="res_dentist_roi"><strong>+150 agendamentos/mês</strong></p>
+                    <p class="card-desc" style="font-size: 0.9rem;" data-i18n="res_dentist_desc">Via Google Meu Negócio, ticket médio de R$ 1.200 (R$ 180k/mês).</p>
                 </div>
                 <div class="card fade-in">
-                    <h4 style="color: var(--primary); margin-bottom: 0.5rem; font-size: 1.1rem;">🍽️ Restaurante Gourmet</h4>
-                    <p><strong>+80% no faturamento</strong></p>
-                    <p class="card-desc" style="font-size: 0.9rem;">Estratégia integrada de Tráfego + Google Local em 6 meses.</p>
+                    <h4 style="color: var(--primary); margin-bottom: 0.5rem; font-size: 1.1rem;" data-i18n="res_rest_title">🍽️ Restaurante Gourmet</h4>
+                    <p data-i18n="res_rest_roi"><strong>+80% no faturamento</strong></p>
+                    <p class="card-desc" style="font-size: 0.9rem;" data-i18n="res_rest_desc">Estratégia integrada de Tráfego + Google Local em 6 meses.</p>
                 </div>
                 <div class="card fade-in">
-                    <h4 style="color: var(--primary); margin-bottom: 0.5rem; font-size: 1.1rem;">🏋️ Academia Funcional</h4>
-                    <p><strong>200+ matrículas</strong></p>
-                    <p class="card-desc" style="font-size: 0.9rem;">Em 4 meses, CAC de R$ 45 por lead qualificado via Meta Ads.</p>
+                    <h4 style="color: var(--primary); margin-bottom: 0.5rem; font-size: 1.1rem;" data-i18n="res_gym_title">🏋️ Academia Funcional</h4>
+                    <p data-i18n="res_gym_roi"><strong>200+ matrículas</strong></p>
+                    <p class="card-desc" style="font-size: 0.9rem;" data-i18n="res_gym_desc">Em 4 meses, CAC de R$ 45 por lead qualificado via Meta Ads.</p>
                 </div>
                 <div class="card fade-in">
-                    <h4 style="color: var(--primary); margin-bottom: 0.5rem; font-size: 1.1rem;">🏠 Arquitetura</h4>
-                    <p><strong>R$ 320k em contratos</strong></p>
-                    <p class="card-desc" style="font-size: 0.9rem;">Gerados via Google Ads e Landing Page otimizada em 5 meses.</p>
+                    <h4 style="color: var(--primary); margin-bottom: 0.5rem; font-size: 1.1rem;" data-i18n="res_arch_title">🏠 Arquitetura</h4>
+                    <p data-i18n="res_arch_roi"><strong>R$ 320k em contratos</strong></p>
+                    <p class="card-desc" style="font-size: 0.9rem;" data-i18n="res_arch_desc">Gerados via Google Ads e Landing Page otimizada em 5 meses.</p>
                 </div>
                 <div class="card fade-in">
-                    <h4 style="color: var(--primary); margin-bottom: 0.5rem; font-size: 1.1rem;">💇 Salão de Beleza</h4>
-                    <p><strong>3x mais agendamentos</strong></p>
-                    <p class="card-desc" style="font-size: 0.9rem;">Com automação via WhatsApp e campanhas segmentadas no Instagram.</p>
+                    <h4 style="color: var(--primary); margin-bottom: 0.5rem; font-size: 1.1rem;" data-i18n="res_salon_title">💇 Salão de Beleza</h4>
+                    <p data-i18n="res_salon_roi"><strong>3x mais agendamentos</strong></p>
+                    <p class="card-desc" style="font-size: 0.9rem;" data-i18n="res_salon_desc">Com automação via WhatsApp e campanhas segmentadas no Instagram.</p>
                 </div>
                 <div class="card fade-in">
-                    <h4 style="color: var(--primary); margin-bottom: 0.5rem; font-size: 1.1rem;">🚗 Concessionária</h4>
-                    <p><strong>47 carros vendidos</strong></p>
-                    <p class="card-desc" style="font-size: 0.9rem;">Em 2 meses via Meta Ads + Remarketing (ticket médio R$ 65k).</p>
+                    <h4 style="color: var(--primary); margin-bottom: 0.5rem; font-size: 1.1rem;" data-i18n="res_car_title">🚗 Concessionária</h4>
+                    <p data-i18n="res_car_roi"><strong>47 carros vendidos</strong></p>
+                    <p class="card-desc" style="font-size: 0.9rem;" data-i18n="res_car_desc">Em 2 meses via Meta Ads + Remarketing (ticket médio R$ 65k).</p>
                 </div>
                 <div class="card fade-in">
-                    <h4 style="color: var(--primary); margin-bottom: 0.5rem; font-size: 1.1rem;">📚 Infoprodutor</h4>
-                    <p><strong>R$ 480k em lançamento</strong></p>
-                    <p class="card-desc" style="font-size: 0.9rem;">Funil completo com Tráfego Pago + Webinar + Remarketing estratégico.</p>
+                    <h4 style="color: var(--primary); margin-bottom: 0.5rem; font-size: 1.1rem;" data-i18n="res_info_title">📚 Infoprodutor</h4>
+                    <p data-i18n="res_info_roi"><strong>R$ 480k em lançamento</strong></p>
+                    <p class="card-desc" style="font-size: 0.9rem;" data-i18n="res_info_desc">Funil completo com Tráfego Pago + Webinar + Remarketing estratégico.</p>
                 </div>
                 <div class="card fade-in">
-                    <h4 style="color: var(--primary); margin-bottom: 0.5rem; font-size: 1.1rem;">🏨 Pousada</h4>
-                    <p><strong>95% de ocupação</strong></p>
-                    <p class="card-desc" style="font-size: 0.9rem;">Na alta temporada com Google Ads + Meta Ads + Google Meu Negócio.</p>
+                    <h4 style="color: var(--primary); margin-bottom: 0.5rem; font-size: 1.1rem;" data-i18n="res_hotel_title">🏨 Pousada</h4>
+                    <p data-i18n="res_hotel_roi"><strong>95% de ocupação</strong></p>
+                    <p class="card-desc" style="font-size: 0.9rem;" data-i18n="res_hotel_desc">Na alta temporada com Google Ads + Meta Ads + Google Meu Negócio.</p>
                 </div>
             </div>
 
             <div style="text-align: center; margin-top: 4rem;" class="fade-in">
-                <h3 style="margin-bottom: 1.5rem;">Pronto para ser o próximo case de sucesso?</h3>
-                <a href="#contato" class="btn">Quero Resultados Assim</a>
+                <h3 style="margin-bottom: 1.5rem;" data-i18n="res_cta_title">Pronto para ser o próximo case de sucesso?</h3>
+                <a href="#contato" class="btn" data-i18n="res_cta_btn">Quero Resultados Assim</a>
             </div>
         </div>
     </section>
 
     <section class="faq-section">
-        <div class="container">
-            <h2 class="section-title">Perguntas Frequentes</h2>
-            <div class="accordion">
-                <div class="accordion-item">
-                    <button class="accordion-header">O valor dos anúncios está incluso na mensalidade?</button>
-                    <div class="accordion-content">
-                        <p>Não. Os valores apresentados são referentes à nossa prestação de serviço (estratégia, criação e otimização). O valor investido nas plataformas (Facebook/Google) é pago diretamente por você.</p>
-                    </div>
-                </div>
-                <div class="accordion-item">
-                    <button class="accordion-header">Existe fidelidade nos contratos?</button>
-                    <div class="accordion-content">
-                        <p>Trabalhamos com contratos flexíveis. Recomendamos um período mínimo de 3 meses para maturação das campanhas e melhores resultados.</p>
-                    </div>
-                </div>
-                <div class="accordion-item">
-                    <button class="accordion-header">Como funciona o Plano Anual GMN?</button>
-                    <div class="accordion-content">
-                        <p>O Plano Anual oferece o melhor custo-benefício. Cuidamos da sua ficha no Google o ano inteiro, garantindo atualizações e resposta a clientes semanalmente.</p>
-                    </div>
-                </div>
+      <div class="container">
+        <h2 class="section-title" data-i18n="faq_title">Perguntas Frequentes</h2>
+        <div class="accordion">
+          <div class="accordion-item">
+            <button class="accordion-header" data-i18n="faq_q1">O valor dos anúncios está incluso na mensalidade?</button>
+            <div class="accordion-content">
+              <p data-i18n="faq_a1">Não. Os valores apresentados são referentes à nossa prestação de serviço (estratégia, criação e otimização). O valor investido nas plataformas (Facebook/Google) é pago diretamente por você.</p>
             </div>
+          </div>
+          <div class="accordion-item">
+            <button class="accordion-header" data-i18n="faq_q2">Existe fidelidade nos contratos?</button>
+            <div class="accordion-content">
+              <p data-i18n="faq_a2">Trabalhamos com contratos flexíveis. Recomendamos um período mínimo de 3 meses para maturação das campanhas e melhores resultados.</p>
+            </div>
+          </div>
+          <div class="accordion-item">
+            <button class="accordion-header" data-i18n="faq_q3">Como funciona o Plano Anual GMN?</button>
+            <div class="accordion-content">
+              <p data-i18n="faq_a3">O Plano Anual oferece o melhor custo-benefício. Cuidamos da sua ficha no Google o ano inteiro, garantindo atualizações e resposta a clientes semanalmente.</p>
+            </div>
+          </div>
         </div>
+      </div>
     </section>
 
     <section id="contato" class="contact-section">
-        <div class="container">
-            <h2 class="section-title">Vamos Alavancar seu Negócio?</h2>
-            <p class="section-subtitle">Ou preencha o formulário abaixo para receber nosso contato.</p>
+      <div class="container">
+        <h2 class="section-title" data-i18n="contact_title">Vamos Alavancar seu Negócio?</h2>
+        <p class="section-subtitle" data-i18n="contact_subtitle">Ou preencha o formulário abaixo para receber nosso contato.</p>
+        
+        <form id="sales-form" class="contact-form fade-in">
             
-            <form id="sales-form" class="contact-form fade-in">
-                
-                <div class="form-group">
-                    <label>Nome</label>
-                    <input type="text" id="nome_pessoa" class="form-control" placeholder="Seu nome completo" required>
-                </div>
+            <div class="form-group">
+                <label data-i18n="form_name">Nome</label>
+                <input type="text" id="nome_pessoa" class="form-control" data-i18n-ph="form_name_ph" placeholder="Seu nome completo" required>
+            </div>
 
-                <div class="form-group">
-                    <label>Telefone</label>
-                    <input type="tel" id="telefone" class="form-control" placeholder="(11) 9 1234-5678" required>
-                </div>
+            <div class="form-group">
+                <label data-i18n="form_phone">Telefone</label>
+                <input type="tel" id="telefone" class="form-control" data-i18n-ph="form_phone_ph" placeholder="(11) 9 1234-5678" required>
+            </div>
 
-                <div class="form-group">
-                    <label>Empresa</label>
-                    <input type="text" id="empresa" class="form-control" placeholder="Nome da sua empresa" required>
-                </div>
-                
-                <div class="form-group">
-                    <label>Instagram da Empresa</label>
-                    <input type="text" id="instagram" class="form-control" placeholder="@suaempresa" required>
-                </div>
+            <div class="form-group">
+                <label data-i18n="form_company">Empresa</label>
+                <input type="text" id="empresa" class="form-control" data-i18n-ph="form_company_ph" placeholder="Nome da sua empresa" required>
+            </div>
+            
+            <div class="form-group">
+                <label data-i18n="form_insta">Instagram da Empresa</label>
+                <input type="text" id="instagram" class="form-control" data-i18n-ph="form_insta_ph" placeholder="@suaempresa" required>
+            </div>
 
-                <div class="form-group">
-                    <label>Cidade / Estado</label>
-                    <input type="text" id="cidade" class="form-control" placeholder="Sao Paulo, SP" required>
-                </div>
-                
-                <div class="form-group">
-                    <label>Qual serviço te interessa?</label>
-                    <select id="interesse" class="form-control" required>
-                        <option value="" disabled selected>Selecione o serviço</option>
-                        <option value="Trafego Pago">Gestão de Tráfego Pago</option>
-                        <option value="Google Meu Negocio">Google Meu Negócio</option>
-                        <option value="Drone/Video">Drone e Vídeos</option>
-                        <option value="Artes">Artes Digitais</option>
-                        <option value="Consultoria">Consultoria</option>
-                        <option value="Combo">Quero um Combo</option>
-                    </select>
-                </div>
+            <div class="form-group">
+                <label data-i18n="form_city">Cidade / Estado</label>
+                <input type="text" id="cidade" class="form-control" data-i18n-ph="form_city_ph" placeholder="Sao Paulo, SP" required>
+            </div>
+            
+            <div class="form-group">
+                <label data-i18n="form_service">Qual serviço te interessa?</label>
+                <select id="interesse" class="form-control" required>
+                    <option value="" disabled selected data-i18n="form_service_opt_default">Selecione o serviço</option>
+                    <option value="Trafego Pago" data-i18n="form_service_opt_traffic">Gestão de Tráfego Pago</option>
+                    <option value="Google Meu Negocio" data-i18n="form_service_opt_gmn">Google Meu Negócio</option>
+                    <option value="Drone/Video" data-i18n="form_service_opt_drone">Drone e Vídeos</option>
+                    <option value="Artes" data-i18n="form_service_opt_arts">Artes Digitais</option>
+                    <option value="Consultoria" data-i18n="form_service_opt_cons">Consultoria</option>
+                    <option value="Combo" data-i18n="form_service_opt_combo">Quero um Combo</option>
+                </select>
+            </div>
 
-                <div class="checkbox-wrapper">
-                    <input type="checkbox" id="filiais">
-                    <label for="filiais">Possuo 2 ou mais filiais (+30% no valor)</label>
-                </div>
+            <div class="checkbox-wrapper">
+                <input type="checkbox" id="filiais">
+                <label for="filiais" data-i18n="form_branches">Possuo 2 ou mais filiais (+30% no valor)</label>
+            </div>
 
-                <div class="form-group">
-                    <label>Mensagem</label>
-                    <textarea id="msg" class="form-control" rows="3" placeholder="Conte mais sobre seu negócio e objetivos..."></textarea>
-                </div>
+            <div class="form-group">
+                <label data-i18n="form_msg">Mensagem</label>
+                <textarea id="msg" class="form-control" rows="3" data-i18n-ph="form_msg_ph" placeholder="Conte mais sobre seu negócio e objetivos..."></textarea>
+            </div>
 
-                <button type="submit" class="btn" style="width: 100%;">Enviar mensagem</button>
-            </form>
-        </div>
+            <button type="submit" class="btn" style="width: 100%;" data-i18n="btn_send">Enviar mensagem</button>
+        </form>
+      </div>
     </section>
 
     <footer>
-        <div class="container">
-            <p class="logo" style="justify-content: center; margin-bottom: 1rem;">Cozzi<span>Media</span></p>
-            <p>© 2022 Cozzi Media. Todos os direitos reservados.</p>
-            <p style="margin-top: 0.5rem; opacity: 0.6;">Transformando presença digital em lucro.</p>
-        </div>
+      <div class="container">
+        <p class="logo" style="justify-content: center; margin-bottom: 1rem;">Cozzi<span>Media</span></p>
+        <p data-i18n="footer_rights">© 2022 Cozzi Media. Todos os direitos reservados.</p>
+        <p style="margin-top: 0.5rem; opacity: 0.6;" data-i18n="footer_tagline">Transformando presença digital em lucro.</p>
+      </div>
     </footer>
 
     <div class="scroll-top" onclick="window.scrollTo({top: 0, behavior: 'smooth'});">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512">
-            <path d="M352 352c-8.188 0-16.38-3.125-22.62-9.375L192 205.3l-137.4 137.4c-12.5 12.5-32.75 12.5-45.25 0s-12.5-32.75 0-45.25l160-160c12.5-12.5 32.75-12.5 45.25 0l160 160c12.5 12.5 12.5 32.75 0 45.25C368.4 348.9 360.2 352 352 352z"/>
-        </svg>
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512">
+        <path d="M352 352c-8.188 0-16.38-3.125-22.62-9.375L192 205.3l-137.4 137.4c-12.5 12.5-32.75 12.5-45.25 0s-12.5-32.75 0-45.25l160-160c12.5-12.5 32.75-12.5 45.25 0l160 160c12.5 12.5 12.5 32.75 0 45.25C368.4 348.9 360.2 352 352 352z"/>
+      </svg>
     </div>
 
     <a href="https://api.whatsapp.com/send/?phone=5581995387708&text=Olá,+estou+no+site+e+tenho+dúvidas." target="_blank" class="floating-wa">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M380.9 97.1C339 55.1 283.2 32 223.9 32c-122.4 0-222 99.6-222 222 0 39.1 10.2 77.3 29.6 111L0 480l117.7-30.9c32.4 17.7 68.9 27 106.1 27h.1c122.3 0 224.1-99.6 224.1-222 0-59.3-25.2-115-67.1-157zm-157 341.6c-33.2 0-65.7-8.9-94-25.7l-6.7-4-69.8 18.3L72 359.2l-4.4-7c-18.5-29.4-28.2-63.3-28.2-98.2 0-101.7 82.8-184.5 184.6-184.5 49.3 0 95.6 19.2 130.4 54.1 34.8 34.9 56.2 81.2 56.1 130.5 0 101.8-84.9 184.6-186.6 184.6zm101.2-138.2c-5.5-2.8-32.8-16.2-37.9-18-5.1-1.9-8.8-2.8-12.5 2.8-3.7 5.6-14.3 18-17.6 21.8-3.2 3.7-6.5 4.2-12 1.4-32.6-16.3-54-29.1-75.5-66-5.7-9.8 5.7-9.1 16.3-30.3 1.8-3.7.9-6.9-.5-9.7-1.4-2.8-12.5-30.1-17.1-41.2-4.5-10.8-9.1-9.3-12.5-9.5-3.2-.2-6.9-.2-10.6-.2-3.7 0-9.7 1.4-14.8 6.9-5.1 5.6-19.4 19-19.4 46.3 0 27.3 19.9 53.7 22.6 57.4 2.8 3.7 39.1 59.7 94.8 83.8 35.2 15.2 49 16.5 66.6 13.9 10.7-1.6 32.8-13.4 37.4-26.4 4.6-13 4.6-24.1 3.2-26.4-1.3-2.5-5-3.9-10.5-6.6z"/></svg>
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M380.9 97.1C339 55.1 283.2 32 223.9 32c-122.4 0-222 99.6-222 222 0 39.1 10.2 77.3 29.6 111L0 480l117.7-30.9c32.4 17.7 68.9 27 106.1 27h.1c122.3 0 224.1-99.6 224.1-222 0-59.3-25.2-115-67.1-157zm-157 341.6c-33.2 0-65.7-8.9-94-25.7l-6.7-4-69.8 18.3L72 359.2l-4.4-7c-18.5-29.4-28.2-63.3-28.2-98.2 0-101.7 82.8-184.5 184.6-184.5 49.3 0 95.6 19.2 130.4 54.1 34.8 34.9 56.2 81.2 56.1 130.5 0 101.8-84.9 184.6-186.6 184.6zm101.2-138.2c-5.5-2.8-32.8-16.2-37.9-18-5.1-1.9-8.8-2.8-12.5 2.8-3.7 5.6-14.3 18-17.6 21.8-3.2 3.7-6.5 4.2-12 1.4-32.6-16.3-54-29.1-75.5-66-5.7-9.8 5.7-9.1 16.3-30.3 1.8-3.7.9-6.9-.5-9.7-1.4-2.8-12.5-30.1-17.1-41.2-4.5-10.8-9.1-9.3-12.5-9.5-3.2-.2-6.9-.2-10.6-.2-3.7 0-9.7 1.4-14.8 6.9-5.1 5.6-19.4 19-19.4 46.3 0 27.3 19.9 53.7 22.6 57.4 2.8 3.7 39.1 59.7 94.8 83.8 35.2 15.2 49 16.5 66.6 13.9 10.7-1.6 32.8-13.4 37.4-26.4 4.6-13 4.6-24.1 3.2-26.4-1.3-2.5-5-3.9-10.5-6.6z"/></svg>
     </a>
 
     <script>
+      // Control Bar Logic
+      const themeToggle = document.getElementById('theme-toggle');
+      const iconSun = document.getElementById('icon-sun');
+      const iconMoon = document.getElementById('icon-moon');
+      const body = document.body;
+
+      // Theme Toggling
+      themeToggle.addEventListener('click', () => {
+        body.classList.toggle('light-mode');
+        // Toggle icons visibility
+        iconSun.classList.toggle('hidden');
+        iconMoon.classList.toggle('hidden');
+      });
+
+      // Translation Dictionary
+      const translations = {
+        nav_home: { pt: 'Início', en: 'Home' },
+        nav_traffic: { pt: 'Tráfego', en: 'Traffic' },
+        nav_local: { pt: 'Google Local', en: 'Google Local' },
+        nav_drone: { pt: 'Drone', en: 'Drone' },
+        nav_arts: { pt: 'Artes', en: 'Arts' },
+        nav_results: { pt: 'Resultados', en: 'Results' },
+        nav_consulting: { pt: 'Consultoria', en: 'Consulting' },
+        
+        hero_title: { pt: 'Transforme Cliques em <br><span class="text-gradient">Vendas Reais</span>', en: 'Turn Clicks into <br><span class="text-gradient">Real Sales</span>' },
+        hero_subtitle: { pt: 'Acelere o crescimento da sua empresa com estratégias validadas de Tráfego Pago, Gestão de Conteúdo e Otimização Google.', en: 'Accelerate your business growth with validated strategies in Paid Traffic, Content Management, and Google Optimization.' },
+        hero_cta_plans: { pt: 'Ver Nossos Planos', en: 'View Our Plans' },
+        hero_cta_contact: { pt: 'Fale Conosco', en: 'Contact Us' },
+        hero_badge_clients: { pt: '🚀 +100 Clientes Atendidos', en: '🚀 +100 Clients Served' },
+        hero_badge_meta: { pt: '💎 Meta Business Partner', en: '💎 Meta Business Partner' },
+        hero_badge_roi: { pt: '📈 ROI Focado', en: '📈 ROI Focused' },
+
+        proof_invested: { pt: '+5 Milhões', en: '+5 Million' },
+        proof_invested_label: { pt: 'Investidos em Anúncios', en: 'Invested in Ads' },
+        proof_companies: { pt: '+100', en: '+100' },
+        proof_companies_label: { pt: 'Empresas Escaladas', en: 'Scaled Companies' },
+        proof_monitoring: { pt: '24/7', en: '24/7' },
+        proof_monitoring_label: { pt: 'Monitoramento Ativo', en: 'Active Monitoring' },
+
+        section_traffic_title: { pt: 'Tráfego <span class="text-gradient">Pago</span>', en: 'Paid <span class="text-gradient">Traffic</span>' },
+        section_traffic_subtitle: { pt: 'Escolha o nível de aceleração que seu negócio precisa hoje.', en: 'Choose the level of acceleration your business needs today.' },
+
+        plan_essencial_title: { pt: 'Plano Essencial', en: 'Essential Plan' },
+        plan_essencial_price: { pt: 'R$ 699<small>/mês</small>', en: 'R$ 699<small>/mo</small>' },
+        plan_essencial_desc: { pt: 'Para quem está começando e precisa gerar presença digital com estratégia.', en: 'For those starting out and needing to generate digital presence strategically.' },
+        plan_essencial_item1: { pt: 'Gestão de Meta Ads (Instagram e Facebook)', en: 'Meta Ads Management (Instagram and Facebook)' },
+        plan_essencial_item2: { pt: 'Planejamento estratégico inicial', en: 'Initial strategic planning' },
+        plan_essencial_item3: { pt: 'Otimização básica de campanhas', en: 'Basic campaign optimization' },
+        plan_essencial_item4: { pt: 'Relatório mensal de desempenho', en: 'Monthly performance report' },
+        plan_essencial_item5: { pt: 'Suporte via grupo de WhatsApp', en: 'Support via WhatsApp group' },
+        plan_essencial_note: { pt: '👉 Ideal para pequenos negócios que querem começar a vender online com anúncios bem estruturados.', en: '👉 Ideal for small businesses wanting to start selling online with well-structured ads.' },
+        btn_start_now: { pt: 'Começar Agora', en: 'Start Now' },
+
+        plan_pro_tag: { pt: 'MAIS VENDIDO', en: 'BEST SELLER' },
+        plan_pro_title: { pt: 'Plano Pro', en: 'Pro Plan' },
+        plan_pro_price: { pt: 'R$ 1.499<small>/mês</small>', en: 'R$ 1,499<small>/mo</small>' },
+        plan_pro_desc: { pt: 'Para empresas que querem escalar vendas com consistência e automação.', en: 'For companies wanting to scale sales with consistency and automation.' },
+        plan_pro_item1: { pt: 'Gestão completa de Meta Ads', en: 'Complete Meta Ads Management' },
+        plan_pro_item2: { pt: 'Automação de pré-atendimento (Instagram / WhatsApp)', en: 'Pre-service automation (Instagram / WhatsApp)' },
+        plan_pro_item3: { pt: 'Planejamento mensal de campanhas', en: 'Monthly campaign planning' },
+        plan_pro_item4: { pt: 'Programação de mídias', en: 'Media scheduling' },
+        plan_pro_item5: { pt: '<strong>12 posts/mês inclusos</strong>', en: '<strong>12 posts/mo included</strong>' },
+        plan_pro_item6: { pt: 'Relatórios semanais', en: 'Weekly reports' },
+        plan_pro_item7: { pt: 'Suporte prioritário', en: 'Priority support' },
+        plan_pro_item8: { pt: 'Reunião mensal estratégica', en: 'Monthly strategic meeting' },
+        plan_pro_note: { pt: '👉 Ideal para negócios que já vendem e querem aumentar faturamento de forma previsível.', en: '👉 Ideal for businesses that already sell and want to increase revenue predictably.' },
+        btn_scale: { pt: 'Quero Escalar', en: 'I Want to Scale' },
+
+        plan_premium_title: { pt: 'Plano Premium', en: 'Premium Plan' },
+        plan_premium_price: { pt: 'R$ 1.999<small>/mês</small>', en: 'R$ 1,999<small>/mo</small>' },
+        plan_premium_desc: { pt: 'Para marcas que buscam liderança e crescimento agressivo.', en: 'For brands seeking leadership and aggressive growth.' },
+        plan_premium_item1: { pt: 'Tudo do Plano Pro', en: 'Everything in Pro Plan' },
+        plan_premium_item2: { pt: '<strong>Gestão de Google Ads</strong>', en: '<strong>Google Ads Management</strong>' },
+        plan_premium_item3: { pt: '<strong>Landing Page inclusa (foco em conversão)</strong>', en: '<strong>Landing Page included (conversion focused)</strong>' },
+        plan_premium_item4: { pt: '<strong>24 posts/mês inclusos</strong>', en: '<strong>24 posts/mo included</strong>' },
+        plan_premium_item5: { pt: 'Suporte Intensivo VIP', en: 'VIP Intensive Support' },
+        plan_premium_note: { pt: '👉 Ideal para empresas que querem dominar o mercado e escalar com estrutura profissional.', en: '👉 Ideal for companies wanting to dominate the market and scale with professional structure.' },
+        btn_hire_premium: { pt: 'Contratar Premium', en: 'Hire Premium' },
+
+        setup_title: { pt: 'Setup Profissional Meta Ads', en: 'Professional Meta Ads Setup' },
+        setup_price: { pt: 'R$ 500<small> (único - Pix)</small>', en: 'R$ 500<small> (one-time - Pix)</small>' },
+        setup_desc: { pt: 'Para quem precisa estruturar tudo corretamente antes de anunciar e evitar bloqueios.', en: 'For those needing to structure everything correctly before advertising to avoid bans.' },
+        setup_item1: { pt: 'Criação de nova Página no Facebook', en: 'New Facebook Page Creation' },
+        setup_item2: { pt: 'Nome da página alinhado ao Instagram', en: 'Page name aligned with Instagram' },
+        setup_item3: { pt: 'Foto de perfil igual ao Instagram', en: 'Profile photo same as Instagram' },
+        setup_item4: { pt: 'Biografia alinhada ao Instagram', en: 'Bio aligned with Instagram' },
+        setup_item5: { pt: 'Categoria correta da página (Criador de conteúdo)', en: 'Correct page category (Content Creator)' },
+        setup_item6: { pt: 'Configuração do Meta Business (Gerenciador de Negócios)', en: 'Meta Business Setup (Business Manager)' },
+        setup_item7: { pt: 'Configuração empresarial correta', en: 'Correct business configuration' },
+        setup_item8: { pt: 'Cadastro e confirmação de e-mail', en: 'Email registration and confirmation' },
+        setup_item9: { pt: 'Cadastro de endereço', en: 'Address registration' },
+        setup_item10: { pt: 'Cadastro de CPF ou CNPJ', en: 'CPF or CNPJ registration' },
+        setup_item11: { pt: 'Vinculação correta entre Facebook e Instagram', en: 'Correct linking between Facebook and Instagram' },
+        setup_item12: { pt: 'Validação do Instagram via código', en: 'Instagram validation via code' },
+        setup_item13: { pt: 'Organização de permissões e acessos', en: 'Organization of permissions and access' },
+        setup_item14: { pt: 'Ativação de boas práticas de segurança', en: 'Activation of security best practices' },
+        setup_item15: { pt: 'Preparação completa para anúncios', en: 'Complete preparation for ads' },
+        setup_item16: { pt: 'Criação / vinculação da conta de anúncios', en: 'Ad account creation / linking' },
+        setup_item17: { pt: 'Configuração correta de fuso horário e moeda', en: 'Correct timezone and currency setup' },
+        setup_item18: { pt: 'Teste de estrutura para impulsionamento', en: 'Structure test for boosting' },
+        setup_item19: { pt: 'Estrutura organizada para liberação futura de anúncios', en: 'Organized structure for future ad release' },
+
+        section_local_title: { pt: 'Google <span class="text-gradient">Local</span>', en: 'Google <span class="text-gradient">Local</span>' },
+        section_local_subtitle: { pt: 'Seja encontrado primeiro quando seus clientes procurarem pelo seu serviço.', en: 'Be found first when your customers search for your service.' },
+        
+        local_flash_title: { pt: 'Flash 30 Dias', en: 'Flash 30 Days' },
+        local_flash_price: { pt: 'R$ 499<small> (único)</small>', en: 'R$ 499<small> (one-time)</small>' },
+        local_flash_desc: { pt: 'Ideal para configurar a casa e começar certo.', en: 'Ideal to set up the house and start right.' },
+        local_flash_item1: { pt: 'Cadastro e verificação da ficha', en: 'Registration and verification of listing' },
+        local_flash_item2: { pt: 'SEO Local (Palavras-chave e Descrição)', en: 'Local SEO (Keywords and Description)' },
+        local_flash_item3: { pt: 'Otimização de Fotos e Produtos', en: 'Photo and Product Optimization' },
+        local_flash_item4: { pt: 'Correção de erros de cadastro', en: 'Registration error correction' },
+        local_flash_item5: { pt: 'Checklist final de entrega', en: 'Final delivery checklist' },
+        btn_hire_setup: { pt: 'Contratar Setup', en: 'Hire Setup' },
+
+        local_annual_tag: { pt: 'MELHOR OFERTA', en: 'BEST OFFER' },
+        local_annual_title: { pt: 'Plano Anual', en: 'Annual Plan' },
+        local_annual_price: { pt: 'R$ 156<small>,66/mês</small>', en: 'R$ 156<small>.66/mo</small>' },
+        local_annual_desc: { pt: 'Total R$ 1.880. Gestão completa o ano todo.', en: 'Total R$ 1,880. Complete management all year round.' },
+        local_annual_item1: { pt: '<strong>Site Institucional Incluso</strong>', en: '<strong>Institutional Website Included</strong>' },
+        local_annual_item2: { pt: 'Gestão contínua de avaliações', en: 'Continuous review management' },
+        local_annual_item3: { pt: 'Publicações semanais (Ofertas/Novidades)', en: 'Weekly posts (Offers/News)' },
+        local_annual_item4: { pt: 'Relatórios de ligações e rotas', en: 'Call and route reports' },
+        local_annual_item5: { pt: 'Monitoramento de concorrentes', en: 'Competitor monitoring' },
+        btn_guarantee: { pt: 'Garantir Oferta', en: 'Secure Offer' },
+
+        local_trim_title: { pt: 'Trimestral', en: 'Quarterly' },
+        local_trim_price: { pt: 'R$ 1.275<small> /trimestre</small>', en: 'R$ 1,275<small> /quarter</small>' },
+        local_trim_desc: { pt: 'Acompanhamento de médio prazo para consolidar.', en: 'Medium-term monitoring to consolidate.' },
+        local_trim_item1: { pt: 'Setup completo da ficha', en: 'Complete listing setup' },
+        local_trim_item2: { pt: 'Atualizações semanais', en: 'Weekly updates' },
+        local_trim_item3: { pt: 'Resposta a avaliações', en: 'Response to reviews' },
+        local_trim_item4: { pt: 'Ajustes estratégicos de SEO', en: 'Strategic SEO adjustments' },
+        local_trim_item5: { pt: 'Relatório de performance', en: 'Performance report' },
+        btn_hire_trim: { pt: 'Contratar Trimestre', en: 'Hire Quarter' },
+
+        section_g_emp_title: { pt: 'Google <span class="text-gradient">Empresas</span>', en: 'Google <span class="text-gradient">Business</span>' },
+        section_g_emp_subtitle: { pt: 'Soluções corporativas completas para consolidar sua autoridade digital e dominar o mercado local.', en: 'Complete corporate solutions to consolidate your digital authority and dominate the local market.' },
+        
+        g_basic_title: { pt: 'PLANO BÁSICO', en: 'BASIC PLAN' },
+        g_basic_old_price: { pt: 'De R$ 497,00', en: 'From R$ 497.00' },
+        g_basic_price: { pt: 'R$ 437<small> (Pix)</small>', en: 'R$ 437<small> (Pix)</small>' },
+        g_basic_desc: { pt: 'Ideal para começar sua presença no Google.', en: 'Ideal to start your presence on Google.' },
+        g_basic_item1: { pt: 'Criação de perfil', en: 'Profile creation' },
+        g_basic_item2: { pt: 'Cadastro de até 5 serviços', en: 'Registration of up to 5 services' },
+        g_basic_item3: { pt: 'Cadastros de até 5 produtos', en: 'Registration of up to 5 products' },
+        g_basic_item4: { pt: '4 postagens', en: '4 posts' },
+        btn_hire_basic: { pt: 'Contratar Básico', en: 'Hire Basic' },
+
+        g_opt_title: { pt: 'OTIMIZAÇÃO ÚNICA', en: 'ONE-TIME OPTIMIZATION' },
+        g_opt_old_price: { pt: 'De R$ 999,00', en: 'From R$ 999.00' },
+        g_opt_price: { pt: 'R$ 850<small> (Pix)</small>', en: 'R$ 850<small> (Pix)</small>' },
+        g_opt_desc: { pt: 'Ideal para empresas que ainda não estão bem posicionadas.', en: 'Ideal for companies not yet well positioned.' },
+        g_opt_item1: { pt: 'Otimização completa da ficha', en: 'Complete listing optimization' },
+        g_opt_item2: { pt: 'Pesquisa e aplicação de palavras-chave', en: 'Keyword research and application' },
+        g_opt_item3: { pt: 'Link de avaliação + QR Code', en: 'Review link + QR Code' },
+        g_opt_item4: { pt: 'Link de Whatsapp rastreável', en: 'Trackable Whatsapp link' },
+        g_opt_item5: { pt: '5 postagens por semana', en: '5 posts per week' },
+        g_opt_item6: { pt: 'Até 10 produtos e 10 serviços', en: 'Up to 10 products and 10 services' },
+        btn_hire_opt: { pt: 'Contratar Otimização', en: 'Hire Optimization' },
+
+        g_rec_tag: { pt: 'MELHOR OFERTA', en: 'BEST OFFER' },
+        g_rec_title: { pt: 'OTIMIZAÇÃO + RECORRÊNCIA', en: 'OPTIMIZATION + RECURRENCE' },
+        g_rec_old_price: { pt: 'De R$ 2.690,00', en: 'From R$ 2,690.00' },
+        g_rec_price: { pt: 'R$ 2.421<small> (Pix)</small>', en: 'R$ 2,421<small> (Pix)</small>' },
+        g_rec_desc: { pt: 'Referente a 4 meses. Para quem quer subir no ranking constantemente.', en: 'Referring to 4 months. For those who want to climb the ranking constantly.' },
+        g_rec_item1: { pt: '<strong>Tudo da otimização única</strong>', en: '<strong>Everything in one-time optimization</strong>' },
+        g_rec_item2: { pt: '5 postagens na semana', en: '5 posts per week' },
+        g_rec_item3: { pt: 'Até 15 produtos e 15 serviços/mês', en: 'Up to 15 products and 15 services/mo' },
+        g_rec_item4: { pt: 'Acompanhamento de métricas e melhorias', en: 'Metrics tracking and improvements' },
+        g_rec_item5: { pt: '<strong>Bônus:</strong> Landing Page + Link Bio + Placa QR Code', en: '<strong>Bonus:</strong> Landing Page + Link Bio + QR Code Plate' },
+        btn_dominate_google: { pt: 'Quero Dominar o Google', en: 'I Want to Dominate Google' },
+
+        section_drone_title: { pt: 'Produção <span class="text-gradient">Audiovisual</span>', en: '<span class="text-gradient">Audiovisual</span> Production' },
+        section_drone_subtitle: { pt: 'Imagens de drone e edição profissional que valorizam sua marca.', en: 'Drone images and professional editing that value your brand.' },
+        
+        drone_basic_title: { pt: 'Básico', en: 'Basic' },
+        drone_basic_price: { pt: 'R$ 349', en: 'R$ 349' },
+        drone_basic_item1: { pt: '3 vídeos aéreos (até 1 min)', en: '3 aerial videos (up to 1 min)' },
+        drone_basic_item2: { pt: '3 fotos em alta resolução', en: '3 high-resolution photos' },
+        drone_basic_item3: { pt: 'Entrega via Drive (sem edição complexa)', en: 'Delivery via Drive (no complex editing)' },
+        btn_request: { pt: 'Solicitar', en: 'Request' },
+
+        drone_inter_tag: { pt: 'MAIS VENDIDO', en: 'BEST SELLER' },
+        drone_inter_title: { pt: 'Intermediário', en: 'Intermediate' },
+        drone_inter_price: { pt: 'R$ 649', en: 'R$ 649' },
+        drone_inter_item1: { pt: '5 vídeos (até 1:30 min)', en: '5 videos (up to 1:30 min)' },
+        drone_inter_item2: { pt: '5 fotos em alta resolução', en: '5 high-resolution photos' },
+        drone_inter_item3: { pt: '<strong>Edição Básica inclusa</strong>', en: '<strong>Basic Editing included</strong>' },
+
+        drone_pro_title: { pt: 'Profissional', en: 'Professional' },
+        drone_pro_price: { pt: 'R$ 859', en: 'R$ 859' },
+        drone_pro_item1: { pt: '5 vídeos premium', en: '5 premium videos' },
+        drone_pro_item2: { pt: '5 fotos editadas', en: '5 edited photos' },
+        drone_pro_item3: { pt: '<strong>Edição Dinâmica (Reels/TikTok)</strong>', en: '<strong>Dynamic Editing (Reels/TikTok)</strong>' },
+        drone_pro_item4: { pt: 'Vídeo Institucional completo', en: 'Complete Institutional Video' },
+
+        section_arts_title: { pt: 'Design de <span class="text-gradient">Artes</span>', en: '<span class="text-gradient">Arts</span> Design' },
+        section_arts_subtitle: { pt: 'Identidade visual profissional para suas redes sociais com foco em conversão.', en: 'Professional visual identity for your social networks focused on conversion.' },
+        
+        arts_tag: { pt: 'FOCO EM PACOTE', en: 'PACKAGE FOCUS' },
+        arts_title: { pt: 'Pacotes Digitais', en: 'Digital Packages' },
+        arts_price: { pt: 'R$ 65<small>/arte</small>', en: 'R$ 65<small>/art</small>' },
+        arts_desc: { pt: 'Design estratégico para elevar o nível do seu perfil.', en: 'Strategic design to elevate your profile level.' },
+        arts_item1: { pt: '<strong>No pacote mínimo de 10 artes</strong>', en: '<strong>Minimum package of 10 arts</strong>' },
+        arts_item2: { pt: 'Artes para Feed, Stories ou Carrossel', en: 'Arts for Feed, Stories or Carousel' },
+        arts_item3: { pt: 'Opção de Post único personalizado', en: 'Personalized Single Post Option' },
+        arts_item4: { pt: 'Criação focada em conversão visual', en: 'Creation focused on visual conversion' },
+        arts_note: { pt: '<strong>Artes Avulsas:</strong> Para 1 ou 2 unidades, o valor é <strong>R$ 80 por arte</strong>. Priorizamos o fechamento por pacote para garantir a consistência do seu branding.', en: '<strong>Single Arts:</strong> For 1 or 2 units, the value is <strong>R$ 80 per art</strong>. We prioritize package closing to ensure your branding consistency.' },
+        btn_want_package: { pt: 'Quero meu Pacote', en: 'I Want my Package' },
+
+        section_consulting_title: { pt: 'Consultoria', en: 'Consulting' },
+        section_consulting_subtitle: { pt: 'Expertise e acompanhamento para escalar seus resultados.', en: 'Expertise and monitoring to scale your results.' },
+        cons_title: { pt: '🎓 Consultoria Completa', en: '🎓 Complete Consulting' },
+        cons_price: { pt: 'Vagas Limitadas', en: 'Limited Spots' },
+        cons_desc: { pt: 'Mentoria prática e estratégica', en: 'Practical and strategic mentorship' },
+        cons_item1: { pt: 'Como criar campanhas do zero', en: 'How to create campaigns from scratch' },
+        cons_item2: { pt: 'Estrutura: Campanha, conjunto, anúncio', en: 'Structure: Campaign, ad set, ad' },
+        cons_item3: { pt: 'ABO vs CBO (estratégias de orçamento)', en: 'ABO vs CBO (budget strategies)' },
+        cons_item4: { pt: 'Contingência e estruturação de conta', en: 'Contingency and account structuring' },
+        cons_item5: { pt: 'Definição de público (Segmentado, Envolvimento, Aberto)', en: 'Audience definition (Segmented, Engagement, Broad)' },
+        cons_item6: { pt: 'Temperatura do lead e Videoview', en: 'Lead temperature and Videoview' },
+        cons_item7: { pt: '<strong>Call estratégica de 1h30 a 2h</strong>', en: '<strong>Strategic Call of 1h30 to 2h</strong>' },
+        cons_item8: { pt: 'Acompanhamento por 7 dias via WhatsApp', en: '7-day follow-up via WhatsApp' },
+        btn_learn: { pt: 'Quero Aprender', en: 'I Want to Learn' },
+
+        section_results_title: { pt: 'Resultados que <span class="text-gradient">Falam por Si</span>', en: 'Results that <span class="text-gradient">Speak for Themselves</span>' },
+        section_results_subtitle: { pt: 'Cases reais de clientes que transformaram seus negócios com nossas estratégias', en: 'Real cases of clients who transformed their businesses with our strategies' },
+        
+        res_fashion_title: { pt: '🛍️ Moda Feminina', en: '🛍️ Women\'s Fashion' },
+        res_fashion_roi: { pt: '<strong>ROI de 420%</strong>', en: '<strong>420% ROI</strong>' },
+        res_fashion_desc: { pt: 'Em 3 meses com Meta Ads, R$ 15k gerou R$ 78k em vendas.', en: 'In 3 months with Meta Ads, R$ 15k generated R$ 78k in sales.' },
+
+        res_dentist_title: { pt: '🦷 Clínica Odonto', en: '🦷 Dental Clinic' },
+        res_dentist_roi: { pt: '<strong>+150 agendamentos/mês</strong>', en: '<strong>+150 appointments/mo</strong>' },
+        res_dentist_desc: { pt: 'Via Google Meu Negócio, ticket médio de R$ 1.200 (R$ 180k/mês).', en: 'Via Google Business Profile, avg ticket R$ 1,200 (R$ 180k/mo).' },
+
+        res_rest_title: { pt: '🍽️ Restaurante Gourmet', en: '🍽️ Gourmet Restaurant' },
+        res_rest_roi: { pt: '<strong>+80% no faturamento</strong>', en: '<strong>+80% in revenue</strong>' },
+        res_rest_desc: { pt: 'Estratégia integrada de Tráfego + Google Local em 6 meses.', en: 'Integrated Traffic + Google Local strategy in 6 months.' },
+
+        res_gym_title: { pt: '🏋️ Academia Funcional', en: '🏋️ Functional Gym' },
+        res_gym_roi: { pt: '<strong>200+ matrículas</strong>', en: '<strong>200+ enrollments</strong>' },
+        res_gym_desc: { pt: 'Em 4 meses, CAC de R$ 45 por lead qualificado via Meta Ads.', en: 'In 4 months, CAC of R$ 45 per qualified lead via Meta Ads.' },
+
+        res_arch_title: { pt: '🏠 Arquitetura', en: '🏠 Architecture' },
+        res_arch_roi: { pt: '<strong>R$ 320k em contratos</strong>', en: '<strong>R$ 320k in contracts</strong>' },
+        res_arch_desc: { pt: 'Gerados via Google Ads e Landing Page otimizada em 5 meses.', en: 'Generated via Google Ads and optimized Landing Page in 5 months.' },
+
+        res_salon_title: { pt: '💇 Salão de Beleza', en: '💇 Beauty Salon' },
+        res_salon_roi: { pt: '<strong>3x mais agendamentos</strong>', en: '<strong>3x more appointments</strong>' },
+        res_salon_desc: { pt: 'Com automação via WhatsApp e campanhas segmentadas no Instagram.', en: 'With WhatsApp automation and segmented campaigns on Instagram.' },
+
+        res_car_title: { pt: '🚗 Concessionária', en: '🚗 Car Dealership' },
+        res_car_roi: { pt: '<strong>47 carros vendidos</strong>', en: '<strong>47 cars sold</strong>' },
+        res_car_desc: { pt: 'Em 2 meses via Meta Ads + Remarketing (ticket médio R$ 65k).', en: 'In 2 months via Meta Ads + Remarketing (avg ticket R$ 65k).' },
+
+        res_info_title: { pt: '📚 Infoprodutor', en: '📚 Info Producer' },
+        res_info_roi: { pt: '<strong>R$ 480k em lançamento</strong>', en: '<strong>R$ 480k in launch</strong>' },
+        res_info_desc: { pt: 'Funil completo com Tráfego Pago + Webinar + Remarketing estratégico.', en: 'Complete funnel with Paid Traffic + Webinar + Strategic Remarketing.' },
+
+        res_hotel_title: { pt: '🏨 Pousada', en: '🏨 Inn/Hotel' },
+        res_hotel_roi: { pt: '<strong>95% de ocupação</strong>', en: '<strong>95% occupancy</strong>' },
+        res_hotel_desc: { pt: 'Na alta temporada com Google Ads + Meta Ads + Google Meu Negócio.', en: 'In high season with Google Ads + Meta Ads + Google Business Profile.' },
+
+        res_cta_title: { pt: 'Pronto para ser o próximo case de sucesso?', en: 'Ready to be the next success case?' },
+        res_cta_btn: { pt: 'Quero Resultados Assim', en: 'I Want Results Like This' },
+
+        faq_title: { pt: 'Perguntas Frequentes', en: 'Frequently Asked Questions' },
+        faq_q1: { pt: 'O valor dos anúncios está incluso na mensalidade?', en: 'Is the ad cost included in the monthly fee?' },
+        faq_a1: { pt: 'Não. Os valores apresentados são referentes à nossa prestação de serviço (estratégia, criação e otimização). O valor investido nas plataformas (Facebook/Google) é pago diretamente por você.', en: 'No. The values presented refer to our service provision (strategy, creation, and optimization). The amount invested in platforms (Facebook/Google) is paid directly by you.' },
+        faq_q2: { pt: 'Existe fidelidade nos contratos?', en: 'Is there loyalty in contracts?' },
+        faq_a2: { pt: 'Trabalhamos com contratos flexíveis. Recomendamos um período mínimo de 3 meses para maturação das campanhas e melhores resultados.', en: 'We work with flexible contracts. We recommend a minimum period of 3 months for campaign maturation and better results.' },
+        faq_q3: { pt: 'Como funciona o Plano Anual GMN?', en: 'How does the GMN Annual Plan work?' },
+        faq_a3: { pt: 'O Plano Anual oferece o melhor custo-benefício. Cuidamos da sua ficha no Google o ano inteiro, garantindo atualizações e resposta a clientes semanalmente.', en: 'The Annual Plan offers the best cost-benefit. We take care of your Google listing all year round, ensuring weekly updates and customer responses.' },
+
+        contact_title: { pt: 'Vamos Alavancar seu Negócio?', en: 'Let\'s Leverage Your Business?' },
+        contact_subtitle: { pt: 'Ou preencha o formulário abaixo para receber nosso contato.', en: 'Or fill out the form below to receive our contact.' },
+        
+        form_name: { pt: 'Nome', en: 'Name' },
+        form_name_ph: { pt: 'Seu nome completo', en: 'Your full name' },
+        form_phone: { pt: 'Telefone', en: 'Phone' },
+        form_phone_ph: { pt: '(11) 9 1234-5678', en: '(11) 9 1234-5678' },
+        form_company: { pt: 'Empresa', en: 'Company' },
+        form_company_ph: { pt: 'Nome da sua empresa', en: 'Your company name' },
+        form_insta: { pt: 'Instagram da Empresa', en: 'Company Instagram' },
+        form_insta_ph: { pt: '@suaempresa', en: '@yourcompany' },
+        form_city: { pt: 'Cidade / Estado', en: 'City / State' },
+        form_city_ph: { pt: 'Sao Paulo, SP', en: 'New York, NY' },
+        
+        form_service: { pt: 'Qual serviço te interessa?', en: 'Which service interests you?' },
+        form_service_opt_default: { pt: 'Selecione o serviço', en: 'Select the service' },
+        form_service_opt_traffic: { pt: 'Gestão de Tráfego Pago', en: 'Paid Traffic Management' },
+        form_service_opt_gmn: { pt: 'Google Meu Negócio', en: 'Google Business Profile' },
+        form_service_opt_drone: { pt: 'Drone e Vídeos', en: 'Drone and Videos' },
+        form_service_opt_arts: { pt: 'Artes Digitais', en: 'Digital Arts' },
+        form_service_opt_cons: { pt: 'Consultoria', en: 'Consulting' },
+        form_service_opt_combo: { pt: 'Quero um Combo', en: 'I Want a Combo' },
+
+        form_branches: { pt: 'Possuo 2 ou mais filiais (+30% no valor)', en: 'I have 2 or more branches (+30% on value)' },
+        form_msg: { pt: 'Mensagem', en: 'Message' },
+        form_msg_ph: { pt: 'Conte mais sobre seu negócio e objetivos...', en: 'Tell us more about your business and goals...' },
+        btn_send: { pt: 'Enviar mensagem', en: 'Send message' },
+
+        footer_rights: { pt: '© 2022 Cozzi Media. Todos os direitos reservados.', en: '© 2022 Cozzi Media. All rights reserved.' },
+        footer_tagline: { pt: 'Transformando presença digital em lucro.', en: 'Transforming digital presence into profit.' },
+      };
+
+      // Language Toggling Logic
+      let currentLang = 'pt';
+
+      function toggleLanguage() {
+        const ptBtn = document.getElementById('lang-pt');
+        const enBtn = document.getElementById('lang-en');
+        
+        // Toggle visual state
+        if (currentLang === 'pt') {
+            currentLang = 'en';
+            // Visual Update
+            ptBtn.classList.remove('text-neon');
+            ptBtn.classList.add('text-[var(--text-muted)]', 'hover:text-neon');
+            enBtn.classList.remove('text-[var(--text-muted)]', 'hover:text-neon');
+            enBtn.classList.add('text-neon');
+        } else {
+            currentLang = 'pt';
+            // Visual Update
+            enBtn.classList.remove('text-neon');
+            enBtn.classList.add('text-[var(--text-muted)]', 'hover:text-neon');
+            ptBtn.classList.remove('text-[var(--text-muted)]', 'hover:text-neon');
+            ptBtn.classList.add('text-neon');
+        }
+
+        // Apply Translations
+        applyTranslations(currentLang);
+      }
+
+      function applyTranslations(lang) {
+        // Update elements with data-i18n
+        const elements = document.querySelectorAll('[data-i18n]');
+        elements.forEach(el => {
+            const key = el.getAttribute('data-i18n');
+            if (translations[key]) {
+                // Check if element has child elements that are not text (simple check)
+                // Use innerHTML to preserve HTML tags like <br> or <span> inside translation strings
+                el.innerHTML = translations[key][lang];
+            }
+        });
+
+        // Update placeholders for inputs with data-i18n-ph
+        const placeholders = document.querySelectorAll('[data-i18n-ph]');
+        placeholders.forEach(el => {
+            const key = el.getAttribute('data-i18n-ph');
+            if (translations[key]) {
+                el.placeholder = translations[key][lang];
+            }
+        });
+      }
+
       // Accordion Logic
       const accordions = document.querySelectorAll('.accordion-header');
       accordions.forEach(acc => {
