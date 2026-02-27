@@ -171,7 +171,7 @@
         color: var(--text-muted);
         font-size: 1.2rem;
         max-width: 650px;
-        margin: 0 auto 4rem auto;
+        margin: 0 auto 1.5rem auto;
       }
 
       /* Header */
@@ -386,6 +386,80 @@
       /* Cards Grid System */
       .pricing-section {
         padding: 4rem 0;
+      }
+
+      /* Billing Toggle Switch */
+      .billing-toggle {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          gap: 0.8rem;
+          margin-bottom: 3.5rem;
+          font-size: 1.1rem;
+          font-weight: 600;
+      }
+      
+      #label-monthly, #label-annual {
+          transition: color 0.3s ease;
+          cursor: pointer;
+          user-select: none;
+      }
+
+      .switch {
+          position: relative;
+          display: inline-block;
+          width: 56px;
+          height: 30px;
+      }
+      
+      .switch input {
+          opacity: 0;
+          width: 0;
+          height: 0;
+      }
+      
+      .slider {
+          position: absolute;
+          cursor: pointer;
+          top: 0;
+          left: 0;
+          right: 0;
+          bottom: 0;
+          background-color: var(--toggle-bg);
+          border: 1px solid var(--border);
+          transition: .4s;
+          border-radius: 34px;
+      }
+      
+      .slider:before {
+          position: absolute;
+          content: "";
+          height: 22px;
+          width: 22px;
+          left: 3px;
+          bottom: 3px;
+          background-color: var(--primary);
+          transition: .4s;
+          border-radius: 50%;
+      }
+      
+      input:checked + .slider {
+          background-color: rgba(1, 212, 255, 0.15);
+          border-color: var(--primary);
+      }
+      
+      input:checked + .slider:before {
+          transform: translateX(26px);
+      }
+      
+      .discount-badge {
+          background: var(--gradient);
+          color: #000;
+          font-size: 0.75rem;
+          padding: 3px 10px;
+          border-radius: 20px;
+          font-weight: 800;
+          box-shadow: 0 2px 10px rgba(1, 212, 255, 0.3);
       }
 
       .cards-grid {
@@ -969,10 +1043,22 @@
     <section id="trafego" class="pricing-section">
       <div class="container">
         <h2 class="section-title" data-i18n="section_traffic_title">Nossos <span class="text-gradient">Planos</span></h2>
-        <p class="section-subtitle">
-            <span data-i18n="section_traffic_subtitle">Escolha o nível de aceleração que seu negócio precisa hoje.</span>
-            <br><span style="color: var(--primary); font-weight: 700; display: inline-block; margin-top: 0.5rem;" data-i18n="plan_discount">Mensal/Anual -20%</span>
+        <p class="section-subtitle" data-i18n="section_traffic_subtitle">
+            Escolha o nível de aceleração que seu negócio precisa hoje.
         </p>
+        
+        <!-- Toggle Switch Anual/Mensal -->
+        <div class="billing-toggle">
+            <span id="label-monthly" style="color: var(--text-main);" data-i18n="toggle_monthly">Mensal</span>
+            <label class="switch">
+                <input type="checkbox" id="billing-checkbox">
+                <span class="slider round"></span>
+            </label>
+            <div style="display: flex; align-items: center; gap: 0.5rem; cursor: pointer;" id="label-annual-wrapper">
+                <span id="label-annual" style="color: var(--text-muted);" data-i18n="toggle_annual">Anual</span>
+                <span class="discount-badge" data-i18n="toggle_discount">-20%</span>
+            </div>
+        </div>
 
         <div class="cards-grid">
           <div class="card fade-in">
@@ -1348,7 +1434,9 @@
         section_traffic_title: { pt: 'Nossos <span class="text-gradient">Planos</span>', en: 'Our <span class="text-gradient">Plans</span>' },
         section_traffic_subtitle: { pt: 'Escolha o nível de aceleração que seu negócio precisa hoje.', en: 'Choose the level of acceleration your business needs today.' },
         
-        plan_discount: { pt: 'Mensal/Anual -20%', en: 'Monthly/Annual -20%' },
+        toggle_monthly: { pt: 'Mensal', en: 'Monthly' },
+        toggle_annual: { pt: 'Anual', en: 'Annual' },
+        toggle_discount: { pt: '-20%', en: '-20%' },
 
         plan_start_title: { pt: 'Plano Start', en: 'Start Plan' },
         plan_start_price: { pt: 'R$ 749<small>/mês</small>', en: 'R$ 749<small>/mo</small>' },
@@ -1590,6 +1678,56 @@
                 el.placeholder = translations[key][lang];
             }
         });
+      }
+
+      // Billing Toggle Logic
+      const billingCheckbox = document.getElementById('billing-checkbox');
+      const labelMonthly = document.getElementById('label-monthly');
+      const labelAnnualWrapper = document.getElementById('label-annual-wrapper');
+      const labelAnnual = document.getElementById('label-annual');
+
+      if (billingCheckbox) {
+          // Allow clicking text labels to toggle the checkbox
+          labelMonthly.addEventListener('click', () => {
+              if (billingCheckbox.checked) {
+                  billingCheckbox.checked = false;
+                  billingCheckbox.dispatchEvent(new Event('change'));
+              }
+          });
+          
+          labelAnnualWrapper.addEventListener('click', () => {
+              if (!billingCheckbox.checked) {
+                  billingCheckbox.checked = true;
+                  billingCheckbox.dispatchEvent(new Event('change'));
+              }
+          });
+
+          // Handle the price change calculation when toggle is interacted with
+          billingCheckbox.addEventListener('change', function() {
+              const isAnnual = this.checked;
+
+              // Style updates for labels
+              if(isAnnual) {
+                  labelMonthly.style.color = 'var(--text-muted)';
+                  labelAnnual.style.color = 'var(--text-main)';
+              } else {
+                  labelMonthly.style.color = 'var(--text-main)';
+                  labelAnnual.style.color = 'var(--text-muted)';
+              }
+
+              // Apply 20% discount if annual is selected
+              translations.plan_start_price.pt = isAnnual ? 'R$ 599<small>/mês</small>' : 'R$ 749<small>/mês</small>';
+              translations.plan_start_price.en = isAnnual ? 'R$ 599<small>/mo</small>' : 'R$ 749<small>/mo</small>';
+
+              translations.plan_pro_price.pt = isAnnual ? 'R$ 1.199<small>/mês</small>' : 'R$ 1.499<small>/mês</small>';
+              translations.plan_pro_price.en = isAnnual ? 'R$ 1,199<small>/mo</small>' : 'R$ 1,499<small>/mo</small>';
+
+              translations.plan_premium_new_price.pt = isAnnual ? 'R$ 2.399<small>/mês</small>' : 'R$ 2.999<small>/mês</small>';
+              translations.plan_premium_new_price.en = isAnnual ? 'R$ 2,399<small>/mo</small>' : 'R$ 2,999<small>/mo</small>';
+
+              // Immediately re-apply translations to trigger the DOM update
+              applyTranslations(currentLang);
+          });
       }
 
       // Accordion Logic
