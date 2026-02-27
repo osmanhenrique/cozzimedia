@@ -1,1842 +1,549 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<html lang="pt-BR" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cozzi Media | Escale Seu Negócio</title>
-    <meta name="description" content="Gestão de Tráfego Pago, Google Meu Negócio e Produção Audiovisual. Transforme sua presença digital." />
-    <link
-      rel="icon"
-      type="image/png"
-      href="https://i.postimg.cc/wBsHdKMn/logo-Copia.jpg"
-      onerror="this.onerror=null; this.href='https://placehold.co/32x32/01d4ff/000?text=CM'"
-    />
+    <!-- Favicon -->
+    <link rel="icon" href="https://i.postimg.cc/xJkxTVqp/logo-cozzi.jpg" type="image/jpeg">
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
-    
-    <!-- Tailwind CSS (Configurado para não resetar o estilo existente) -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script>
-      tailwind.config = {
-        corePlugins: {
-          preflight: false, // Desativa o reset padrão para não quebrar o CSS antigo
-        },
-        theme: {
-          extend: {
-            colors: {
-              neon: '#01d4ff',
-            }
-          }
-        }
-      }
-    </script>
-
     <style>
-      :root {
-        --primary: #01d4ff;
-        --primary-glow: rgba(1, 212, 255, 0.5);
-        --secondary: #39eaff;
-        --bg-dark: #0b0f16;
-        --bg-card: rgba(17, 24, 39, 0.7);
-        --bg-card-hover: rgba(30, 41, 59, 0.9);
-        --text-main: #f1f5f9;
-        --text-muted: #94a3b8;
-        --border: rgba(255, 255, 255, 0.1);
-        --gradient: linear-gradient(135deg, #01d4ff 0%, #39eaff 100%);
-      }
-
-      /* Variáveis para o Modo Claro */
-      body.light-mode {
-        --bg-dark: #f8fafc;
-        --bg-card: rgba(255, 255, 255, 0.8);
-        --bg-card-hover: #ffffff;
-        --text-main: #0f172a; /* Texto escuro */
-        --text-muted: #64748b;
-        --border: rgba(0, 0, 0, 0.1);
-      }
-
-      * {
-        box-sizing: border-box;
-        margin: 0;
-        padding: 0;
-        scroll-behavior: smooth;
-      }
-
-      body {
-        font-family: "Inter", sans-serif;
-        background-color: var(--bg-dark);
-        background-image: 
-          radial-gradient(circle at 15% 50%, rgba(1, 212, 255, 0.08), transparent 25%),
-          radial-gradient(circle at 85% 30%, rgba(57, 234, 255, 0.05), transparent 25%);
-        color: var(--text-main);
-        line-height: 1.6;
-        overflow-x: hidden;
-        font-size: 16px;
-        transition: background-color 0.3s ease, color 0.3s ease;
-      }
-
-      /* Utilitários */
-      .container {
-        max-width: 1200px;
-        margin: 0 auto;
-        padding: 0 1.5rem;
-      }
-
-      .text-gradient {
-        background: var(--gradient);
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-        background-clip: text;
-      }
-      
-      section {
-        scroll-margin-top: 100px;
-      }
-
-      .btn {
-        display: inline-block;
-        background: var(--primary);
-        color: #000;
-        font-weight: 700;
-        padding: 1rem 2rem;
-        border-radius: 50px;
-        text-decoration: none;
-        transition: all 0.3s ease;
-        box-shadow: 0 4px 15px rgba(1, 212, 255, 0.3);
-        border: none;
-        cursor: pointer;
-        text-align: center;
-        font-size: 1rem;
-      }
-
-      .btn:hover {
-        transform: translateY(-3px);
-        box-shadow: 0 8px 25px rgba(1, 212, 255, 0.5);
-        background: var(--secondary);
-      }
-
-      .btn-outline {
-        background: transparent;
-        border: 2px solid var(--primary);
-        color: var(--primary);
-        box-shadow: none;
-      }
-
-      .btn-outline:hover {
-        background: var(--primary);
-        color: #000;
-      }
-
-      .section-title {
-        text-align: center;
-        font-size: clamp(2.2rem, 5vw, 3rem);
-        font-weight: 800;
-        margin-bottom: 1rem;
-      }
-
-      .section-subtitle {
-        text-align: center;
-        color: var(--text-muted);
-        font-size: 1.2rem;
-        max-width: 650px;
-        margin: 0 auto 4rem auto;
-      }
-
-      /* Header */
-      header {
-        position: fixed;
-        top: 0;
-        width: 100%;
-        background: rgba(11, 15, 22, 0.85);
-        backdrop-filter: blur(10px);
-        z-index: 100;
-        border-bottom: 1px solid var(--border);
-        padding: 1rem 0;
-        transition: background-color 0.3s ease, border-color 0.3s ease;
-      }
-      
-      body.light-mode header {
-        background: rgba(255, 255, 255, 0.85);
-      }
-
-      nav {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        position: relative;
-      }
-
-      .logo {
-        font-size: 1.6rem;
-        font-weight: 800;
-        color: var(--text-main);
-        text-decoration: none;
-        display: flex;
-        align-items: center;
-        gap: 0.5rem;
-        z-index: 101;
-      }
-
-      .logo span { color: var(--primary); }
-
-      /* Mobile Menu Toggle Button */
-      .menu-toggle {
-        display: none;
-        font-size: 1.8rem;
-        color: var(--text-main);
-        cursor: pointer;
-        z-index: 101;
-      }
-
-      /* Desktop Nav Links */
-      .nav-links {
-        display: none;
-      }
-
-      /* Desktop Styles */
-      @media(min-width: 768px) {
-        .menu-toggle {
-            display: none;
-        }
-
-        .nav-links {
-          display: flex !important;
-          align-items: center;
-          gap: 1.2rem;
-          position: static;
-          background: transparent;
-          width: auto;
-          height: auto;
-          flex-direction: row;
-          padding: 0;
-          border-bottom: none;
-        }
-        
-        .nav-links a:not(.btn) {
-          color: var(--text-muted);
-          text-decoration: none;
-          font-weight: 500;
-          font-size: 0.95rem;
-          transition: color 0.3s;
-          padding: 0;
-          border-bottom: none;
-          display: inline;
-        }
-        .nav-links a:not(.btn):hover { color: var(--primary); }
-        
-        .nav-links .btn {
-            color: #001a24 !important;
-            width: auto;
-            margin: 0;
-        }
-      }
-
-      /* Mobile Menu Styles */
-      @media(max-width: 768px) {
-        .menu-toggle {
-            display: block;
-        }
-
-        .nav-links.active {
-            display: flex;
-            flex-direction: column;
-            position: absolute;
-            top: 100%;
-            left: 0;
-            width: 100%;
-            background: rgba(11, 15, 22, 0.98);
-            backdrop-filter: blur(15px);
-            padding: 2rem;
-            border-bottom: 1px solid var(--border);
-            gap: 1.5rem;
-            text-align: center;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-            animation: slideDown 0.3s ease forwards;
-        }
-        
-        body.light-mode .nav-links.active {
-            background: rgba(255, 255, 255, 0.98);
-        }
-
-        .nav-links a {
-            color: var(--text-main);
-            text-decoration: none;
-            font-size: 1.2rem;
-            padding: 0.5rem;
-            display: block;
-            border-bottom: 1px solid rgba(255,255,255,0.05);
-        }
-        
-        body.light-mode .nav-links a {
-             border-bottom: 1px solid rgba(0,0,0,0.05);
-        }
-
-        .nav-links a:last-child {
-            border-bottom: none;
-        }
-
-        .nav-links .btn {
-            width: 100%;
-            margin-top: 1rem;
-        }
-        
-        @keyframes slideDown {
-            from { opacity: 0; transform: translateY(-10px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-      }
-
-      /* Hero Section */
-      .hero {
-        padding: 9rem 0 5rem;
-        text-align: center;
-        position: relative;
-      }
-
-      .hero h1 {
-        font-size: clamp(2.8rem, 6vw, 4.5rem);
-        font-weight: 800;
-        line-height: 1.2;
-        margin-bottom: 1.5rem;
-      }
-
-      .hero p {
-        font-size: 1.25rem;
-        color: var(--text-muted);
-        max-width: 750px;
-        margin: 0 auto 2.5rem;
-      }
-
-      .hero-badges {
-        display: flex;
-        justify-content: center;
-        gap: 2rem;
-        flex-wrap: wrap;
-        margin-top: 3rem;
-        font-size: 1rem;
-        color: var(--text-muted);
-      }
-      
-      .hero-badges span {
-          display: flex;
-          align-items: center;
-          gap: 0.5rem;
-      }
-
-      /* Social Proof */
-      .social-proof {
-        padding: 2.5rem 0;
-        border-top: 1px solid var(--border);
-        border-bottom: 1px solid var(--border);
-        background: rgba(255,255,255,0.02);
-        margin-bottom: 4rem;
-        transition: border-color 0.3s ease;
-      }
-      
-      .proof-container {
-          display: flex;
-          flex-wrap: wrap;
-          justify-content: center;
-          gap: 3rem;
-          text-align: center;
-      }
-
-      .stat-item h4 {
-          font-size: 2.5rem;
-          color: var(--primary);
-          font-weight: 800;
-      }
-      .stat-item p {
-          font-size: 1rem;
-          color: var(--text-muted);
-      }
-
-      /* Cards Grid System */
-      .pricing-section {
-        padding: 4rem 0;
-      }
-
-      .cards-grid {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-        gap: 2.5rem;
-        justify-content: center;
-      }
-
-      .card {
-        background: var(--bg-card);
-        border: 1px solid var(--border);
-        border-radius: 20px;
-        padding: 2.5rem 2rem;
-        display: flex;
-        flex-direction: column;
-        transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-        position: relative;
-        overflow: visible;
-      }
-
-      .card:hover {
-        transform: translateY(-10px);
-        background: var(--bg-card-hover);
-        border-color: rgba(1, 212, 255, 0.3);
-      }
-
-      .card.featured {
-        border: 2px solid var(--primary);
-        background: rgba(1, 212, 255, 0.03);
-        box-shadow: 0 0 30px rgba(1, 212, 255, 0.1);
-        position: relative;
-        overflow: visible;
-      }
-
-      .ribbon {
-        display: none; 
-      }
-
-      .card-header {
-        margin-bottom: 2rem;
-        border-bottom: 1px solid var(--border);
-        padding-bottom: 1rem;
-        text-align: center;
-        padding-top: 1rem;
-        transition: border-color 0.3s ease;
-      }
-      
-      .card-tag {
-        position: absolute;
-        top: -15px;
-        left: 50%;
-        transform: translateX(-50%);
-        background: var(--gradient);
-        color: #000;
-        padding: 0.5rem 1.5rem;
-        border-radius: 50px;
-        font-size: 0.85rem;
-        font-weight: 800;
-        text-transform: uppercase;
-        box-shadow: 0 4px 15px rgba(1, 212, 255, 0.4);
-        z-index: 10;
-        white-space: nowrap;
-        letter-spacing: 0.5px;
-      }
-
-      .card h3 {
-        font-size: 1.6rem;
-        margin-bottom: 0.5rem;
-      }
-
-      .price {
-        font-size: 2.2rem;
-        font-weight: 800;
-        color: var(--text-main);
-      }
-      
-      .price small {
-          font-size: 1.1rem;
-          font-weight: 400;
-          color: var(--text-muted);
-      }
-
-      .card-desc {
-        color: var(--text-muted);
-        font-size: 1rem;
-        margin-top: 0.5rem;
-      }
-
-      .card ul {
-        list-style: none;
-        margin-bottom: 2rem;
-        flex-grow: 1;
-      }
-
-      .card li {
-        margin-bottom: 0.8rem;
-        display: flex;
-        align-items: flex-start;
-        gap: 0.5rem; 
-        font-size: 1rem;
-        color: var(--text-muted);
-        line-height: 1.5;
-      }
-
-      .card li::before {
-        content: "✓";
-        color: var(--primary);
-        font-weight: bold;
-        flex-shrink: 0;
-        font-size: 1.1rem;
-      }
-      
-      .card.setup-card {
-        max-width: 800px;
-        margin: 0 auto;
-      }
-      
-      .card.setup-card ul {
-        display: grid;
-        grid-template-columns: 1fr;
-        gap: 0 1.5rem;
-      }
-      
-      @media(min-width: 768px) {
-        .card.setup-card ul {
-            grid-template-columns: 1fr 1fr;
-        }
-      }
-      
-      .card ul ul {
-          margin-bottom: 0;
-          margin-top: 0.5rem;
-          padding-left: 0.5rem;
-      }
-      
-      .card ul ul li {
-          font-size: 0.95rem;
-          color: var(--text-muted);
-          margin-bottom: 0.4rem;
-          display: block;
-          padding-left: 1.5rem;
-          position: relative;
-      }
-      
-      .card ul ul li::before {
-          content: "•";
-          color: var(--text-muted);
-          position: absolute;
-          left: 0;
-          font-weight: normal;
-      }
-      
-      .card-btn {
-          width: 100%;
-          padding: 1rem;
-          border-radius: 12px;
-          background: rgba(255, 255, 255, 0.1);
-          color: var(--text-main);
-          text-align: center;
-          text-decoration: none;
-          font-weight: 600;
-          transition: 0.3s;
-          border: 1px solid transparent;
-          font-size: 1.05rem;
-      }
-
-      body.light-mode .card-btn {
-          background: rgba(0,0,0,0.05);
-          color: #000;
-      }
-      
-      .card.featured .card-btn,
-      .card:hover .card-btn {
-          background: var(--primary);
-          color: #000;
-          box-shadow: 0 4px 15px rgba(1, 212, 255, 0.3);
-      }
-
-      /* FAQ Section */
-      .faq-section {
-        padding: 4rem 0;
-        background: rgba(255,255,255,0.02);
-      }
-
-      .accordion {
-        max-width: 800px;
-        margin: 0 auto;
-      }
-
-      .accordion-item {
-        border-bottom: 1px solid var(--border);
-        margin-bottom: 1rem;
-        transition: border-color 0.3s ease;
-      }
-
-      .accordion-header {
-        width: 100%;
-        background: none;
-        border: none;
-        padding: 1.5rem 0;
-        text-align: left;
-        color: var(--text-main);
-        font-size: 1.2rem;
-        font-weight: 600;
-        cursor: pointer;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-      }
-
-      .accordion-header::after {
-        content: '+';
-        font-size: 1.5rem;
-        color: var(--primary);
-        transition: 0.3s;
-      }
-
-      .accordion-header.active::after {
-        transform: rotate(45deg);
-      }
-
-      .accordion-content {
-        max-height: 0;
-        overflow: hidden;
-        transition: max-height 0.3s ease-out;
-        color: var(--text-muted);
-        font-size: 1.05rem;
-      }
-      
-      .accordion-content p {
-          padding-bottom: 1.5rem;
-      }
-
-      /* Formulário */
-      .contact-section {
-        padding: 6rem 0;
-      }
-
-      .contact-form {
-        max-width: 600px;
-        margin: 0 auto;
-        background: var(--bg-card);
-        padding: 3rem;
-        border-radius: 20px;
-        border: 1px solid var(--border);
-        box-shadow: 0 20px 50px rgba(0,0,0,0.3);
-        text-align: left;
-        transition: border-color 0.3s ease, background-color 0.3s ease;
-      }
-
-      .form-group {
-        margin-bottom: 1.5rem;
-      }
-
-      .form-group label {
-        display: block;
-        margin-bottom: 0.4rem;
-        font-weight: 800;
-        font-size: 0.8rem;
-        text-transform: uppercase;
-        letter-spacing: 1px;
-        color: var(--text-muted);
-        margin-left: 2px;
-      }
-
-      .form-control {
-        width: 100%;
-        padding: 1rem;
-        background: #f8fafc;
-        border: 1px solid rgba(255,255,255,0.1);
-        border-radius: 10px;
-        color: #0f172a;
-        font-family: inherit;
-        transition: 0.3s;
-        text-align: left;
-        font-size: 1rem;
-      }
-      
-      body.light-mode .form-control {
-          border: 1px solid #cbd5e1;
-      }
-      
-      .form-control:focus {
-          background: #ffffff;
-          border-color: var(--primary);
-          outline: none;
-      }
-
-      .form-control::placeholder {
-          color: #94a3b8;
-      }
-      
-      option {
-          background: #ffffff;
-          color: #000;
-      }
-      
-      .checkbox-wrapper {
-          display: flex;
-          align-items: center;
-          justify-content: flex-start;
-          gap: 12px;
-          background: rgba(255,255,255,0.05);
-          padding: 1rem;
-          border-radius: 8px;
-          margin-bottom: 1.5rem;
-          border: 1px solid transparent;
-          transition: 0.3s;
-      }
-      
-      body.light-mode .checkbox-wrapper {
-          background: rgba(0,0,0,0.05);
-      }
-      
-      .checkbox-wrapper:hover {
-          border-color: rgba(255,255,255,0.1);
-          background: rgba(255,255,255,0.08);
-      }
-      
-      .checkbox-wrapper input {
-          width: 20px;
-          height: 20px;
-          cursor: pointer;
-          margin: 0;
-          accent-color: var(--primary);
-          flex-shrink: 0;
-      }
-      
-      .checkbox-wrapper label {
-          margin: 0;
-          font-size: 1rem;
-          color: var(--text-muted);
-          cursor: pointer;
-          line-height: 1.4;
-      }
-
-      /* Footer */
-      footer {
-        text-align: center;
-        padding: 3rem 0;
-        border-top: 1px solid var(--border);
-        font-size: 1rem;
-        color: var(--text-muted);
-        transition: border-color 0.3s ease;
-      }
-
-      /* Whatsapp Button */
-      .floating-wa {
-        position: fixed;
-        bottom: 30px;
-        right: 30px;
-        width: 60px;
-        height: 60px;
-        background: #25D366;
-        border-radius: 50%;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        box-shadow: 0 4px 15px rgba(37, 211, 102, 0.4);
-        z-index: 999;
-        transition: 0.3s;
-        cursor: pointer;
-      }
-
-      .floating-wa:hover {
-        transform: scale(1.1);
-      }
-      
-      .floating-wa svg {
-          width: 35px;
-          height: 35px;
-          fill: white;
-      }
-
-      /* Scroll To Top Button */
-      .scroll-top {
-        position: fixed;
-        bottom: 110px;
-        right: 35px;
-        width: 50px;
-        height: 50px;
-        background: var(--bg-card);
-        border: 1px solid var(--primary);
-        border-radius: 50%;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        z-index: 990;
-        cursor: pointer;
-        opacity: 0;
-        visibility: hidden;
-        transition: all 0.3s ease;
-        box-shadow: 0 4px 15px rgba(0,0,0,0.5);
-      }
-      
-      .scroll-top.active {
-        opacity: 1;
-        visibility: visible;
-        transform: translateY(0);
-      }
-
-      .scroll-top:hover {
-        background: var(--primary);
-        transform: translateY(-5px);
-      }
-      
-      .scroll-top svg {
-          width: 20px;
-          height: 20px;
-          fill: var(--primary);
-          transition: fill 0.3s;
-      }
-      
-      .scroll-top:hover svg {
-          fill: #000;
-      }
-
-      @media (max-width: 768px) {
-        .hero h1 { font-size: 2.5rem; }
-        .contact-form { padding: 1.5rem; }
-      }
-      
-      /* Animação de entrada */
-      .fade-in {
-          opacity: 0;
-          transform: translateY(30px);
-          transition: opacity 0.6s ease-out, transform 0.6s ease-out;
-      }
-      
-      .fade-in.visible {
-          opacity: 1;
-          transform: translateY(0);
-      }
+        body { font-family: 'Inter', sans-serif; background-color: #0b0f16; color: #f1f5f9; }
+        .text-gradient { background: linear-gradient(135deg, #01d4ff 0%, #39eaff 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .bg-gradient-primary { background: linear-gradient(135deg, #01d4ff 0%, #39eaff 100%); }
+        .card-glow:hover { box-shadow: 0 0 30px rgba(1, 212, 255, 0.1); border-color: rgba(1, 212, 255, 0.3); }
+        [x-cloak] { display: none !important; }
     </style>
-  </head>
-  <body>
-    
-    <header>
-      <div class="container">
-        <nav>
-          <a href="#inicio" class="logo">
-            Cozzi<span>Media</span>
-          </a>
-          
-          <div class="menu-toggle" id="mobile-menu">
-            <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <line x1="3" y1="12" x2="21" y2="12"></line>
-                <line x1="3" y1="6" x2="21" y2="6"></line>
-                <line x1="3" y1="18" x2="21" y2="18"></line>
-            </svg>
-          </div>
+</head>
+<body x-data="{ 
+    isAnnual: false, 
+    scrolled: false, 
+    activeFaq: null, 
+    showScrollTop: false,
+    formData: {
+        nome: '', telefone: '', empresa: '', instagram: '', cidade: '', interesse: '', filiais: false, msg: ''
+    },
+    submitForm() {
+        const filiaisText = this.formData.filiais ? 'Sim (+30%)' : 'Não';
+        const text = `*Nova Solicitação via Site*%0A%0A👤 *Nome:* ${this.formData.nome}%0A📞 *Telefone:* ${this.formData.telefone}%0A🏢 *Empresa:* ${this.formData.empresa}%0A📱 *Instagram:* ${this.formData.instagram}%0A📍 *Cidade/UF:* ${this.formData.cidade}%0A🎯 *Interesse:* ${this.formData.interesse}%0A🏢 *Filiais:* ${filiaisText}%0A📝 *Mensagem:* ${this.formData.msg}`;
+        window.open(`https://api.whatsapp.com/send/?phone=5581995387708&text=${text}`, '_blank');
+    }
+}" @scroll.window="scrolled = (window.pageYOffset > 50); showScrollTop = (window.pageYOffset > 300)">
 
-          <div class="nav-links">
-            <a href="#inicio" data-i18n="nav_home">Início</a>
-            <a href="#trafego" data-i18n="nav_traffic">Tráfego</a>
-            <a href="#gmn" data-i18n="nav_local">Google Local</a>
-            <a href="#drone" data-i18n="nav_drone">Drone</a>
-            <a href="#artes" data-i18n="nav_arts">Artes</a>
-            <a href="#resultados" data-i18n="nav_results">Resultados</a>
-            <a href="#consultoria" data-i18n="nav_consulting">Consultoria</a>
+    <!-- Background Gradients -->
+    <div class="fixed inset-0 pointer-events-none overflow-hidden -z-10">
+        <div class="absolute top-1/4 left-[-10%] w-[40%] h-[40%] bg-[#01d4ff] opacity-[0.08] blur-[120px] rounded-full"></div>
+        <div class="absolute top-2/3 right-[-10%] w-[40%] h-[40%] bg-[#39eaff] opacity-[0.05] blur-[120px] rounded-full"></div>
+    </div>
 
-            <!-- Componente Barra de Controle (Novo Design Separado) -->
-            <div class="flex items-center gap-3 ml-6">
-                <!-- Language Selector (Cápsula) -->
-                <div class="flex items-center px-4 py-1.5 rounded-full bg-[rgba(255,255,255,0.03)] border border-[var(--border)] backdrop-blur-md transition-all duration-300 hover:border-[var(--primary)] hover:bg-[rgba(1,212,255,0.05)] cursor-pointer select-none group" onclick="toggleLanguage()">
-                    <span id="lang-pt" class="text-xs font-bold text-neon transition-colors tracking-wider">PT</span>
-                    <span class="mx-2 text-[var(--text-muted)] text-[10px] opacity-50">|</span>
-                    <span id="lang-en" class="text-xs font-bold text-[var(--text-muted)] group-hover:text-[var(--text-main)] hover:!text-neon transition-colors tracking-wider">EN</span>
+    <!-- Navbar -->
+    <header :class="scrolled ? 'bg-[#0b0f16]/95 shadow-lg' : 'bg-[#0b0f16]/85'" class="fixed top-0 left-0 w-full z-[100] backdrop-blur-md py-4 transition-all duration-300">
+        <div class="container mx-auto px-6">
+            <nav class="flex justify-between items-center relative h-10">
+                <div class="text-2xl font-extrabold text-white">
+                    Cozzi<span class="text-[#01d4ff]">Media</span>
                 </div>
-
-                <!-- Theme Toggle (Círculo) -->
-                <button id="theme-toggle" class="flex items-center justify-center w-9 h-9 rounded-full bg-[rgba(255,255,255,0.03)] border border-[var(--border)] backdrop-blur-md transition-all duration-300 hover:border-[var(--primary)] hover:bg-[var(--primary)] group shadow-lg shadow-transparent hover:shadow-[0_0_15px_rgba(1,212,255,0.4)]" aria-label="Alternar Tema">
-                    <!-- Sun Icon (Hidden by default in dark) -->
-                    <svg id="icon-sun" class="w-5 h-5 text-yellow-400 hidden group-hover:text-white transition-transform duration-300 group-hover:rotate-90" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"></path></svg>
-                    <!-- Moon Icon (Visible in dark) -->
-                    <svg id="icon-moon" class="w-5 h-5 text-[var(--primary)] group-hover:text-white transition-transform duration-300 group-hover:-rotate-12" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"></path></svg>
-                </button>
-            </div>
-            <!-- Fim do Componente -->
-
-          </div>
-        </nav>
-      </div>
+                <div class="hidden md:flex gap-8 text-sm font-semibold text-[#94a3b8]">
+                    <a href="#inicio" class="hover:text-[#01d4ff] transition-colors">Início</a>
+                    <a href="#depoimentos" class="hover:text-[#01d4ff] transition-colors">Depoimentos</a>
+                    <a href="#resultados" class="hover:text-[#01d4ff] transition-colors">Resultados</a>
+                    <a href="#planos" class="hover:text-[#01d4ff] transition-colors">Planos</a>
+                    <a href="#contato" class="hover:text-[#01d4ff] transition-colors">Contato</a>
+                </div>
+                <a href="#contato" class="bg-[#01d4ff] text-black px-6 py-2 rounded-full font-bold text-sm hover:scale-105 transition-transform">Falar Agora</a>
+            </nav>
+        </div>
     </header>
 
-    <section class="hero" id="inicio">
-      <div class="container">
-        <h1 data-i18n="hero_title">Transforme Cliques em <br><span class="text-gradient">Vendas Reais</span></h1>
-        <p data-i18n="hero_subtitle">Acelere o crescimento da sua empresa com estratégias validadas de Tráfego Pago, Gestão de Conteúdo e Otimização Google.</p>
-        
-        <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
-            <a href="#trafego" class="btn" data-i18n="hero_cta_plans">Ver Nossos Planos</a>
-            <a href="#contato" class="btn" data-i18n="hero_cta_contact">Fale Conosco</a>
+    <!-- Hero -->
+    <section id="inicio" class="pt-40 pb-20 text-center relative px-6 scroll-mt-24">
+        <div class="container mx-auto">
+            <h1 class="text-4xl md:text-7xl font-extrabold leading-tight mb-6">
+                Transforme Cliques em <br />
+                <span class="text-gradient">Vendas Reais</span>
+            </h1>
+            <p class="text-lg md:text-xl text-[#94a3b8] max-w-3xl mx-auto mb-10 leading-relaxed">
+                Acelere o crescimento da sua empresa com estratégias validadas de Tráfego Pago, Gestão de Conteúdo e Otimização Google.
+            </p>
+            <div class="flex justify-center">
+                <a href="#planos" class="bg-[#01d4ff] text-black font-bold px-12 py-4 rounded-full shadow-[0_4px_15px_rgba(1,212,255,0.3)] hover:scale-105 hover:shadow-[0_8px_25px_rgba(1,212,255,0.5)] transition-all">
+                    Ver Nossos Planos
+                </a>
+            </div>
+            <div class="flex flex-wrap justify-center gap-8 mt-16 text-[#94a3b8] text-sm md:text-base">
+                <span>🚀 +100 Clientes Atendidos</span>
+                <span>💎 Meta Business Partner</span>
+                <span>📈 ROI Focado</span>
+            </div>
         </div>
-
-        <div class="hero-badges">
-            <span data-i18n="hero_badge_clients">🚀 +100 Clientes Atendidos</span>
-            <span data-i18n="hero_badge_meta">💎 Meta Business Partner</span>
-            <span data-i18n="hero_badge_roi">📈 ROI Focado</span>
-        </div>
-      </div>
     </section>
 
-    <div class="social-proof">
-        <div class="container proof-container">
-            <div class="stat-item">
-                <h4 data-i18n="proof_invested">+5 Milhões</h4>
-                <p data-i18n="proof_invested_label">Investidos em Anúncios</p>
-            </div>
-            <div class="stat-item">
-                <h4 data-i18n="proof_companies">+100</h4>
-                <p data-i18n="proof_companies_label">Empresas Escaladas</p>
-            </div>
-            <div class="stat-item">
-                <h4 data-i18n="proof_monitoring">24/7</h4>
-                <p data-i18n="proof_monitoring_label">Monitoramento Ativo</p>
+    <!-- Stats -->
+    <div class="py-12 border-y border-white/10 bg-white/5 mb-16">
+        <div class="container mx-auto px-6">
+            <div class="flex flex-wrap justify-center gap-12 md:gap-24 text-center">
+                <div class="flex flex-col gap-2">
+                    <h4 class="text-4xl md:text-5xl font-extrabold text-[#01d4ff]">+5 Milhões</h4>
+                    <p class="text-[#94a3b8] uppercase tracking-wider text-sm font-semibold">Investidos em Anúncios</p>
+                </div>
+                <div class="flex flex-col gap-2">
+                    <h4 class="text-4xl md:text-5xl font-extrabold text-[#01d4ff]">+100</h4>
+                    <p class="text-[#94a3b8] uppercase tracking-wider text-sm font-semibold">Empresas Escaladas</p>
+                </div>
+                <div class="flex flex-col gap-2">
+                    <h4 class="text-4xl md:text-5xl font-extrabold text-[#01d4ff]">24/7</h4>
+                    <p class="text-[#94a3b8] uppercase tracking-wider text-sm font-semibold">Monitoramento Ativo</p>
+                </div>
             </div>
         </div>
     </div>
 
-    <section id="trafego" class="pricing-section">
-      <div class="container">
-        <h2 class="section-title" data-i18n="section_traffic_title">Tráfego <span class="text-gradient">Pago</span></h2>
-        <p class="section-subtitle" data-i18n="section_traffic_subtitle">Escolha o nível de aceleração que seu negócio precisa hoje.</p>
-
-        <div class="cards-grid">
-          <div class="card fade-in">
-            <div class="card-header">
-              <h3 data-i18n="plan_essencial_title">Plano Essencial</h3>
-              <div class="price" data-i18n="plan_essencial_price">R$ 699<small>/mês</small></div>
-              <p class="card-desc" data-i18n="plan_essencial_desc">Para quem está começando e precisa gerar presença digital com estratégia.</p>
+    <!-- Testimonials -->
+    <section id="depoimentos" class="py-20 scroll-mt-24">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl md:text-5xl font-extrabold mb-4">O que dizem nossos <span class="text-gradient">Clientes</span></h2>
+                <p class="text-[#94a3b8] text-lg max-w-2xl mx-auto">Histórias reais de quem confiou na Cozzi Media para escalar seus resultados.</p>
             </div>
-            <ul>
-              <li data-i18n="plan_essencial_item1">Gestão de Meta Ads (Instagram e Facebook)</li>
-              <li data-i18n="plan_essencial_item2">Planejamento estratégico inicial</li>
-              <li data-i18n="plan_essencial_item3">Otimização básica de campanhas</li>
-              <li data-i18n="plan_essencial_item4">Relatório mensal de desempenho</li>
-              <li data-i18n="plan_essencial_item5">Suporte via grupo de WhatsApp</li>
-            </ul>
-            <p style="font-size: 0.9rem; color: var(--text-muted); margin-bottom: 1.5rem; border-top: 1px solid var(--border); padding-top: 1rem;" data-i18n="plan_essencial_note">
-                👉 Ideal para pequenos negócios que querem começar a vender online com anúncios bem estruturados.
-            </p>
-            <a href="https://api.whatsapp.com/send/?phone=5581995387708&text=Quero+o+Plano+Essencial" target="_blank" class="card-btn" data-i18n="btn_start_now">Começar Agora</a>
-          </div>
-
-          <div class="card featured fade-in">
-            <div class="card-header">
-              <div class="card-tag" data-i18n="plan_pro_tag">MAIS VENDIDO</div>
-              <h3 data-i18n="plan_pro_title">Plano Pro</h3>
-              <div class="price" data-i18n="plan_pro_price">R$ 1.499<small>/mês</small></div>
-              <p class="card-desc" data-i18n="plan_pro_desc">Para empresas que querem escalar vendas com consistência e automação.</p>
-            </div>
-            <ul>
-              <li data-i18n="plan_pro_item1">Gestão completa de Meta Ads</li>
-              <li data-i18n="plan_pro_item2">Automação de pré-atendimento (Instagram / WhatsApp)</li>
-              <li data-i18n="plan_pro_item3">Planejamento mensal de campanhas</li>
-              <li data-i18n="plan_pro_item4">Programação de mídias</li>
-              <li data-i18n="plan_pro_item5"><strong>12 posts/mês inclusos</strong></li>
-              <li data-i18n="plan_pro_item6">Relatórios semanais</li>
-              <li data-i18n="plan_pro_item7">Suporte prioritário</li>
-              <li data-i18n="plan_pro_item8">Reunião mensal estratégica</li>
-            </ul>
-            <p style="font-size: 0.9rem; color: #cbd5e1; margin-bottom: 1.5rem; border-top: 1px solid rgba(1, 212, 255, 0.2); padding-top: 1rem;" data-i18n="plan_pro_note">
-                👉 Ideal para negócios que já vendem e querem aumentar faturamento de forma previsível.
-            </p>
-            <a href="https://api.whatsapp.com/send/?phone=5581995387708&text=Quero+o+Plano+Pro+(Mais+Vendido)" target="_blank" class="card-btn" data-i18n="btn_scale">Quero Escalar</a>
-          </div>
-
-          <!-- NOVO PLANO ADICIONADO AQUI -->
-          <div class="card fade-in">
-            <div class="card-header">
-              <h3 data-i18n="plan_groups_title">Tráfego para Grupos</h3>
-              <div class="price" data-i18n="plan_groups_price">R$ 1.499<small>/mês</small></div>
-              <p class="card-desc" data-i18n="plan_groups_desc">Estratégia focada em encher grupos de WhatsApp e Telegram.</p>
-            </div>
-            <ul>
-              <li data-i18n="plan_groups_item1">Gestão completa (Instagram e Facebook)</li>
-              <li data-i18n="plan_groups_item2">Foco em Grupos (Maternidade/Promo)</li>
-              <li data-i18n="plan_groups_item3"><strong>Página de redirecionamento inclusa</strong></li>
-              <li data-i18n="plan_groups_item4">Testes para baixar custo por entrada</li>
-              <li data-i18n="plan_groups_item5">Relatórios semanais</li>
-              <li data-i18n="plan_groups_item6">Suporte direto via WhatsApp</li>
-            </ul>
-            <p style="font-size: 0.9rem; color: var(--text-muted); margin-bottom: 1.5rem; border-top: 1px solid var(--border); padding-top: 1rem;" data-i18n="plan_groups_note">
-               👉 Sugestão de investimento: R$ 50/dia para otimização constante e crescimento escalável.
-            </p>
-            <a href="https://api.whatsapp.com/send/?phone=5581995387708&text=Quero+o+Plano+de+Trafego+para+Grupos" target="_blank" class="card-btn" data-i18n="btn_hire_groups">Contratar Plano</a>
-          </div>
-
-          <div class="card fade-in">
-            <div class="card-header">
-              <h3 data-i18n="plan_premium_title">Plano Premium</h3>
-              <div class="price" data-i18n="plan_premium_price">R$ 1.999<small>/mês</small></div>
-              <p class="card-desc" data-i18n="plan_premium_desc">Para marcas que buscam liderança e crescimento agressivo.</p>
-            </div>
-            <ul>
-              <li data-i18n="plan_premium_item1">Tudo do Plano Pro</li>
-              <li data-i18n="plan_premium_item2"><strong>Gestão de Google Ads</strong></li>
-              <li data-i18n="plan_premium_item3"><strong>Landing Page inclusa (foco em conversão)</strong></li>
-              <li data-i18n="plan_premium_item4"><strong>24 posts/mês inclusos</strong></li>
-              <li data-i18n="plan_premium_item5">Suporte Intensivo VIP</li>
-            </ul>
-            <p style="font-size: 0.9rem; color: var(--text-muted); margin-bottom: 1.5rem; border-top: 1px solid var(--border); padding-top: 1rem;" data-i18n="plan_premium_note">
-                👉 Ideal para empresas que querem dominar o mercado e escalar com estrutura profissional.
-            </p>
-            <a href="https://api.whatsapp.com/send/?phone=5581995387708&text=Quero+o+Plano+Premium" target="_blank" class="card-btn" data-i18n="btn_hire_premium">Contratar Premium</a>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section id="setup-meta" class="pricing-section" style="background-color: #0d121c; padding-top: 0; padding-bottom: 4rem;">
-      <div class="container">
-          <div class="card setup-card fade-in" style="max-width: 900px; margin: 0 auto; border-color: var(--secondary);">
-              <div class="card-header">
-                  <h3 data-i18n="setup_title">Setup Profissional Meta Ads</h3>
-                  <div class="price" data-i18n="setup_price">R$ 500<small> (único - Pix)</small></div>
-                  <p class="card-desc" style="max-width: 600px; margin: 0.5rem auto;" data-i18n="setup_desc">Para quem precisa estruturar tudo corretamente antes de anunciar e evitar bloqueios.</p>
-              </div>
-              
-              <ul>
-                  <li data-i18n="setup_item1">Criação de nova Página no Facebook</li>
-                  <li data-i18n="setup_item2">Nome da página alinhado ao Instagram</li>
-                  <li data-i18n="setup_item3">Foto de perfil igual ao Instagram</li>
-                  <li data-i18n="setup_item4">Biografia alinhada ao Instagram</li>
-                  <li data-i18n="setup_item5">Categoria correta da página (Criador de conteúdo)</li>
-                  <li data-i18n="setup_item6">Configuração do Meta Business (Gerenciador de Negócios)</li>
-                  <li data-i18n="setup_item7">Configuração empresarial correta</li>
-                  <li data-i18n="setup_item8">Cadastro e confirmação de e-mail</li>
-                  <li data-i18n="setup_item9">Cadastro de endereço</li>
-                  <li data-i18n="setup_item10">Cadastro de CPF ou CNPJ</li>
-                  <li data-i18n="setup_item11">Vinculação correta entre Facebook e Instagram</li>
-                  <li data-i18n="setup_item12">Validação do Instagram via código</li>
-                  <li data-i18n="setup_item13">Organização de permissões e acessos</li>
-                  <li data-i18n="setup_item14">Ativação de boas práticas de segurança</li>
-                  <li data-i18n="setup_item15">Preparação completa para anúncios</li>
-                  <li data-i18n="setup_item16">Criação / vinculação da conta de anúncios</li>
-                  <li data-i18n="setup_item17">Configuração correta de fuso horário e moeda</li>
-                  <li data-i18n="setup_item18">Teste de estrutura para impulsionamento</li>
-                  <li data-i18n="setup_item19">Estrutura organizada para liberação futura de anúncios</li>
-              </ul>
-              
-              <div style="text-align: center; margin-top: 2rem;">
-                  <a href="https://api.whatsapp.com/send/?phone=5581995387708&text=Quero+o+Setup+Profissional+Meta+Ads" target="_blank" class="card-btn" style="max-width: 300px; display: inline-block;" data-i18n="btn_start_now">Começar Agora</a>
-              </div>
-          </div>
-      </div>
-    </section>
-
-    <section id="gmn" class="pricing-section">
-      <div class="container">
-        <h2 class="section-title" data-i18n="section_local_title">Google <span class="text-gradient">Local</span></h2>
-        <p class="section-subtitle" data-i18n="section_local_subtitle">Seja encontrado primeiro quando seus clientes procurarem pelo seu serviço.</p>
-
-        <div class="cards-grid">
-            <div class="card fade-in">
-                <div class="card-header">
-                  <h3 data-i18n="local_flash_title">Flash 30 Dias</h3>
-                  <div class="price" data-i18n="local_flash_price">R$ 499<small> (único)</small></div>
-                  <p class="card-desc" data-i18n="local_flash_desc">Ideal para configurar a casa e começar certo.</p>
-                </div>
-                <ul>
-                  <li data-i18n="local_flash_item1">Cadastro e verificação da ficha</li>
-                  <li data-i18n="local_flash_item2">SEO Local (Palavras-chave e Descrição)</li>
-                  <li data-i18n="local_flash_item3">Otimização de Fotos e Produtos</li>
-                  <li data-i18n="local_flash_item4">Correção de erros de cadastro</li>
-                  <li data-i18n="local_flash_item5">Checklist final de entrega</li>
-                </ul>
-                <a href="https://api.whatsapp.com/send/?phone=5581995387708&text=Quero+Otimizacao+30+Dias" target="_blank" class="card-btn" data-i18n="btn_hire_setup">Contratar Setup</a>
-            </div>
-
-            <div class="card featured fade-in">
-                <div class="card-header">
-                  <div class="card-tag" data-i18n="local_annual_tag">MELHOR OFERTA</div>
-                  <h3 data-i18n="local_annual_title">Plano Anual</h3>
-                  <div class="price" data-i18n="local_annual_price">R$ 156<small>,66/mês</small></div>
-                  <p class="card-desc" data-i18n="local_annual_desc">Total R$ 1.880. Gestão completa o ano todo.</p>
-                </div>
-                <ul>
-                  <li data-i18n="local_annual_item1"><strong>Site Institucional Incluso</strong></li>
-                  <li data-i18n="local_annual_item2">Gestão contínua de avaliações</li>
-                  <li data-i18n="local_annual_item3">Publicações semanais (Ofertas/Novidades)</li>
-                  <li data-i18n="local_annual_item4">Relatórios de ligações e rotas</li>
-                  <li data-i18n="local_annual_item5">Monitoramento de concorrentes</li>
-                </ul>
-                <a href="https://api.whatsapp.com/send/?phone=5581995387708&text=Quero+o+Plano+Anual+GMN" target="_blank" class="card-btn" data-i18n="btn_guarantee">Garantir Oferta</a>
-            </div>
-            
-            <div class="card fade-in">
-                <div class="card-header">
-                  <h3 data-i18n="local_trim_title">Trimestral</h3>
-                  <div class="price" data-i18n="local_trim_price">R$ 1.275<small> /trimestre</small></div>
-                  <p class="card-desc" data-i18n="local_trim_desc">Acompanhamento de médio prazo para consolidar.</p>
-                </div>
-                <ul>
-                  <li data-i18n="local_trim_item1">Setup completo da ficha</li>
-                  <li data-i18n="local_trim_item2">Atualizações semanais</li>
-                  <li data-i18n="local_trim_item3">Resposta a avaliações</li>
-                  <li data-i18n="local_trim_item4">Ajustes estratégicos de SEO</li>
-                  <li data-i18n="local_trim_item5">Relatório de performance</li>
-                </ul>
-                <a href="https://api.whatsapp.com/send/?phone=5581995387708&text=Quero+o+Plano+Trimestral" target="_blank" class="card-btn" data-i18n="btn_hire_trim">Contratar Trimestre</a>
-            </div>
-        </div>
-      </div>
-    </section>
-
-    <section id="google-empresas" class="pricing-section" style="background-color: #0d121c;">
-      <div class="container">
-        <h2 class="section-title" data-i18n="section_g_emp_title">Google <span class="text-gradient">Empresas</span></h2>
-        <p class="section-subtitle" data-i18n="section_g_emp_subtitle">Soluções corporativas completas para consolidar sua autoridade digital e dominar o mercado local.</p>
-
-        <div class="cards-grid">
-            <div class="card fade-in">
-                <div class="card-header">
-                  <h3 data-i18n="g_basic_title">PLANO BÁSICO</h3>
-                  <p style="text-decoration: line-through; color: var(--text-muted); font-size: 0.9rem; margin-bottom: -5px;" data-i18n="g_basic_old_price">De R$ 497,00</p>
-                  <div class="price" data-i18n="g_basic_price">R$ 437<small> (Pix)</small></div>
-                  <p class="card-desc" data-i18n="g_basic_desc">Ideal para começar sua presença no Google.</p>
-                </div>
-                <ul>
-                  <li data-i18n="g_basic_item1">Criação de perfil</li>
-                  <li data-i18n="g_basic_item2">Cadastro de até 5 serviços</li>
-                  <li data-i18n="g_basic_item3">Cadastros de até 5 produtos</li>
-                  <li data-i18n="g_basic_item4">4 postagens</li>
-                </ul>
-                <a href="https://api.whatsapp.com/send/?phone=5581995387708&text=Interesse+Google+Empresas+Basico" target="_blank" class="card-btn" data-i18n="btn_hire_basic">Contratar Básico</a>
-            </div>
-
-            <div class="card fade-in">
-                <div class="card-header">
-                  <h3 data-i18n="g_opt_title">OTIMIZAÇÃO ÚNICA</h3>
-                  <p style="text-decoration: line-through; color: var(--text-muted); font-size: 0.9rem; margin-bottom: -5px;" data-i18n="g_opt_old_price">De R$ 999,00</p>
-                  <div class="price" data-i18n="g_opt_price">R$ 850<small> (Pix)</small></div>
-                  <p class="card-desc" data-i18n="g_opt_desc">Ideal para empresas que ainda não estão bem posicionadas.</p>
-                </div>
-                <ul>
-                  <li data-i18n="g_opt_item1">Otimização completa da ficha</li>
-                  <li data-i18n="g_opt_item2">Pesquisa e aplicação de palavras-chave</li>
-                  <li data-i18n="g_opt_item3">Link de avaliação + QR Code</li>
-                  <li data-i18n="g_opt_item4">Link de Whatsapp rastreável</li>
-                  <li data-i18n="g_opt_item5">5 postagens por semana</li>
-                  <li data-i18n="g_opt_item6">Até 10 produtos e 10 serviços</li>
-                </ul>
-                <a href="https://api.whatsapp.com/send/?phone=5581995387708&text=Interesse+Otimizacao+Unica" target="_blank" class="card-btn" data-i18n="btn_hire_opt">Contratar Otimização</a>
-            </div>
-
-            <div class="card featured fade-in">
-                <div class="card-header">
-                  <div class="card-tag" data-i18n="g_rec_tag">MELHOR OFERTA</div>
-                  <h3 data-i18n="g_rec_title">OTIMIZAÇÃO + RECORRÊNCIA</h3>
-                  <p style="text-decoration: line-through; color: #a5b4fc; font-size: 0.9rem; margin-bottom: -5px;" data-i18n="g_rec_old_price">De R$ 2.690,00</p>
-                  <div class="price" data-i18n="g_rec_price">R$ 2.421<small> (Pix)</small></div>
-                  <p class="card-desc" data-i18n="g_rec_desc">Referente a 4 meses. Para quem quer subir no ranking constantemente.</p>
-                </div>
-                <ul>
-                  <li data-i18n="g_rec_item1"><strong>Tudo da otimização única</strong></li>
-                  <li data-i18n="g_rec_item2">5 postagens na semana</li>
-                  <li data-i18n="g_rec_item3">Até 15 produtos e 15 serviços/mês</li>
-                  <li data-i18n="g_rec_item4">Acompanhamento de métricas e melhorias</li>
-                  <li data-i18n="g_rec_item5"><strong>Bônus:</strong> Landing Page + Link Bio + Placa QR Code</li>
-                </ul>
-                <a href="https://api.whatsapp.com/send/?phone=5581995387708&text=Interesse+Otimizacao+Recorrencia" target="_blank" class="card-btn" data-i18n="btn_dominate_google">Quero Dominar o Google</a>
-            </div>
-        </div>
-      </div>
-    </section>
-
-    <section id="drone" class="pricing-section">
-        <div class="container">
-            <h2 class="section-title" data-i18n="section_drone_title">Produção <span class="text-gradient">Audiovisual</span></h2>
-            <p class="section-subtitle" data-i18n="section_drone_subtitle">Imagens de drone e edição profissional que valorizam sua marca.</p>
-            
-            <div class="cards-grid">
-                <div class="card fade-in">
-                    <div class="card-header">
-                        <h3 data-i18n="drone_basic_title">Básico</h3>
-                        <div class="price" data-i18n="drone_basic_price">R$ 349</div>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="bg-[#111827]/70 border border-white/10 p-8 rounded-2xl relative">
+                    <div class="text-[#01d4ff] text-5xl absolute -top-4 -left-2 opacity-20">"</div>
+                    <p class="text-[#cbd5e1] mb-6 italic leading-relaxed">O Método Rocket mudou meu jogo. Saímos de R$ 5k para R$ 45k de faturamento em apenas 4 meses.</p>
+                    <div class="flex items-center gap-4">
+                        <div class="w-12 h-12 bg-gradient-primary rounded-full flex items-center justify-center font-bold text-black">A</div>
+                        <div><h4 class="text-white font-bold">Ana Silva</h4><p class="text-[#94a3b8] text-xs">Dona da Boutique Chic</p></div>
                     </div>
-                    <ul>
-                        <li data-i18n="drone_basic_item1">3 vídeos aéreos (até 1 min)</li>
-                        <li data-i18n="drone_basic_item2">3 fotos em alta resolução</li>
-                        <li data-i18n="drone_basic_item3">Entrega via Drive (sem edição complexa)</li>
-                    </ul>
-                    <a href="https://api.whatsapp.com/send/?phone=5581995387708&text=Interesse+Drone+Basico" target="_blank" class="card-btn" data-i18n="btn_request">Solicitar</a>
                 </div>
-
-                <div class="card featured fade-in">
-                    <div class="card-header">
-                        <div class="card-tag" data-i18n="drone_inter_tag">MAIS VENDIDO</div>
-                        <h3 data-i18n="drone_inter_title">Intermediário</h3>
-                        <div class="price" data-i18n="drone_inter_price">R$ 649</div>
+                <div class="bg-[#111827]/70 border border-white/10 p-8 rounded-2xl relative">
+                    <div class="text-[#01d4ff] text-5xl absolute -top-4 -left-2 opacity-20">"</div>
+                    <p class="text-[#cbd5e1] mb-6 italic leading-relaxed">Minha agenda no Google nunca esteve tão cheia. A otimização do Google Meu Negócio trouxe pacientes qualificados.</p>
+                    <div class="flex items-center gap-4">
+                        <div class="w-12 h-12 bg-gradient-primary rounded-full flex items-center justify-center font-bold text-black">R</div>
+                        <div><h4 class="text-white font-bold">Dr. Ricardo Santos</h4><p class="text-[#94a3b8] text-xs">Clínica Sorriso</p></div>
                     </div>
-                    <ul>
-                        <li data-i18n="drone_inter_item1">5 vídeos (até 1:30 min)</li>
-                        <li data-i18n="drone_inter_item2">5 fotos em alta resolução</li>
-                        <li data-i18n="drone_inter_item3"><strong>Edição Básica inclusa</strong></li>
-                    </ul>
-                    <a href="https://api.whatsapp.com/send/?phone=5581995387708&text=Interesse+Drone+Intermediario" target="_blank" class="card-btn" data-i18n="btn_request">Solicitar</a>
                 </div>
-
-                <div class="card fade-in" style="border-color: var(--secondary)">
-                    <div class="card-header">
-                        <h3 data-i18n="drone_pro_title">Profissional</h3>
-                        <div class="price" data-i18n="drone_pro_price">R$ 859</div>
+                <div class="bg-[#111827]/70 border border-white/10 p-8 rounded-2xl relative">
+                    <div class="text-[#01d4ff] text-5xl absolute -top-4 -left-2 opacity-20">"</div>
+                    <p class="text-[#cbd5e1] mb-6 italic leading-relaxed">Profissionalismo raro no mercado. Os relatórios semanais me dão a clareza que eu precisava.</p>
+                    <div class="flex items-center gap-4">
+                        <div class="w-12 h-12 bg-gradient-primary rounded-full flex items-center justify-center font-bold text-black">M</div>
+                        <div><h4 class="text-white font-bold">Marcos Oliveira</h4><p class="text-[#94a3b8] text-xs">CEO Tech Solutions</p></div>
                     </div>
-                    <ul>
-                        <li data-i18n="drone_pro_item1">5 vídeos premium</li>
-                        <li data-i18n="drone_pro_item2">5 fotos editadas</li>
-                        <li data-i18n="drone_pro_item3"><strong>Edição Dinâmica (Reels/TikTok)</strong></li>
-                        <li data-i18n="drone_pro_item4">Vídeo Institucional completo</li>
-                    </ul>
-                    <a href="https://api.whatsapp.com/send/?phone=5581995387708&text=Interesse+Drone+Profissional" target="_blank" class="card-btn" data-i18n="btn_request">Solicitar</a>
                 </div>
             </div>
         </div>
     </section>
 
-    <section id="artes" class="pricing-section" style="background-color: #0d121c;">
-        <div class="container">
-            <h2 class="section-title" data-i18n="section_arts_title">Design de <span class="text-gradient">Artes</span></h2>
-            <p class="section-subtitle" data-i18n="section_arts_subtitle">Identidade visual profissional para suas redes sociais com foco em conversão.</p>
-            
-            <div class="cards-grid">
-                <div class="card featured fade-in" style="max-width: 550px; margin: 0 auto;">
-                    <div class="card-tag" data-i18n="arts_tag">FOCO EM PACOTE</div>
-                    <div class="card-header">
-                        <h3 data-i18n="arts_title">Pacotes Digitais</h3>
-                        <div class="price" data-i18n="arts_price">R$ 65<small>/arte</small></div>
-                        <p class="card-desc" data-i18n="arts_desc">Design estratégico para elevar o nível do seu perfil.</p>
+    <!-- Results -->
+    <section id="resultados" class="py-20 bg-[#0d121c] scroll-mt-24">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl md:text-5xl font-extrabold mb-4">Resultados que <span class="text-gradient">Falam por Si</span></h2>
+                <p class="text-[#94a3b8] text-lg max-w-2xl mx-auto">Cases reais de clientes que transformaram seus negócios com nossas estratégias</p>
+            </div>
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                <div class="bg-[#111827]/70 border border-white/10 p-6 rounded-2xl card-glow">
+                    <h4 class="text-[#01d4ff] font-bold text-lg mb-2">🛍️ Moda Feminina</h4>
+                    <p class="text-white font-black text-xl mb-2">ROI de 420%</p>
+                    <p class="text-[#94a3b8] text-sm">Em 3 meses com Meta Ads, R$ 15k gerou R$ 78k em vendas.</p>
+                </div>
+                <div class="bg-[#111827]/70 border border-white/10 p-6 rounded-2xl card-glow">
+                    <h4 class="text-[#01d4ff] font-bold text-lg mb-2">🦷 Clínica Odonto</h4>
+                    <p class="text-white font-black text-xl mb-2">+150 agendamentos/mês</p>
+                    <p class="text-[#94a3b8] text-sm">Via Google Meu Negócio, ticket médio de R$ 1.200.</p>
+                </div>
+                <div class="bg-[#111827]/70 border border-white/10 p-6 rounded-2xl card-glow">
+                    <h4 class="text-[#01d4ff] font-bold text-lg mb-2">🍽️ Restaurante Gourmet</h4>
+                    <p class="text-white font-black text-xl mb-2">+80% no faturamento</p>
+                    <p class="text-[#94a3b8] text-sm">Estratégia integrada de Tráfego + Google Local em 6 meses.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Method -->
+    <section id="metodo" class="py-24 scroll-mt-24 bg-gradient-to-b from-[#0b0f16] to-[#0d121c]">
+        <div class="container mx-auto px-6">
+            <div class="max-w-5xl mx-auto bg-[#111827]/40 border border-white/5 rounded-[32px] p-8 md:p-16 relative overflow-hidden">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+                    <div class="space-y-6">
+                        <div class="inline-block bg-[#01d4ff]/10 text-[#01d4ff] px-4 py-1 rounded-full text-xs font-bold uppercase tracking-widest">O SEGREDO DA ESCALA</div>
+                        <h2 class="text-4xl md:text-5xl font-black leading-tight">Entenda o <br><span class="text-gradient">Método Rocket</span></h2>
+                        <p class="text-[#94a3b8] text-lg">Não somos apenas uma agência de tráfego. Somos o seu parceiro de crescimento.</p>
+                        <div class="space-y-4 pt-4">
+                            <div class="flex gap-4">
+                                <div class="text-[#01d4ff]">✦</div>
+                                <div><h4 class="text-white font-bold">Foco em Estrutura</h4><p class="text-[#94a3b8] text-sm">Organizamos seu comercial para não perder leads.</p></div>
+                            </div>
+                            <div class="flex gap-4">
+                                <div class="text-[#01d4ff]">✦</div>
+                                <div><h4 class="text-white font-bold">Criativos Magnéticos</h4><p class="text-[#94a3b8] text-sm">Artes que param o scroll e geram desejo.</p></div>
+                            </div>
+                        </div>
                     </div>
-                    <ul>
-                        <li data-i18n="arts_item1"><strong>No pacote mínimo de 10 artes</strong></li>
-                        <li data-i18n="arts_item2">Artes para Feed, Stories ou Carrossel</li>
-                        <li data-i18n="arts_item3">Opção de Post único personalizado</li>
-                        <li data-i18n="arts_item4">Criação focada em conversão visual</li>
+                    <div class="bg-[#0b0f16] p-8 rounded-2xl border border-white/10 text-center">
+                        <div class="text-6xl mb-4">🚀</div>
+                        <h3 class="text-2xl font-bold mb-4">Pronto para decolar?</h3>
+                        <a href="https://api.whatsapp.com/send/?phone=5581995387708" class="block w-full bg-gradient-primary text-black font-black py-4 rounded-xl shadow-lg hover:scale-105 transition-all">Falar com Especialista</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pricing -->
+    <section id="planos" class="py-20 scroll-mt-24">
+        <div class="container mx-auto px-6">
+            <div class="flex flex-col items-center mb-16 space-y-6">
+                <div class="text-center">
+                    <h2 class="text-4xl md:text-5xl font-extrabold mb-4">Nossos <span class="text-gradient">Planos</span></h2>
+                    <p class="text-[#94a3b8] text-lg">Escolha o modelo de parceria ideal.</p>
+                </div>
+                <div class="flex items-center gap-4 bg-[#111827] p-2 rounded-2xl border border-white/5">
+                    <button @click="isAnnual = false" :class="!isAnnual ? 'bg-[#01d4ff] text-black' : 'text-[#94a3b8]'" class="px-8 py-3 rounded-xl font-bold transition-all">Mensal</button>
+                    <button @click="isAnnual = true" :class="isAnnual ? 'bg-[#01d4ff] text-black' : 'text-[#94a3b8]'" class="px-8 py-3 rounded-xl font-bold transition-all flex items-center gap-2">Anual <span class="text-[10px] bg-black/20 px-2 py-0.5 rounded-full">-20%</span></button>
+                </div>
+            </div>
+
+            <!-- Other Plans -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-6xl mx-auto">
+                <div class="bg-[#111827]/70 border border-white/10 rounded-[20px] p-8 flex flex-col card-glow">
+                    <h3 class="text-xl font-bold mb-4">Plano Start</h3>
+                    <div class="text-3xl font-extrabold mb-6">R$ <span x-text="isAnnual ? '599' : '749'"></span></div>
+                    <ul class="space-y-3 mb-8 flex-grow text-sm text-[#cbd5e1]">
+                        <li>✓ Gestão de tráfego pago <span class="text-xs text-[#94a3b8] block ml-4">(Meta)</span></li>
+                        <li>✓ Planejamento estratégico</li>
+                        <li>✓ Suporte dentro do horário comercial <span class="text-xs text-[#94a3b8] block ml-4">(WhatsApp)</span></li>
+                        <li>✓ Relatório de performance mensal</li>
                     </ul>
-                    <div style="padding: 1rem; background: rgba(255,255,255,0.05); border-radius: 10px; margin-bottom: 1.5rem;">
-                        <p style="font-size: 0.95rem; color: var(--text-muted);" data-i18n="arts_note">
-                            <strong>Artes Avulsas:</strong> Para 1 ou 2 unidades, o valor é <strong>R$ 80 por arte</strong>. Priorizamos o fechamento por pacote para garantir a consistência do seu branding.
+                    <a href="https://api.whatsapp.com/send/?phone=5581995387708&text=Ol%C3%A1,%20gostaria%20de%20assinar%20o%20Plano%20Start." target="_blank" class="w-full py-4 bg-white/10 rounded-xl text-center font-bold hover:bg-[#01d4ff] hover:text-black transition-all">Começar Agora</a>
+                </div>
+                <div class="bg-[#01d4ff]/5 border border-[#01d4ff] rounded-[20px] p-8 flex flex-col card-glow relative">
+                    <div class="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-gradient-primary text-black text-[10px] font-black uppercase px-4 py-1 rounded-full">MAIS VENDIDO</div>
+                    <h3 class="text-xl font-bold mb-4">Plano Pro</h3>
+                    <div class="text-3xl font-extrabold mb-6">R$ <span x-text="isAnnual ? '1.199' : '1.499'"></span></div>
+                    <ul class="space-y-3 mb-8 flex-grow text-sm text-[#cbd5e1]">
+                        <li>✓ Gestão completa de tráfego pago <span class="text-xs text-[#94a3b8] block ml-4">(Meta)</span></li>
+                        <li>✓ Suporte dentro do horário comercial <span class="text-xs text-[#94a3b8] block ml-4">(WhatsApp)</span></li>
+                        <li>✓ Diagnóstico de impacto</li>
+                        <li>✓ Infraestrutura digital</li>
+                        <li>✓ 12 posts/mês inclusos</li>
+                        <li>✓ Análise SWOT</li>
+                        <li>✓ Análise BCG</li>
+                        <li>✓ Scripts de atendimento</li>
+                        <li>✓ Relatório de performance semanal</li>
+                        <li>✓ Relatório de performance mensal</li>
+                    </ul>
+                    <a href="https://api.whatsapp.com/send/?phone=5581995387708&text=Ol%C3%A1,%20gostaria%20de%20assinar%20o%20Plano%20Pro." target="_blank" class="w-full py-4 bg-[#01d4ff] text-black rounded-xl text-center font-bold">Quero Escalar</a>
+                </div>
+                <div class="bg-[#111827]/70 border border-white/10 rounded-[20px] p-8 flex flex-col card-glow">
+                    <h3 class="text-xl font-bold mb-4">Plano Premium</h3>
+                    <div class="text-3xl font-extrabold mb-6">R$ <span x-text="isAnnual ? '2.399' : '2.999'"></span></div>
+                    <ul class="space-y-3 mb-8 flex-grow text-sm text-[#cbd5e1]">
+                        <li>✓ Execução do Método CozziSales; <span class="text-xs text-[#94a3b8] block ml-4">(Estruturação, Implementação, Consolidação e Escala)</span></li>
+                        <li>✓ Suporte dentro do horário comercial <span class="text-xs text-[#94a3b8] block ml-4">(WhatsApp)</span></li>
+                        <li>✓ Gestão completa de tráfego pago <span class="text-xs text-[#94a3b8] block ml-4">(Meta ou Google)</span></li>
+                        <li>✓ Atualização de performance semanal</li>
+                        <li>✓ Reunião de planejamento mensal</li>
+                        <li>✓ Gerenciamento de até 3 mil em anúncios</li>
+                        <li>✓ Acompanhamento de vendas semanal</li>
+                        <li>✓ Produção dos criativos para anúncios</li>
+                        <li>✓ Relatório de performance mensal</li>
+                    </ul>
+                    <a href="https://api.whatsapp.com/send/?phone=5581995387708&text=Ol%C3%A1,%20gostaria%20de%20assinar%20o%20Plano%20Premium." target="_blank" class="w-full py-4 bg-white/10 rounded-xl text-center font-bold hover:bg-[#01d4ff] hover:text-black transition-all">Contratar Premium</a>
+                </div>
+            </div>
+
+            <!-- Plano para Sites -->
+            <div class="mt-32 max-w-4xl mx-auto">
+                <div class="text-center mb-12">
+                    <h2 class="text-3xl md:text-4xl font-extrabold mb-4">Plano para <span class="text-[#01d4ff]">Sites</span></h2>
+                    <p class="text-[#94a3b8] italic text-lg">"Um site bem estruturado é a sua loja aberta 24h para o mundo."</p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <!-- Card 1 -->
+                    <div class="bg-[#111827]/60 border border-white/10 rounded-[24px] p-8 flex flex-col card-glow">
+                        <h3 class="text-2xl font-bold mb-2 text-center text-white">Site com seu Nome</h3>
+                        <div class="text-center mb-2">
+                            <span class="text-4xl font-extrabold text-white">R$ 250</span>
+                            <span class="text-sm text-[#94a3b8] ml-1">(Oferta Hoje)</span>
+                        </div>
+                        <p class="text-sm text-[#94a3b8] text-center mb-8">De R$ 500 por R$ 250. Perfeito para autoridade imediata.</p>
+                        
+                        <ul class="space-y-4 mb-8 flex-grow text-[15px] text-[#cbd5e1]">
+                            <li class="flex items-start gap-3"><span class="text-[#01d4ff] font-bold">✓</span> Design estruturado para conversão</li>
+                            <li class="flex items-start gap-3"><span class="text-[#01d4ff] font-bold">✓</span> Foco em chamadas de ação (CTA)</li>
+                            <li class="flex items-start gap-3"><span class="text-[#01d4ff] font-bold">✓</span> Otimizado para dispositivos móveis</li>
+                            <li class="flex items-start gap-3"><span class="text-[#01d4ff] font-bold">✓</span> Configuração de nome customizado</li>
+                        </ul>
+                        
+                        <a href="https://api.whatsapp.com/send/?phone=5581995387708&text=Ol%C3%A1,%20gostaria%20de%20aproveitar%20a%20oferta%20do%20Site%20com%20meu%20Nome%20por%20R$%20250." target="_blank" class="w-full py-4 bg-[#1e293b] border border-white/10 rounded-xl text-center font-bold text-white hover:bg-[#334155] transition-all mt-auto">Aproveitar Oferta</a>
+                    </div>
+
+                    <!-- Card 2 -->
+                    <div class="bg-[#111827]/90 border border-[#01d4ff]/30 rounded-[24px] p-8 flex flex-col card-glow relative shadow-[0_0_30px_rgba(1,212,255,0.05)]">
+                        <div class="absolute -top-4 left-1/2 -translate-x-1/2 bg-[#01d4ff] text-black text-[11px] font-black uppercase px-6 py-2 rounded-full shadow-[0_0_20px_rgba(1,212,255,0.4)] tracking-wider">MAIS PROFISSIONAL</div>
+                        
+                        <h3 class="text-2xl font-bold mb-2 text-center text-white mt-2">Registro .com / .com.br</h3>
+                        <div class="text-center mb-2">
+                            <span class="text-4xl font-extrabold text-white">R$ 500</span>
+                            <span class="text-sm text-[#94a3b8] ml-1">(Oferta Hoje)</span>
+                        </div>
+                        <p class="text-sm text-[#94a3b8] text-center mb-8">De R$ 1.000 por R$ 500. Presença profissional completa.</p>
+                        
+                        <ul class="space-y-4 mb-8 flex-grow text-[15px] text-[#cbd5e1]">
+                            <li class="flex items-start gap-3"><span class="text-[#01d4ff] font-bold">✓</span> Registro oficial de domínio</li>
+                            <li class="flex items-start gap-3"><span class="text-[#01d4ff] font-bold">✓</span> Hospedagem inclusa no setup</li>
+                            <li class="flex items-start gap-3"><span class="text-[#01d4ff] font-bold">✓</span> Site institucional de alto impacto</li>
+                            <li class="flex items-start gap-3"><span class="text-[#01d4ff] font-bold">✓</span> Estrutura focada em chamar atenção</li>
+                        </ul>
+                        
+                        <a href="https://api.whatsapp.com/send/?phone=5581995387708&text=Ol%C3%A1,%20gostaria%20de%20registrar%20meu%20site%20.com/.com.br%20por%20R$%20500." target="_blank" class="w-full py-4 bg-[#01d4ff] text-black rounded-xl text-center font-bold hover:scale-105 transition-transform shadow-[0_4px_15px_rgba(1,212,255,0.2)] mt-auto">Registrar Agora</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Produção Audiovisual -->
+            <div class="mt-32 max-w-5xl mx-auto">
+                <div class="text-center mb-12">
+                    <h2 class="text-3xl md:text-4xl font-extrabold mb-4">Produção <span class="text-[#01d4ff]">Audiovisual</span></h2>
+                    <p class="text-[#94a3b8] italic text-lg">"Imagens aéreas e edição profissional que valorizam sua marca."</p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <!-- Card 1: Drone -->
+                    <div class="bg-[#111827]/60 border border-white/10 rounded-[24px] p-8 flex flex-col card-glow">
+                        <h3 class="text-2xl font-bold mb-4 text-center text-white">Filmagem de Drone</h3>
+                        <div class="text-center mb-2 flex items-baseline justify-center gap-1 flex-wrap">
+                            <span class="text-sm text-[#94a3b8]">a partir de</span>
+                            <span class="text-3xl md:text-4xl font-extrabold text-white">R$ 300</span>
+                            <span class="text-sm text-[#94a3b8] mx-1">a</span>
+                            <span class="text-3xl md:text-4xl font-extrabold text-white">R$ 500</span>
+                        </div>
+                        <p class="text-sm text-[#94a3b8] text-center mb-8 mt-2">Captação de imagens aéreas em alta resolução para o seu negócio ou evento.</p>
+                        
+                        <ul class="space-y-4 mb-8 flex-grow text-[15px] text-[#cbd5e1]">
+                            <li class="flex items-start gap-3"><span class="text-[#01d4ff] font-bold">✓</span> Imagens em 4K de alta qualidade</li>
+                            <li class="flex items-start gap-3"><span class="text-[#01d4ff] font-bold">✓</span> Alinhamento de expectativas (definição exata do que será filmado)</li>
+                            <li class="flex items-start gap-3"><span class="text-[#01d4ff] font-bold">✓</span> Criação de roteiro detalhado para a captação</li>
+                            <li class="flex items-start gap-3"><span class="text-[#01d4ff] font-bold">✓</span> Entrega dos arquivos originais (brutos)</li>
+                        </ul>
+                        
+                        <a href="https://api.whatsapp.com/send/?phone=5581995387708&text=Ol%C3%A1,%20gostaria%20de%20fazer%20um%20or%C3%A7amento%20para%20Filmagem%20de%20Drone." target="_blank" class="w-full py-4 bg-[#1e293b] border border-white/10 rounded-xl text-center font-bold text-white hover:bg-[#334155] transition-all mt-auto">Orçar Filmagem</a>
+                    </div>
+
+                    <!-- Card 2: Adicionais -->
+                    <div class="bg-[#111827]/90 border border-[#01d4ff]/30 rounded-[24px] p-8 flex flex-col card-glow relative shadow-[0_0_30px_rgba(1,212,255,0.05)]">
+                        <div class="absolute -top-4 left-1/2 -translate-x-1/2 bg-[#01d4ff] text-black text-[11px] font-black uppercase px-6 py-2 rounded-full shadow-[0_0_20px_rgba(1,212,255,0.4)] tracking-wider">PERSONALIZE SEU PACOTE</div>
+                        
+                        <h3 class="text-2xl font-bold mb-4 text-center text-white mt-2">Edição & Adicionais</h3>
+                        <div class="text-center mb-2">
+                            <span class="text-xl font-extrabold text-white">Serviços Complementares</span>
+                        </div>
+                        <p class="text-sm text-[#94a3b8] text-center mb-8 mt-2">Monte o pacote ideal com edição profissional e tempo extra de gravação.</p>
+                        
+                        <ul class="space-y-4 mb-8 flex-grow text-[15px] text-[#cbd5e1]">
+                            <li class="flex items-center justify-between border-b border-white/5 pb-4">
+                                <div class="flex items-center gap-3"><span class="text-[#01d4ff] font-bold">✓</span> Edição de Vídeo</div>
+                                <span class="font-bold text-white text-lg">R$ 99<span class="text-sm font-normal text-[#94a3b8]">/un</span></span>
+                            </li>
+                            <li class="flex items-center justify-between border-b border-white/5 pb-4">
+                                <div class="flex items-center gap-3"><span class="text-[#01d4ff] font-bold">✓</span> Hora Adicional</div>
+                                <span class="font-bold text-white text-lg">R$ 199<span class="text-sm font-normal text-[#94a3b8]">/h</span></span>
+                            </li>
+                            <li class="flex items-center justify-between pb-4">
+                                <div class="flex items-center gap-3"><span class="text-[#01d4ff] font-bold">✓</span> Taxa de Deslocamento</div>
+                                <span class="font-bold text-white text-lg">R$ 99</span>
+                            </li>
+                        </ul>
+                        
+                        <a href="https://api.whatsapp.com/send/?phone=5581995387708&text=Ol%C3%A1,%20gostaria%20de%20saber%20mais%20sobre%20os%20pacotes%20de%20Drone%20e%20Edi%C3%A7%C3%A3o." target="_blank" class="w-full py-4 bg-[#01d4ff] text-black rounded-xl text-center font-bold hover:scale-105 transition-transform shadow-[0_4px_15px_rgba(1,212,255,0.2)] mt-auto">Montar Meu Pacote</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Design de Artes -->
+            <div class="mt-32 max-w-3xl mx-auto">
+                <div class="text-center mb-12">
+                    <h2 class="text-3xl md:text-4xl font-extrabold mb-4">Design de <span class="text-[#01d4ff]">Artes</span></h2>
+                    <p class="text-[#94a3b8] text-lg">Identidade visual profissional para suas redes sociais com foco em conversão.</p>
+                </div>
+
+                <div class="bg-[#111827]/90 border border-[#01d4ff]/30 rounded-[24px] p-8 md:p-12 flex flex-col card-glow relative shadow-[0_0_30px_rgba(1,212,255,0.05)]">
+                    <div class="absolute -top-4 left-1/2 -translate-x-1/2 bg-[#01d4ff] text-black text-[11px] font-black uppercase px-6 py-2 rounded-full shadow-[0_0_20px_rgba(1,212,255,0.4)] tracking-wider">FOCO EM PACOTE</div>
+                    
+                    <h3 class="text-2xl md:text-3xl font-bold mb-2 text-center text-white mt-2">Pacotes Digitais</h3>
+                    <div class="text-center mb-2 flex justify-center items-end gap-1">
+                        <span class="text-4xl md:text-5xl font-extrabold text-white">R$ 65</span>
+                        <span class="text-sm text-[#94a3b8] mb-1">/arte</span>
+                    </div>
+                    <p class="text-sm text-[#94a3b8] text-center mb-10">Design estratégico para elevar o nível do seu perfil.</p>
+                    
+                    <ul class="space-y-5 mb-8 flex-grow text-[15px] md:text-base text-[#cbd5e1]">
+                        <li class="flex items-start gap-3"><span class="text-[#01d4ff] font-bold">✓</span> No pacote mínimo de 10 artes</li>
+                        <li class="flex items-start gap-3"><span class="text-[#01d4ff] font-bold">✓</span> Artes para Feed, Stories ou Carrossel</li>
+                        <li class="flex items-start gap-3"><span class="text-[#01d4ff] font-bold">✓</span> Opção de Post único personalizado</li>
+                        <li class="flex items-start gap-3"><span class="text-[#01d4ff] font-bold">✓</span> Criação focada em conversão visual</li>
+                    </ul>
+
+                    <div class="bg-[#1e293b]/60 border border-white/5 p-5 rounded-xl mb-8">
+                        <p class="text-[13px] md:text-sm text-[#94a3b8] leading-relaxed">
+                            <span class="text-[#cbd5e1] font-bold">Artes Avulsas:</span> Para 1 ou 2 unidades, o valor é <strong class="text-white">R$ 80 por arte</strong>. Priorizamos o fechamento por pacote para garantir a consistência do seu branding.
                         </p>
                     </div>
-                    <a href="https://api.whatsapp.com/send/?phone=5581995387708&text=Quero+contratar+o+pacote+de+artes" target="_blank" class="card-btn" data-i18n="btn_want_package">Quero meu Pacote</a>
+                    
+                    <a href="https://api.whatsapp.com/send/?phone=5581995387708&text=Ol%C3%A1,%20gostaria%20de%20contratar%20o%20pacote%20de%20Design%20de%20Artes." target="_blank" class="w-full py-4 md:py-5 bg-[#01d4ff] text-black rounded-xl text-center font-bold text-lg hover:scale-[1.02] transition-transform shadow-[0_4px_15px_rgba(1,212,255,0.2)]">Quero meu Pacote</a>
                 </div>
             </div>
-        </div>
-    </section>
 
-    <section id="consultoria" class="pricing-section">
-        <div class="container">
-            <h2 class="section-title" data-i18n="section_consulting_title">Consultoria</h2>
-            <p class="section-subtitle" data-i18n="section_consulting_subtitle">Expertise e acompanhamento para escalar seus resultados.</p>
+            <!-- Google Meu Negócio -->
+            <div class="mt-32 max-w-6xl mx-auto">
+                <div class="text-center mb-12">
+                    <h2 class="text-3xl md:text-4xl font-extrabold mb-4">Google <span class="text-[#01d4ff]">Meu Negócio</span></h2>
+                    <p class="text-[#94a3b8] text-lg max-w-2xl mx-auto">Soluções corporativas completas para consolidar sua autoridade digital e dominar o mercado local.</p>
+                </div>
 
-            <div class="cards-grid">
-                <div class="card fade-in" style="max-width: 450px; margin: 0 auto;">
-                    <div class="card-header">
-                        <h3 data-i18n="cons_title">🎓 Consultoria Completa</h3>
-                        <div class="price" style="font-size: 1.5rem;" data-i18n="cons_price">Vagas Limitadas</div>
-                        <p class="card-desc" data-i18n="cons_desc">Mentoria prática e estratégica</p>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <!-- Plano Básico -->
+                    <div class="bg-[#111827]/70 border border-white/10 rounded-[20px] p-8 flex flex-col card-glow">
+                        <h3 class="text-xl font-bold mb-2 text-white">PLANO BÁSICO</h3>
+                        <p class="text-sm text-[#94a3b8] mb-6 min-h-[40px]">Ideal para começar sua presença no Google.</p>
+                        <div class="text-3xl font-extrabold mb-6">R$ 497</div>
+                        <ul class="space-y-3 mb-8 flex-grow text-[15px] text-[#cbd5e1]">
+                            <li class="flex items-start gap-3"><span class="text-[#01d4ff] font-bold">✓</span> Criação de perfil</li>
+                            <li class="flex items-start gap-3"><span class="text-[#01d4ff] font-bold">✓</span> Cadastro de até 5 serviços</li>
+                            <li class="flex items-start gap-3"><span class="text-[#01d4ff] font-bold">✓</span> Cadastros de até 5 produtos</li>
+                            <li class="flex items-start gap-3"><span class="text-[#01d4ff] font-bold">✓</span> 4 postagens</li>
+                        </ul>
+                        <a href="https://api.whatsapp.com/send/?phone=5581995387708&text=Ol%C3%A1,%20gostaria%20de%20contratar%20o%20Plano%20B%C3%A1sico%20do%20Google%20Empresas." target="_blank" class="w-full py-4 bg-white/10 rounded-xl text-center font-bold hover:bg-[#01d4ff] hover:text-black transition-all mt-auto">Contratar Básico</a>
                     </div>
-                    <ul style="text-align: left;">
-                        <li data-i18n="cons_item1">Como criar campanhas do zero</li>
-                        <li data-i18n="cons_item2">Estrutura: Campanha, conjunto, anúncio</li>
-                        <li data-i18n="cons_item3">ABO vs CBO (estratégias de orçamento)</li>
-                        <li data-i18n="cons_item4">Contingência e estruturação de conta</li>
-                        <li data-i18n="cons_item5">Definição de público (Segmentado, Envolvimento, Aberto)</li>
-                        <li data-i18n="cons_item6">Temperatura do lead e Videoview</li>
-                        <li data-i18n="cons_item7"><strong>Call estratégica de 1h30 a 2h</strong></li>
-                        <li data-i18n="cons_item8">Acompanhamento por 7 dias via WhatsApp</li>
-                    </ul>
-                    <a href="https://api.whatsapp.com/send/?phone=5581995387708&text=Interesse+Consultoria+Completa" class="card-btn" data-i18n="btn_learn">Quero Aprender</a>
+
+                    <!-- Otimização Única -->
+                    <div class="bg-[#111827]/70 border border-white/10 rounded-[20px] p-8 flex flex-col card-glow">
+                        <h3 class="text-xl font-bold mb-2 text-white">OTIMIZAÇÃO ÚNICA</h3>
+                        <p class="text-sm text-[#94a3b8] mb-6 min-h-[40px]">Ideal para empresas que ainda não estão bem posicionadas.</p>
+                        <div class="text-3xl font-extrabold mb-6">R$ 997<span class="text-sm font-normal text-[#94a3b8]">,00</span></div>
+                        <ul class="space-y-3 mb-8 flex-grow text-[15px] text-[#cbd5e1]">
+                            <li class="flex items-start gap-3"><span class="text-[#01d4ff] font-bold">✓</span> Otimização completa da ficha</li>
+                            <li class="flex items-start gap-3"><span class="text-[#01d4ff] font-bold">✓</span> Pesquisa e aplicação de palavras-chave</li>
+                            <li class="flex items-start gap-3"><span class="text-[#01d4ff] font-bold">✓</span> Link de avaliação + QR Code</li>
+                            <li class="flex items-start gap-3"><span class="text-[#01d4ff] font-bold">✓</span> Link de Whatsapp rastreável</li>
+                            <li class="flex items-start gap-3"><span class="text-[#01d4ff] font-bold">✓</span> 5 postagens por semana</li>
+                            <li class="flex items-start gap-3"><span class="text-[#01d4ff] font-bold">✓</span> Até 10 produtos e 10 serviços</li>
+                        </ul>
+                        <a href="https://api.whatsapp.com/send/?phone=5581995387708&text=Ol%C3%A1,%20gostaria%20de%20contratar%20a%20Otimiza%C3%A7%C3%A3o%20%C3%9Anica%20do%20Google%20Empresas." target="_blank" class="w-full py-4 bg-white/10 rounded-xl text-center font-bold hover:bg-[#01d4ff] hover:text-black transition-all mt-auto">Contratar Otimização</a>
+                    </div>
+
+                    <!-- Otimização + Recorrência -->
+                    <div class="bg-[#01d4ff]/5 border border-[#01d4ff] rounded-[20px] p-8 flex flex-col card-glow relative shadow-[0_0_30px_rgba(1,212,255,0.05)]">
+                        <div class="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-gradient-primary text-black text-[10px] font-black uppercase px-4 py-1 rounded-full whitespace-nowrap">MELHOR OFERTA</div>
+                        <h3 class="text-xl font-bold mb-2 text-white">OTIMIZAÇÃO + RECORRÊNCIA</h3>
+                        <p class="text-sm text-[#94a3b8] mb-6 min-h-[40px]">Referente a 6 meses. Para quem quer subir no ranking constantemente.</p>
+                        <div class="text-3xl font-extrabold mb-6 text-[#01d4ff]"><span class="text-sm font-normal text-[#94a3b8]">De </span>R$ 3.297<span class="text-sm font-normal text-[#94a3b8]">,00</span></div>
+                        <ul class="space-y-3 mb-8 flex-grow text-[15px] text-[#cbd5e1]">
+                            <li class="flex items-start gap-3"><span class="text-[#01d4ff] font-bold">✓</span> Tudo da otimização única</li>
+                            <li class="flex items-start gap-3"><span class="text-[#01d4ff] font-bold">✓</span> 5 postagens na semana</li>
+                            <li class="flex items-start gap-3"><span class="text-[#01d4ff] font-bold">✓</span> Até 15 produtos e 15 serviços/mês</li>
+                            <li class="flex items-start gap-3"><span class="text-[#01d4ff] font-bold">✓</span> Acompanhamento de métricas e melhorias</li>
+                            
+                            <!-- Bônus Section -->
+                            <li class="mt-6 pt-5 border-t border-[#01d4ff]/20 block">
+                                <span class="font-black text-[#01d4ff] block mb-2 uppercase text-xs tracking-wider">🎁 Bônus Exclusivos:</span>
+                                <span class="font-semibold text-white">Landing Page + Link Bio + Placa QR Code</span>
+                            </li>
+                        </ul>
+                        <a href="https://api.whatsapp.com/send/?phone=5581995387708&text=Ol%C3%A1,%20gostaria%20de%20contratar%20a%20Otimiza%C3%A7%C3%A3o%20+%20Recorr%C3%AAncia%20do%20Google%20Empresas." target="_blank" class="w-full py-4 bg-[#01d4ff] text-black rounded-xl text-center font-bold hover:scale-105 transition-transform mt-auto shadow-[0_4px_15px_rgba(1,212,255,0.2)]">Quero Dominar o Google</a>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- FAQ -->
+    <section class="py-20 bg-white/2">
+        <div class="container mx-auto px-6">
+            <h2 class="text-4xl font-extrabold text-center mb-16">Perguntas Frequentes</h2>
+            <div class="max-w-3xl mx-auto space-y-4">
+                <div class="border-b border-white/10">
+                    <button @click="activeFaq = (activeFaq === 0 ? null : 0)" class="w-full flex justify-between items-center py-6 text-left text-lg font-semibold text-white">
+                        O valor dos anúncios está incluso na mensalidade?
+                        <span :class="activeFaq === 0 ? 'rotate-45' : ''" class="text-[#01d4ff] text-2xl transition-transform">+</span>
+                    </button>
+                    <div x-show="activeFaq === 0" x-cloak class="pb-6 text-[#94a3b8]">Não. O valor investido nas plataformas é pago diretamente por você.</div>
+                </div>
+                <div class="border-b border-white/10">
+                    <button @click="activeFaq = (activeFaq === 1 ? null : 1)" class="w-full flex justify-between items-center py-6 text-left text-lg font-semibold text-white">
+                        Existe fidelidade nos contratos?
+                        <span :class="activeFaq === 1 ? 'rotate-45' : ''" class="text-[#01d4ff] text-2xl transition-transform">+</span>
+                    </button>
+                    <div x-show="activeFaq === 1" x-cloak class="pb-6 text-[#94a3b8]">Trabalhamos com contratos flexíveis. Recomendamos mínimo de 3 meses.</div>
                 </div>
             </div>
         </div>
     </section>
 
-    <section id="resultados" class="pricing-section" style="background-color: #0d121c;">
-        <div class="container">
-            <h2 class="section-title" data-i18n="section_results_title">Resultados que <span class="text-gradient">Falam por Si</span></h2>
-            <p class="section-subtitle" data-i18n="section_results_subtitle">Cases reais de clientes que transformaram seus negócios com nossas estratégias</p>
-            
-            <div class="cards-grid" style="grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));">
-                <div class="card fade-in">
-                    <h4 style="color: var(--primary); margin-bottom: 0.5rem; font-size: 1.1rem;" data-i18n="res_fashion_title">🛍️ Moda Feminina</h4>
-                    <p data-i18n="res_fashion_roi"><strong>ROI de 420%</strong></p>
-                    <p class="card-desc" style="font-size: 0.9rem;" data-i18n="res_fashion_desc">Em 3 meses com Meta Ads, R$ 15k gerou R$ 78k em vendas.</p>
-                </div>
-                <div class="card fade-in">
-                    <h4 style="color: var(--primary); margin-bottom: 0.5rem; font-size: 1.1rem;" data-i18n="res_dentist_title">🦷 Clínica Odonto</h4>
-                    <p data-i18n="res_dentist_roi"><strong>+150 agendamentos/mês</strong></p>
-                    <p class="card-desc" style="font-size: 0.9rem;" data-i18n="res_dentist_desc">Via Google Meu Negócio, ticket médio de R$ 1.200 (R$ 180k/mês).</p>
-                </div>
-                <div class="card fade-in">
-                    <h4 style="color: var(--primary); margin-bottom: 0.5rem; font-size: 1.1rem;" data-i18n="res_rest_title">🍽️ Restaurante Gourmet</h4>
-                    <p data-i18n="res_rest_roi"><strong>+80% no faturamento</strong></p>
-                    <p class="card-desc" style="font-size: 0.9rem;" data-i18n="res_rest_desc">Estratégia integrada de Tráfego + Google Local em 6 meses.</p>
-                </div>
-                <div class="card fade-in">
-                    <h4 style="color: var(--primary); margin-bottom: 0.5rem; font-size: 1.1rem;" data-i18n="res_gym_title">🏋️ Academia Funcional</h4>
-                    <p data-i18n="res_gym_roi"><strong>200+ matrículas</strong></p>
-                    <p class="card-desc" style="font-size: 0.9rem;" data-i18n="res_gym_desc">Em 4 meses, CAC de R$ 45 por lead qualificado via Meta Ads.</p>
-                </div>
-                <div class="card fade-in">
-                    <h4 style="color: var(--primary); margin-bottom: 0.5rem; font-size: 1.1rem;" data-i18n="res_arch_title">🏠 Arquitetura</h4>
-                    <p data-i18n="res_arch_roi"><strong>R$ 320k em contratos</strong></p>
-                    <p class="card-desc" style="font-size: 0.9rem;" data-i18n="res_arch_desc">Gerados via Google Ads e Landing Page otimizada em 5 meses.</p>
-                </div>
-                <div class="card fade-in">
-                    <h4 style="color: var(--primary); margin-bottom: 0.5rem; font-size: 1.1rem;" data-i18n="res_salon_title">💇 Salão de Beleza</h4>
-                    <p data-i18n="res_salon_roi"><strong>3x mais agendamentos</strong></p>
-                    <p class="card-desc" style="font-size: 0.9rem;" data-i18n="res_salon_desc">Com automação via WhatsApp e campanhas segmentadas no Instagram.</p>
-                </div>
-                <div class="card fade-in">
-                    <h4 style="color: var(--primary); margin-bottom: 0.5rem; font-size: 1.1rem;" data-i18n="res_car_title">🚗 Concessionária</h4>
-                    <p data-i18n="res_car_roi"><strong>47 carros vendidos</strong></p>
-                    <p class="card-desc" style="font-size: 0.9rem;" data-i18n="res_car_desc">Em 2 meses via Meta Ads + Remarketing (ticket médio R$ 65k).</p>
-                </div>
-                <div class="card fade-in">
-                    <h4 style="color: var(--primary); margin-bottom: 0.5rem; font-size: 1.1rem;" data-i18n="res_info_title">📚 Infoprodutor</h4>
-                    <p data-i18n="res_info_roi"><strong>R$ 480k em lançamento</strong></p>
-                    <p class="card-desc" style="font-size: 0.9rem;" data-i18n="res_info_desc">Funil completo com Tráfego Pago + Webinar + Remarketing estratégico.</p>
-                </div>
-                <div class="card fade-in">
-                    <h4 style="color: var(--primary); margin-bottom: 0.5rem; font-size: 1.1rem;" data-i18n="res_hotel_title">🏨 Pousada</h4>
-                    <p data-i18n="res_hotel_roi"><strong>95% de ocupação</strong></p>
-                    <p class="card-desc" style="font-size: 0.9rem;" data-i18n="res_hotel_desc">Na alta temporada com Google Ads + Meta Ads + Google Meu Negócio.</p>
-                </div>
+    <!-- Contact Form -->
+    <section id="contato" class="py-20 scroll-mt-24">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl md:text-5xl font-extrabold mb-4">Vamos Alavancar seu Negócio?</h2>
+                <p class="text-[#94a3b8] text-lg">Preencha o formulário abaixo.</p>
             </div>
-
-            <div style="text-align: center; margin-top: 4rem;" class="fade-in">
-                <h3 style="margin-bottom: 1.5rem;" data-i18n="res_cta_title">Pronto para ser o próximo case de sucesso?</h3>
-                <a href="#contato" class="btn" data-i18n="res_cta_btn">Quero Resultados Assim</a>
-            </div>
+            <form @submit.prevent="submitForm()" class="max-w-xl mx-auto bg-[#111827]/70 border border-white/10 p-8 md:p-12 rounded-[20px] shadow-2xl">
+                <div class="space-y-6">
+                    <div class="space-y-2">
+                        <label class="block text-xs font-black uppercase text-[#94a3b8] tracking-widest">Nome</label>
+                        <input x-model="formData.nome" type="text" required placeholder="Seu nome completo" class="w-full p-4 bg-[#f8fafc] text-[#0f172a] rounded-xl outline-none">
+                    </div>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div class="space-y-2">
+                            <label class="block text-xs font-black uppercase text-[#94a3b8] tracking-widest">Telefone</label>
+                            <input x-model="formData.telefone" type="tel" required placeholder="(11) 9 1234-5678" class="w-full p-4 bg-[#f8fafc] text-[#0f172a] rounded-xl outline-none">
+                        </div>
+                        <div class="space-y-2">
+                            <label class="block text-xs font-black uppercase text-[#94a3b8] tracking-widest">Empresa</label>
+                            <input x-model="formData.empresa" type="text" required placeholder="Nome da sua empresa" class="w-full p-4 bg-[#f8fafc] text-[#0f172a] rounded-xl outline-none">
+                        </div>
+                    </div>
+                    <div class="space-y-2">
+                        <label class="block text-xs font-black uppercase text-[#94a3b8] tracking-widest">Qual serviço te interessa?</label>
+                        <select x-model="formData.interesse" required class="w-full p-4 bg-[#f8fafc] text-[#0f172a] rounded-xl outline-none appearance-none">
+                            <option value="" disabled>Selecione o serviço</option>
+                            <option value="Setup Comercial">Setup Comercial</option>
+                            <option value="Gestão de Tráfego (Planos)">Gestão de Tráfego (Planos)</option>
+                            <option value="Criação de Sites">Criação de Sites</option>
+                            <option value="Google Meu Negócio">Google Meu Negócio</option>
+                            <option value="Produção Audiovisual (Drone)">Produção Audiovisual (Drone)</option>
+                            <option value="Design de Artes">Design de Artes</option>
+                        </select>
+                    </div>
+                    <button type="submit" class="w-full bg-[#01d4ff] text-black font-black py-5 rounded-xl text-lg shadow-xl">Enviar mensagem</button>
+                </div>
+            </form>
         </div>
     </section>
 
-    <section class="faq-section">
-      <div class="container">
-        <h2 class="section-title" data-i18n="faq_title">Perguntas Frequentes</h2>
-        <div class="accordion">
-          <div class="accordion-item">
-            <button class="accordion-header" data-i18n="faq_q1">O valor dos anúncios está incluso na mensalidade?</button>
-            <div class="accordion-content">
-              <p data-i18n="faq_a1">Não. Os valores apresentados são referentes à nossa prestação de serviço (estratégia, criação e otimização). O valor investido nas plataformas (Facebook/Google) é pago diretamente por você.</p>
-            </div>
-          </div>
-          <div class="accordion-item">
-            <button class="accordion-header" data-i18n="faq_q2">Existe fidelidade nos contratos?</button>
-            <div class="accordion-content">
-              <p data-i18n="faq_a2">Trabalhamos com contratos flexíveis. Recomendamos um período mínimo de 3 meses para maturação das campanhas e melhores resultados.</p>
-            </div>
-          </div>
-          <div class="accordion-item">
-            <button class="accordion-header" data-i18n="faq_q3">Como funciona o Plano Anual GMN?</button>
-            <div class="accordion-content">
-              <p data-i18n="faq_a3">O Plano Anual oferece o melhor custo-benefício. Cuidamos da sua ficha no Google o ano inteiro, garantindo atualizações e resposta a clientes semanalmente.</p>
-            </div>
-          </div>
+    <!-- Footer -->
+    <footer class="py-12 border-t border-white/10 text-center">
+        <div class="container mx-auto px-6">
+            <div class="text-2xl font-extrabold text-white mb-4">Cozzi<span class="text-[#01d4ff]">Media</span></div>
+            <p class="text-[#94a3b8] text-sm">© 2022 Cozzi Media. Todos os direitos reservados.</p>
         </div>
-      </div>
-    </section>
-
-    <section id="contato" class="contact-section">
-      <div class="container">
-        <h2 class="section-title" data-i18n="contact_title">Vamos Alavancar seu Negócio?</h2>
-        <p class="section-subtitle" data-i18n="contact_subtitle">Ou preencha o formulário abaixo para receber nosso contato.</p>
-        
-        <form id="sales-form" class="contact-form fade-in">
-            
-            <div class="form-group">
-                <label data-i18n="form_name">Nome</label>
-                <input type="text" id="nome_pessoa" class="form-control" data-i18n-ph="form_name_ph" placeholder="Seu nome completo" required>
-            </div>
-
-            <div class="form-group">
-                <label data-i18n="form_phone">Telefone</label>
-                <input type="tel" id="telefone" class="form-control" data-i18n-ph="form_phone_ph" placeholder="(11) 9 1234-5678" required>
-            </div>
-
-            <div class="form-group">
-                <label data-i18n="form_company">Empresa</label>
-                <input type="text" id="empresa" class="form-control" data-i18n-ph="form_company_ph" placeholder="Nome da sua empresa" required>
-            </div>
-            
-            <div class="form-group">
-                <label data-i18n="form_insta">Instagram da Empresa</label>
-                <input type="text" id="instagram" class="form-control" data-i18n-ph="form_insta_ph" placeholder="@suaempresa" required>
-            </div>
-
-            <div class="form-group">
-                <label data-i18n="form_city">Cidade / Estado</label>
-                <input type="text" id="cidade" class="form-control" data-i18n-ph="form_city_ph" placeholder="Sao Paulo, SP" required>
-            </div>
-            
-            <div class="form-group">
-                <label data-i18n="form_service">Qual serviço te interessa?</label>
-                <select id="interesse" class="form-control" required>
-                    <option value="" disabled selected data-i18n="form_service_opt_default">Selecione o serviço</option>
-                    <option value="Trafego Pago" data-i18n="form_service_opt_traffic">Gestão de Tráfego Pago</option>
-                    <option value="Google Meu Negocio" data-i18n="form_service_opt_gmn">Google Meu Negócio</option>
-                    <option value="Drone/Video" data-i18n="form_service_opt_drone">Drone e Vídeos</option>
-                    <option value="Artes" data-i18n="form_service_opt_arts">Artes Digitais</option>
-                    <option value="Consultoria" data-i18n="form_service_opt_cons">Consultoria</option>
-                    <option value="Combo" data-i18n="form_service_opt_combo">Quero um Combo</option>
-                </select>
-            </div>
-
-            <div class="checkbox-wrapper">
-                <input type="checkbox" id="filiais">
-                <label for="filiais" data-i18n="form_branches">Possuo 2 ou mais filiais (+30% no valor)</label>
-            </div>
-
-            <div class="form-group">
-                <label data-i18n="form_msg">Mensagem</label>
-                <textarea id="msg" class="form-control" rows="3" data-i18n-ph="form_msg_ph" placeholder="Conte mais sobre seu negócio e objetivos..."></textarea>
-            </div>
-
-            <button type="submit" class="btn" style="width: 100%;" data-i18n="btn_send">Enviar mensagem</button>
-        </form>
-      </div>
-    </section>
-
-    <footer>
-      <div class="container">
-        <p class="logo" style="justify-content: center; margin-bottom: 1rem;">Cozzi<span>Media</span></p>
-        <p data-i18n="footer_rights">© 2022 Cozzi Media. Todos os direitos reservados.</p>
-        <p style="margin-top: 0.5rem; opacity: 0.6;" data-i18n="footer_tagline">Transformando presença digital em lucro.</p>
-      </div>
     </footer>
 
-    <div class="scroll-top" onclick="window.scrollTo({top: 0, behavior: 'smooth'});">
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512">
-        <path d="M352 352c-8.188 0-16.38-3.125-22.62-9.375L192 205.3l-137.4 137.4c-12.5 12.5-32.75 12.5-45.25 0s-12.5-32.75 0-45.25l160-160c12.5-12.5 32.75-12.5 45.25 0l160 160c12.5 12.5 12.5 32.75 0 45.25C368.4 348.9 360.2 352 352 352z"/>
-      </svg>
-    </div>
-
-    <a href="https://api.whatsapp.com/send/?phone=5581995387708&text=Olá,+estou+no+site+e+tenho+dúvidas." target="_blank" class="floating-wa">
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M380.9 97.1C339 55.1 283.2 32 223.9 32c-122.4 0-222 99.6-222 222 0 39.1 10.2 77.3 29.6 111L0 480l117.7-30.9c32.4 17.7 68.9 27 106.1 27h.1c122.3 0 224.1-99.6 224.1-222 0-59.3-25.2-115-67.1-157zm-157 341.6c-33.2 0-65.7-8.9-94-25.7l-6.7-4-69.8 18.3L72 359.2l-4.4-7c-18.5-29.4-28.2-63.3-28.2-98.2 0-101.7 82.8-184.5 184.6-184.5 49.3 0 95.6 19.2 130.4 54.1 34.8 34.9 56.2 81.2 56.1 130.5 0 101.8-84.9 184.6-186.6 184.6zm101.2-138.2c-5.5-2.8-32.8-16.2-37.9-18-5.1-1.9-8.8-2.8-12.5 2.8-3.7 5.6-14.3 18-17.6 21.8-3.2 3.7-6.5 4.2-12 1.4-32.6-16.3-54-29.1-75.5-66-5.7-9.8 5.7-9.1 16.3-30.3 1.8-3.7.9-6.9-.5-9.7-1.4-2.8-12.5-30.1-17.1-41.2-4.5-10.8-9.1-9.3-12.5-9.5-3.2-.2-6.9-.2-10.6-.2-3.7 0-9.7 1.4-14.8 6.9-5.1 5.6-19.4 19-19.4 46.3 0 27.3 19.9 53.7 22.6 57.4 2.8 3.7 39.1 59.7 94.8 83.8 35.2 15.2 49 16.5 66.6 13.9 10.7-1.6 32.8-13.4 37.4-26.4 4.6-13 4.6-24.1 3.2-26.4-1.3-2.5-5-3.9-10.5-6.6z"/></svg>
+    <!-- Floating UI -->
+    <a href="https://api.whatsapp.com/send/?phone=5581995387708" target="_blank" class="fixed bottom-8 right-8 w-16 h-16 bg-[#25D366] rounded-full flex items-center justify-center shadow-lg hover:scale-110 transition-transform z-[999]">
+        <svg class="w-9 h-9 fill-white" viewBox="0 0 448 512"><path d="M380.9 97.1C339 55.1 283.2 32 223.9 32c-122.4 0-222 99.6-222 222 0 39.1 10.2 77.3 29.6 111L0 480l117.7-30.9c32.4 17.7 68.9 27 106.1 27h.1c122.3 0 224.1-99.6 224.1-222 0-59.3-25.2-115-67.1-157zm-157 341.6c-33.2 0-65.7-8.9-94-25.7l-6.7-4-69.8 18.3L72 359.2l-4.4-7c-18.5-29.4-28.2-63.3-28.2-98.2 0-101.7 82.8-184.5 184.6-184.5 49.3 0 95.6 19.2 130.4 54.1 34.8 34.9 56.2 81.2 56.1 130.5 0 101.8-84.9 184.6-186.6 184.6zm101.2-138.2c-5.5-2.8-32.8-16.2-37.9-18-5.1-1.9-8.8-2.8-12.5 2.8-3.7 5.6-14.3 18-17.6 21.8-3.2 3.7-6.5 4.2-12 1.4-32.6-16.3-54-29.1-75.5-66-5.7-9.8 5.7-9.1 16.3-30.3 1.8-3.7.9-6.9-.5-9.7-1.4-2.8-12.5-30.1-17.1-41.2-4.5-10.8-9.1-9.3-12.5-9.5-3.2-.2-6.9-.2-10.6-.2-3.7 0-9.7 1.4-14.8 6.9-5.1 5.6-19.4 19-19.4 46.3 0 27.3 19.9 53.7 22.6 57.4 2.8 3.7 39.1 59.7 94.8 83.8 35.2 15.2 49 16.5 66.6 13.9 10.7-1.6 32.8-13.4 37.4-26.4 4.6-13 4.6-24.1 3.2-26.4-1.3-2.5-5-3.9-10.5-6.6z"/></svg>
     </a>
-
-    <script>
-      // Control Bar Logic
-      const themeToggle = document.getElementById('theme-toggle');
-      const iconSun = document.getElementById('icon-sun');
-      const iconMoon = document.getElementById('icon-moon');
-      const body = document.body;
-
-      // Theme Toggling
-      themeToggle.addEventListener('click', () => {
-        body.classList.toggle('light-mode');
-        // Toggle icons visibility
-        iconSun.classList.toggle('hidden');
-        iconMoon.classList.toggle('hidden');
-      });
-
-      // Translation Dictionary
-      const translations = {
-        nav_home: { pt: 'Início', en: 'Home' },
-        nav_traffic: { pt: 'Tráfego', en: 'Traffic' },
-        nav_local: { pt: 'Google Local', en: 'Google Local' },
-        nav_drone: { pt: 'Drone', en: 'Drone' },
-        nav_arts: { pt: 'Artes', en: 'Arts' },
-        nav_results: { pt: 'Resultados', en: 'Results' },
-        nav_consulting: { pt: 'Consultoria', en: 'Consulting' },
-        
-        hero_title: { pt: 'Transforme Cliques em <br><span class="text-gradient">Vendas Reais</span>', en: 'Turn Clicks into <br><span class="text-gradient">Real Sales</span>' },
-        hero_subtitle: { pt: 'Acelere o crescimento da sua empresa com estratégias validadas de Tráfego Pago, Gestão de Conteúdo e Otimização Google.', en: 'Accelerate your business growth with validated strategies in Paid Traffic, Content Management, and Google Optimization.' },
-        hero_cta_plans: { pt: 'Ver Nossos Planos', en: 'View Our Plans' },
-        hero_cta_contact: { pt: 'Fale Conosco', en: 'Contact Us' },
-        hero_badge_clients: { pt: '🚀 +100 Clientes Atendidos', en: '🚀 +100 Clients Served' },
-        hero_badge_meta: { pt: '💎 Meta Business Partner', en: '💎 Meta Business Partner' },
-        hero_badge_roi: { pt: '📈 ROI Focado', en: '📈 ROI Focused' },
-
-        proof_invested: { pt: '+5 Milhões', en: '+5 Million' },
-        proof_invested_label: { pt: 'Investidos em Anúncios', en: 'Invested in Ads' },
-        proof_companies: { pt: '+100', en: '+100' },
-        proof_companies_label: { pt: 'Empresas Escaladas', en: 'Scaled Companies' },
-        proof_monitoring: { pt: '24/7', en: '24/7' },
-        proof_monitoring_label: { pt: 'Monitoramento Ativo', en: 'Active Monitoring' },
-
-        section_traffic_title: { pt: 'Tráfego <span class="text-gradient">Pago</span>', en: 'Paid <span class="text-gradient">Traffic</span>' },
-        section_traffic_subtitle: { pt: 'Escolha o nível de aceleração que seu negócio precisa hoje.', en: 'Choose the level of acceleration your business needs today.' },
-
-        plan_essencial_title: { pt: 'Plano Essencial', en: 'Essential Plan' },
-        plan_essencial_price: { pt: 'R$ 699<small>/mês</small>', en: 'R$ 699<small>/mo</small>' },
-        plan_essencial_desc: { pt: 'Para quem está começando e precisa gerar presença digital com estratégia.', en: 'For those starting out and needing to generate digital presence strategically.' },
-        plan_essencial_item1: { pt: 'Gestão de Meta Ads (Instagram e Facebook)', en: 'Meta Ads Management (Instagram and Facebook)' },
-        plan_essencial_item2: { pt: 'Planejamento estratégico inicial', en: 'Initial strategic planning' },
-        plan_essencial_item3: { pt: 'Otimização básica de campanhas', en: 'Basic campaign optimization' },
-        plan_essencial_item4: { pt: 'Relatório mensal de desempenho', en: 'Monthly performance report' },
-        plan_essencial_item5: { pt: 'Suporte via grupo de WhatsApp', en: 'Support via WhatsApp group' },
-        plan_essencial_note: { pt: '👉 Ideal para pequenos negócios que querem começar a vender online com anúncios bem estruturados.', en: '👉 Ideal for small businesses wanting to start selling online with well-structured ads.' },
-        btn_start_now: { pt: 'Começar Agora', en: 'Start Now' },
-
-        plan_pro_tag: { pt: 'MAIS VENDIDO', en: 'BEST SELLER' },
-        plan_pro_title: { pt: 'Plano Pro', en: 'Pro Plan' },
-        plan_pro_price: { pt: 'R$ 1.499<small>/mês</small>', en: 'R$ 1,499<small>/mo</small>' },
-        plan_pro_desc: { pt: 'Para empresas que querem escalar vendas com consistência e automação.', en: 'For companies wanting to scale sales with consistency and automation.' },
-        plan_pro_item1: { pt: 'Gestão completa de Meta Ads', en: 'Complete Meta Ads Management' },
-        plan_pro_item2: { pt: 'Automação de pré-atendimento (Instagram / WhatsApp)', en: 'Pre-service automation (Instagram / WhatsApp)' },
-        plan_pro_item3: { pt: 'Planejamento mensal de campanhas', en: 'Monthly campaign planning' },
-        plan_pro_item4: { pt: 'Programação de mídias', en: 'Media scheduling' },
-        plan_pro_item5: { pt: '<strong>12 posts/mês inclusos</strong>', en: '<strong>12 posts/mo included</strong>' },
-        plan_pro_item6: { pt: 'Relatórios semanais', en: 'Weekly reports' },
-        plan_pro_item7: { pt: 'Suporte prioritário', en: 'Priority support' },
-        plan_pro_item8: { pt: 'Reunião mensal estratégica', en: 'Monthly strategic meeting' },
-        plan_pro_note: { pt: '👉 Ideal para negócios que já vendem e querem aumentar faturamento de forma previsível.', en: '👉 Ideal for businesses that already sell and want to increase revenue predictably.' },
-        btn_scale: { pt: 'Quero Escalar', en: 'I Want to Scale' },
-
-        // NOVAS TRADUÇÕES DO PLANO DE GRUPOS
-        plan_groups_title: { pt: 'Tráfego para Grupos', en: 'Traffic for Groups' },
-        plan_groups_price: { pt: 'R$ 1.499<small>/mês</small>', en: 'R$ 1,499<small>/mo</small>' },
-        plan_groups_desc: { pt: 'Estratégia focada em encher grupos de WhatsApp e Telegram.', en: 'Strategy focused on filling WhatsApp and Telegram groups.' },
-        plan_groups_item1: { pt: 'Gestão completa (Instagram e Facebook)', en: 'Complete Management (Instagram & Facebook)' },
-        plan_groups_item2: { pt: 'Foco em Grupos (Maternidade/Promo)', en: 'Focus on Groups (Maternity/Promos)' },
-        plan_groups_item3: { pt: '<strong>Página de redirecionamento inclusa</strong>', en: '<strong>Redirect page included</strong>' },
-        plan_groups_item4: { pt: 'Testes para baixar custo por entrada', en: 'Tests to lower cost per entry' },
-        plan_groups_item5: { pt: 'Relatórios semanais', en: 'Weekly reports' },
-        plan_groups_item6: { pt: 'Suporte direto via WhatsApp', en: 'Direct support via WhatsApp' },
-        plan_groups_note: { pt: '👉 Sugestão de investimento: R$ 50/dia para otimização constante e crescimento escalável.', en: '👉 Suggested investment: R$ 50/day for constant optimization and scalable growth.' },
-        btn_hire_groups: { pt: 'Contratar Plano', en: 'Hire Plan' },
-
-        plan_premium_title: { pt: 'Plano Premium', en: 'Premium Plan' },
-        plan_premium_price: { pt: 'R$ 1.999<small>/mês</small>', en: 'R$ 1,999<small>/mo</small>' },
-        plan_premium_desc: { pt: 'Para marcas que buscam liderança e crescimento agressivo.', en: 'For brands seeking leadership and aggressive growth.' },
-        plan_premium_item1: { pt: 'Tudo do Plano Pro', en: 'Everything in Pro Plan' },
-        plan_premium_item2: { pt: '<strong>Gestão de Google Ads</strong>', en: '<strong>Google Ads Management</strong>' },
-        plan_premium_item3: { pt: '<strong>Landing Page inclusa (foco em conversão)</strong>', en: '<strong>Landing Page included (conversion focused)</strong>' },
-        plan_premium_item4: { pt: '<strong>24 posts/mês inclusos</strong>', en: '<strong>24 posts/mo included</strong>' },
-        plan_premium_item5: { pt: 'Suporte Intensivo VIP', en: 'VIP Intensive Support' },
-        plan_premium_note: { pt: '👉 Ideal para empresas que querem dominar o mercado e escalar com estrutura profissional.', en: '👉 Ideal for companies wanting to dominate the market and scale with professional structure.' },
-        btn_hire_premium: { pt: 'Contratar Premium', en: 'Hire Premium' },
-
-        setup_title: { pt: 'Setup Profissional Meta Ads', en: 'Professional Meta Ads Setup' },
-        setup_price: { pt: 'R$ 500<small> (único - Pix)</small>', en: 'R$ 500<small> (one-time - Pix)</small>' },
-        setup_desc: { pt: 'Para quem precisa estruturar tudo corretamente antes de anunciar e evitar bloqueios.', en: 'For those needing to structure everything correctly before advertising to avoid bans.' },
-        setup_item1: { pt: 'Criação de nova Página no Facebook', en: 'New Facebook Page Creation' },
-        setup_item2: { pt: 'Nome da página alinhado ao Instagram', en: 'Page name aligned with Instagram' },
-        setup_item3: { pt: 'Foto de perfil igual ao Instagram', en: 'Profile photo same as Instagram' },
-        setup_item4: { pt: 'Biografia alinhada ao Instagram', en: 'Bio aligned with Instagram' },
-        setup_item5: { pt: 'Categoria correta da página (Criador de conteúdo)', en: 'Correct page category (Content Creator)' },
-        setup_item6: { pt: 'Configuração do Meta Business (Gerenciador de Negócios)', en: 'Meta Business Setup (Business Manager)' },
-        setup_item7: { pt: 'Configuração empresarial correta', en: 'Correct business configuration' },
-        setup_item8: { pt: 'Cadastro e confirmação de e-mail', en: 'Email registration and confirmation' },
-        setup_item9: { pt: 'Cadastro de endereço', en: 'Address registration' },
-        setup_item10: { pt: 'Cadastro de CPF ou CNPJ', en: 'CPF or CNPJ registration' },
-        setup_item11: { pt: 'Vinculação correta entre Facebook e Instagram', en: 'Correct linking between Facebook and Instagram' },
-        setup_item12: { pt: 'Validação do Instagram via código', en: 'Instagram validation via code' },
-        setup_item13: { pt: 'Organização de permissões e acessos', en: 'Organization of permissions and access' },
-        setup_item14: { pt: 'Ativação de boas práticas de segurança', en: 'Activation of security best practices' },
-        setup_item15: { pt: 'Preparação completa para anúncios', en: 'Complete preparation for ads' },
-        setup_item16: { pt: 'Criação / vinculação da conta de anúncios', en: 'Ad account creation / linking' },
-        setup_item17: { pt: 'Configuração correta de fuso horário e moeda', en: 'Correct timezone and currency setup' },
-        setup_item18: { pt: 'Teste de estrutura para impulsionamento', en: 'Structure test for boosting' },
-        setup_item19: { pt: 'Estrutura organizada para liberação futura de anúncios', en: 'Organized structure for future ad release' },
-
-        section_local_title: { pt: 'Google <span class="text-gradient">Local</span>', en: 'Google <span class="text-gradient">Local</span>' },
-        section_local_subtitle: { pt: 'Seja encontrado primeiro quando seus clientes procurarem pelo seu serviço.', en: 'Be found first when your customers search for your service.' },
-        
-        local_flash_title: { pt: 'Flash 30 Dias', en: 'Flash 30 Days' },
-        local_flash_price: { pt: 'R$ 499<small> (único)</small>', en: 'R$ 499<small> (one-time)</small>' },
-        local_flash_desc: { pt: 'Ideal para configurar a casa e começar certo.', en: 'Ideal to set up the house and start right.' },
-        local_flash_item1: { pt: 'Cadastro e verificação da ficha', en: 'Registration and verification of listing' },
-        local_flash_item2: { pt: 'SEO Local (Palavras-chave e Descrição)', en: 'Local SEO (Keywords and Description)' },
-        local_flash_item3: { pt: 'Otimização de Fotos e Produtos', en: 'Photo and Product Optimization' },
-        local_flash_item4: { pt: 'Correção de erros de cadastro', en: 'Registration error correction' },
-        local_flash_item5: { pt: 'Checklist final de entrega', en: 'Final delivery checklist' },
-        btn_hire_setup: { pt: 'Contratar Setup', en: 'Hire Setup' },
-
-        local_annual_tag: { pt: 'MELHOR OFERTA', en: 'BEST OFFER' },
-        local_annual_title: { pt: 'Plano Anual', en: 'Annual Plan' },
-        local_annual_price: { pt: 'R$ 156<small>,66/mês</small>', en: 'R$ 156<small>.66/mo</small>' },
-        local_annual_desc: { pt: 'Total R$ 1.880. Gestão completa o ano todo.', en: 'Total R$ 1,880. Complete management all year round.' },
-        local_annual_item1: { pt: '<strong>Site Institucional Incluso</strong>', en: '<strong>Institutional Website Included</strong>' },
-        local_annual_item2: { pt: 'Gestão contínua de avaliações', en: 'Continuous review management' },
-        local_annual_item3: { pt: 'Publicações semanais (Ofertas/Novidades)', en: 'Weekly posts (Offers/News)' },
-        local_annual_item4: { pt: 'Relatórios de ligações e rotas', en: 'Call and route reports' },
-        local_annual_item5: { pt: 'Monitoramento de concorrentes', en: 'Competitor monitoring' },
-        btn_guarantee: { pt: 'Garantir Oferta', en: 'Secure Offer' },
-
-        local_trim_title: { pt: 'Trimestral', en: 'Quarterly' },
-        local_trim_price: { pt: 'R$ 1.275<small> /trimestre</small>', en: 'R$ 1,275<small> /quarter</small>' },
-        local_trim_desc: { pt: 'Acompanhamento de médio prazo para consolidar.', en: 'Medium-term monitoring to consolidate.' },
-        local_trim_item1: { pt: 'Setup completo da ficha', en: 'Complete listing setup' },
-        local_trim_item2: { pt: 'Atualizações semanais', en: 'Weekly updates' },
-        local_trim_item3: { pt: 'Resposta a avaliações', en: 'Response to reviews' },
-        local_trim_item4: { pt: 'Ajustes estratégicos de SEO', en: 'Strategic SEO adjustments' },
-        local_trim_item5: { pt: 'Relatório de performance', en: 'Performance report' },
-        btn_hire_trim: { pt: 'Contratar Trimestre', en: 'Hire Quarter' },
-
-        section_g_emp_title: { pt: 'Google <span class="text-gradient">Empresas</span>', en: 'Google <span class="text-gradient">Business</span>' },
-        section_g_emp_subtitle: { pt: 'Soluções corporativas completas para consolidar sua autoridade digital e dominar o mercado local.', en: 'Complete corporate solutions to consolidate your digital authority and dominate the local market.' },
-        
-        g_basic_title: { pt: 'PLANO BÁSICO', en: 'BASIC PLAN' },
-        g_basic_old_price: { pt: 'De R$ 497,00', en: 'From R$ 497.00' },
-        g_basic_price: { pt: 'R$ 437<small> (Pix)</small>', en: 'R$ 437<small> (Pix)</small>' },
-        g_basic_desc: { pt: 'Ideal para começar sua presença no Google.', en: 'Ideal to start your presence on Google.' },
-        g_basic_item1: { pt: 'Criação de perfil', en: 'Profile creation' },
-        g_basic_item2: { pt: 'Cadastro de até 5 serviços', en: 'Registration of up to 5 services' },
-        g_basic_item3: { pt: 'Cadastros de até 5 produtos', en: 'Registration of up to 5 products' },
-        g_basic_item4: { pt: '4 postagens', en: '4 posts' },
-        btn_hire_basic: { pt: 'Contratar Básico', en: 'Hire Basic' },
-
-        g_opt_title: { pt: 'OTIMIZAÇÃO ÚNICA', en: 'ONE-TIME OPTIMIZATION' },
-        g_opt_old_price: { pt: 'De R$ 999,00', en: 'From R$ 999.00' },
-        g_opt_price: { pt: 'R$ 850<small> (Pix)</small>', en: 'R$ 850<small> (Pix)</small>' },
-        g_opt_desc: { pt: 'Ideal para empresas que ainda não estão bem posicionadas.', en: 'Ideal for companies not yet well positioned.' },
-        g_opt_item1: { pt: 'Otimização completa da ficha', en: 'Complete listing optimization' },
-        g_opt_item2: { pt: 'Pesquisa e aplicação de palavras-chave', en: 'Keyword research and application' },
-        g_opt_item3: { pt: 'Link de avaliação + QR Code', en: 'Review link + QR Code' },
-        g_opt_item4: { pt: 'Link de Whatsapp rastreável', en: 'Trackable Whatsapp link' },
-        g_opt_item5: { pt: '5 postagens por semana', en: '5 posts per week' },
-        g_opt_item6: { pt: 'Até 10 produtos e 10 serviços', en: 'Up to 10 products and 10 services' },
-        btn_hire_opt: { pt: 'Contratar Otimização', en: 'Hire Optimization' },
-
-        g_rec_tag: { pt: 'MELHOR OFERTA', en: 'BEST OFFER' },
-        g_rec_title: { pt: 'OTIMIZAÇÃO + RECORRÊNCIA', en: 'OPTIMIZATION + RECURRENCE' },
-        g_rec_old_price: { pt: 'De R$ 2.690,00', en: 'From R$ 2,690.00' },
-        g_rec_price: { pt: 'R$ 2.421<small> (Pix)</small>', en: 'R$ 2,421<small> (Pix)</small>' },
-        g_rec_desc: { pt: 'Referente a 4 meses. Para quem quer subir no ranking constantemente.', en: 'Referring to 4 months. For those who want to climb the ranking constantly.' },
-        g_rec_item1: { pt: '<strong>Tudo da otimização única</strong>', en: '<strong>Everything in one-time optimization</strong>' },
-        g_rec_item2: { pt: '5 postagens na semana', en: '5 posts per week' },
-        g_rec_item3: { pt: 'Até 15 produtos e 15 serviços/mês', en: 'Up to 15 products and 15 services/mo' },
-        g_rec_item4: { pt: 'Acompanhamento de métricas e melhorias', en: 'Metrics tracking and improvements' },
-        g_rec_item5: { pt: '<strong>Bônus:</strong> Landing Page + Link Bio + Placa QR Code', en: '<strong>Bonus:</strong> Landing Page + Link Bio + QR Code Plate' },
-        btn_dominate_google: { pt: 'Quero Dominar o Google', en: 'I Want to Dominate Google' },
-
-        section_drone_title: { pt: 'Produção <span class="text-gradient">Audiovisual</span>', en: '<span class="text-gradient">Audiovisual</span> Production' },
-        section_drone_subtitle: { pt: 'Imagens de drone e edição profissional que valorizam sua marca.', en: 'Drone images and professional editing that value your brand.' },
-        
-        drone_basic_title: { pt: 'Básico', en: 'Basic' },
-        drone_basic_price: { pt: 'R$ 349', en: 'R$ 349' },
-        drone_basic_item1: { pt: '3 vídeos aéreos (até 1 min)', en: '3 aerial videos (up to 1 min)' },
-        drone_basic_item2: { pt: '3 fotos em alta resolução', en: '3 high-resolution photos' },
-        drone_basic_item3: { pt: 'Entrega via Drive (sem edição complexa)', en: 'Delivery via Drive (no complex editing)' },
-        btn_request: { pt: 'Solicitar', en: 'Request' },
-
-        drone_inter_tag: { pt: 'MAIS VENDIDO', en: 'BEST SELLER' },
-        drone_inter_title: { pt: 'Intermediário', en: 'Intermediate' },
-        drone_inter_price: { pt: 'R$ 649', en: 'R$ 649' },
-        drone_inter_item1: { pt: '5 vídeos (até 1:30 min)', en: '5 videos (up to 1:30 min)' },
-        drone_inter_item2: { pt: '5 fotos em alta resolução', en: '5 high-resolution photos' },
-        drone_inter_item3: { pt: '<strong>Edição Básica inclusa</strong>', en: '<strong>Basic Editing included</strong>' },
-
-        drone_pro_title: { pt: 'Profissional', en: 'Professional' },
-        drone_pro_price: { pt: 'R$ 859', en: 'R$ 859' },
-        drone_pro_item1: { pt: '5 vídeos premium', en: '5 premium videos' },
-        drone_pro_item2: { pt: '5 fotos editadas', en: '5 edited photos' },
-        drone_pro_item3: { pt: '<strong>Edição Dinâmica (Reels/TikTok)</strong>', en: '<strong>Dynamic Editing (Reels/TikTok)</strong>' },
-        drone_pro_item4: { pt: 'Vídeo Institucional completo', en: 'Complete Institutional Video' },
-
-        section_arts_title: { pt: 'Design de <span class="text-gradient">Artes</span>', en: '<span class="text-gradient">Arts</span> Design' },
-        section_arts_subtitle: { pt: 'Identidade visual profissional para suas redes sociais com foco em conversão.', en: 'Professional visual identity for your social networks focused on conversion.' },
-        
-        arts_tag: { pt: 'FOCO EM PACOTE', en: 'PACKAGE FOCUS' },
-        arts_title: { pt: 'Pacotes Digitais', en: 'Digital Packages' },
-        arts_price: { pt: 'R$ 65<small>/arte</small>', en: 'R$ 65<small>/art</small>' },
-        arts_desc: { pt: 'Design estratégico para elevar o nível do seu perfil.', en: 'Strategic design to elevate your profile level.' },
-        arts_item1: { pt: '<strong>No pacote mínimo de 10 artes</strong>', en: '<strong>Minimum package of 10 arts</strong>' },
-        arts_item2: { pt: 'Artes para Feed, Stories ou Carrossel', en: 'Arts for Feed, Stories or Carousel' },
-        arts_item3: { pt: 'Opção de Post único personalizado', en: 'Personalized Single Post Option' },
-        arts_item4: { pt: 'Criação focada em conversão visual', en: 'Creation focused on visual conversion' },
-        arts_note: { pt: '<strong>Artes Avulsas:</strong> Para 1 ou 2 unidades, o valor é <strong>R$ 80 por arte</strong>. Priorizamos o fechamento por pacote para garantir a consistência do seu branding.', en: '<strong>Single Arts:</strong> For 1 or 2 units, the value is <strong>R$ 80 per art</strong>. We prioritize package closing to ensure your branding consistency.' },
-        btn_want_package: { pt: 'Quero meu Pacote', en: 'I Want my Package' },
-
-        section_consulting_title: { pt: 'Consultoria', en: 'Consulting' },
-        section_consulting_subtitle: { pt: 'Expertise e acompanhamento para escalar seus resultados.', en: 'Expertise and monitoring to scale your results.' },
-        cons_title: { pt: '🎓 Consultoria Completa', en: '🎓 Complete Consulting' },
-        cons_price: { pt: 'Vagas Limitadas', en: 'Limited Spots' },
-        cons_desc: { pt: 'Mentoria prática e estratégica', en: 'Practical and strategic mentorship' },
-        cons_item1: { pt: 'Como criar campanhas do zero', en: 'How to create campaigns from scratch' },
-        cons_item2: { pt: 'Estrutura: Campanha, conjunto, anúncio', en: 'Structure: Campaign, ad set, ad' },
-        cons_item3: { pt: 'ABO vs CBO (estratégias de orçamento)', en: 'ABO vs CBO (budget strategies)' },
-        cons_item4: { pt: 'Contingência e estruturação de conta', en: 'Contingency and account structuring' },
-        cons_item5: { pt: 'Definição de público (Segmentado, Envolvimento, Aberto)', en: 'Audience definition (Segmented, Engagement, Broad)' },
-        cons_item6: { pt: 'Temperatura do lead e Videoview', en: 'Lead temperature and Videoview' },
-        cons_item7: { pt: '<strong>Call estratégica de 1h30 a 2h</strong>', en: '<strong>Strategic Call of 1h30 to 2h</strong>' },
-        cons_item8: { pt: 'Acompanhamento por 7 dias via WhatsApp', en: '7-day follow-up via WhatsApp' },
-        btn_learn: { pt: 'Quero Aprender', en: 'I Want to Learn' },
-
-        section_results_title: { pt: 'Resultados que <span class="text-gradient">Falam por Si</span>', en: 'Results that <span class="text-gradient">Speak for Themselves</span>' },
-        section_results_subtitle: { pt: 'Cases reais de clientes que transformaram seus negócios com nossas estratégias', en: 'Real cases of clients who transformed their businesses with our strategies' },
-        
-        res_fashion_title: { pt: '🛍️ Moda Feminina', en: '🛍️ Women\'s Fashion' },
-        res_fashion_roi: { pt: '<strong>ROI de 420%</strong>', en: '<strong>420% ROI</strong>' },
-        res_fashion_desc: { pt: 'Em 3 meses com Meta Ads, R$ 15k gerou R$ 78k em vendas.', en: 'In 3 months with Meta Ads, R$ 15k generated R$ 78k in sales.' },
-
-        res_dentist_title: { pt: '🦷 Clínica Odonto', en: '🦷 Dental Clinic' },
-        res_dentist_roi: { pt: '<strong>+150 agendamentos/mês</strong>', en: '<strong>+150 appointments/mo</strong>' },
-        res_dentist_desc: { pt: 'Via Google Meu Negócio, ticket médio de R$ 1.200 (R$ 180k/mês).', en: 'Via Google Business Profile, avg ticket R$ 1,200 (R$ 180k/mo).' },
-
-        res_rest_title: { pt: '🍽️ Restaurante Gourmet', en: '🍽️ Gourmet Restaurant' },
-        res_rest_roi: { pt: '<strong>+80% no faturamento</strong>', en: '<strong>+80% in revenue</strong>' },
-        res_rest_desc: { pt: 'Estratégia integrada de Tráfego + Google Local em 6 meses.', en: 'Integrated Traffic + Google Local strategy in 6 months.' },
-
-        res_gym_title: { pt: '🏋️ Academia Funcional', en: '🏋️ Functional Gym' },
-        res_gym_roi: { pt: '<strong>200+ matrículas</strong>', en: '<strong>200+ enrollments</strong>' },
-        res_gym_desc: { pt: 'Em 4 meses, CAC de R$ 45 por lead qualificado via Meta Ads.', en: 'In 4 months, CAC of R$ 45 per qualified lead via Meta Ads.' },
-
-        res_arch_title: { pt: '🏠 Arquitetura', en: '🏠 Architecture' },
-        res_arch_roi: { pt: '<strong>R$ 320k em contratos</strong>', en: '<strong>R$ 320k in contracts</strong>' },
-        res_arch_desc: { pt: 'Gerados via Google Ads e Landing Page otimizada em 5 meses.', en: 'Generated via Google Ads and optimized Landing Page in 5 months.' },
-
-        res_salon_title: { pt: '💇 Salão de Beleza', en: '💇 Beauty Salon' },
-        res_salon_roi: { pt: '<strong>3x mais agendamentos</strong>', en: '<strong>3x more appointments</strong>' },
-        res_salon_desc: { pt: 'Com automação via WhatsApp e campanhas segmentadas no Instagram.', en: 'With WhatsApp automation and segmented campaigns on Instagram.' },
-
-        res_car_title: { pt: '🚗 Concessionária', en: '🚗 Car Dealership' },
-        res_car_roi: { pt: '<strong>47 carros vendidos</strong>', en: '<strong>47 cars sold</strong>' },
-        res_car_desc: { pt: 'Em 2 meses via Meta Ads + Remarketing (ticket médio R$ 65k).', en: 'In 2 months via Meta Ads + Remarketing (avg ticket R$ 65k).' },
-
-        res_info_title: { pt: '📚 Infoprodutor', en: '📚 Info Producer' },
-        res_info_roi: { pt: '<strong>R$ 480k em lançamento</strong>', en: '<strong>R$ 480k in launch</strong>' },
-        res_info_desc: { pt: 'Funil completo com Tráfego Pago + Webinar + Remarketing estratégico.', en: 'Complete funnel with Paid Traffic + Webinar + Strategic Remarketing.' },
-
-        res_hotel_title: { pt: '🏨 Pousada', en: '🏨 Inn/Hotel' },
-        res_hotel_roi: { pt: '<strong>95% de ocupação</strong>', en: '<strong>95% occupancy</strong>' },
-        res_hotel_desc: { pt: 'Na alta temporada com Google Ads + Meta Ads + Google Meu Negócio.', en: 'In high season with Google Ads + Meta Ads + Google Business Profile.' },
-
-        res_cta_title: { pt: 'Pronto para ser o próximo case de sucesso?', en: 'Ready to be the next success case?' },
-        res_cta_btn: { pt: 'Quero Resultados Assim', en: 'I Want Results Like This' },
-
-        faq_title: { pt: 'Perguntas Frequentes', en: 'Frequently Asked Questions' },
-        faq_q1: { pt: 'O valor dos anúncios está incluso na mensalidade?', en: 'Is the ad cost included in the monthly fee?' },
-        faq_a1: { pt: 'Não. Os valores apresentados são referentes à nossa prestação de serviço (estratégia, criação e otimização). O valor investido nas plataformas (Facebook/Google) é pago diretamente por você.', en: 'No. The values presented refer to our service provision (strategy, creation, and optimization). The amount invested in platforms (Facebook/Google) is paid directly by you.' },
-        faq_q2: { pt: 'Existe fidelidade nos contratos?', en: 'Is there loyalty in contracts?' },
-        faq_a2: { pt: 'Trabalhamos com contratos flexíveis. Recomendamos um período mínimo de 3 meses para maturação das campanhas e melhores resultados.', en: 'We work with flexible contracts. We recommend a minimum period of 3 months for campaign maturation and better results.' },
-        faq_q3: { pt: 'Como funciona o Plano Anual GMN?', en: 'How does the GMN Annual Plan work?' },
-        faq_a3: { pt: 'O Plano Anual oferece o melhor custo-benefício. Cuidamos da sua ficha no Google o ano inteiro, garantindo atualizações e resposta a clientes semanalmente.', en: 'The Annual Plan offers the best cost-benefit. We take care of your Google listing all year round, ensuring weekly updates and customer responses.' },
-
-        contact_title: { pt: 'Vamos Alavancar seu Negócio?', en: 'Let\'s Leverage Your Business?' },
-        contact_subtitle: { pt: 'Ou preencha o formulário abaixo para receber nosso contato.', en: 'Or fill out the form below to receive our contact.' },
-        
-        form_name: { pt: 'Nome', en: 'Name' },
-        form_name_ph: { pt: 'Seu nome completo', en: 'Your full name' },
-        form_phone: { pt: 'Telefone', en: 'Phone' },
-        form_phone_ph: { pt: '(11) 9 1234-5678', en: '(11) 9 1234-5678' },
-        form_company: { pt: 'Empresa', en: 'Company' },
-        form_company_ph: { pt: 'Nome da sua empresa', en: 'Your company name' },
-        form_insta: { pt: 'Instagram da Empresa', en: 'Company Instagram' },
-        form_insta_ph: { pt: '@suaempresa', en: '@yourcompany' },
-        form_city: { pt: 'Cidade / Estado', en: 'City / State' },
-        form_city_ph: { pt: 'Sao Paulo, SP', en: 'New York, NY' },
-        
-        form_service: { pt: 'Qual serviço te interessa?', en: 'Which service interests you?' },
-        form_service_opt_default: { pt: 'Selecione o serviço', en: 'Select the service' },
-        form_service_opt_traffic: { pt: 'Gestão de Tráfego Pago', en: 'Paid Traffic Management' },
-        form_service_opt_gmn: { pt: 'Google Meu Negócio', en: 'Google Business Profile' },
-        form_service_opt_drone: { pt: 'Drone e Vídeos', en: 'Drone and Videos' },
-        form_service_opt_arts: { pt: 'Artes Digitais', en: 'Digital Arts' },
-        form_service_opt_cons: { pt: 'Consultoria', en: 'Consulting' },
-        form_service_opt_combo: { pt: 'Quero um Combo', en: 'I Want a Combo' },
-
-        form_branches: { pt: 'Possuo 2 ou mais filiais (+30% no valor)', en: 'I have 2 or more branches (+30% on value)' },
-        form_msg: { pt: 'Mensagem', en: 'Message' },
-        form_msg_ph: { pt: 'Conte mais sobre seu negócio e objetivos...', en: 'Tell us more about your business and goals...' },
-        btn_send: { pt: 'Enviar mensagem', en: 'Send message' },
-
-        footer_rights: { pt: '© 2022 Cozzi Media. Todos os direitos reservados.', en: '© 2022 Cozzi Media. All rights reserved.' },
-        footer_tagline: { pt: 'Transformando presença digital em lucro.', en: 'Transforming digital presence into profit.' },
-      };
-
-      // Language Toggling Logic
-      let currentLang = 'pt';
-
-      function toggleLanguage() {
-        const ptBtn = document.getElementById('lang-pt');
-        const enBtn = document.getElementById('lang-en');
-        
-        // Toggle visual state
-        if (currentLang === 'pt') {
-            currentLang = 'en';
-            // Visual Update
-            ptBtn.classList.remove('text-neon');
-            ptBtn.classList.add('text-[var(--text-muted)]', 'hover:text-neon');
-            enBtn.classList.remove('text-[var(--text-muted)]', 'hover:text-neon');
-            enBtn.classList.add('text-neon');
-        } else {
-            currentLang = 'pt';
-            // Visual Update
-            enBtn.classList.remove('text-neon');
-            enBtn.classList.add('text-[var(--text-muted)]', 'hover:text-neon');
-            ptBtn.classList.remove('text-[var(--text-muted)]', 'hover:text-neon');
-            ptBtn.classList.add('text-neon');
-        }
-
-        // Apply Translations
-        applyTranslations(currentLang);
-      }
-
-      function applyTranslations(lang) {
-        // Update elements with data-i18n
-        const elements = document.querySelectorAll('[data-i18n]');
-        elements.forEach(el => {
-            const key = el.getAttribute('data-i18n');
-            if (translations[key]) {
-                // Check if element has child elements that are not text (simple check)
-                // Use innerHTML to preserve HTML tags like <br> or <span> inside translation strings
-                el.innerHTML = translations[key][lang];
-            }
-        });
-
-        // Update placeholders for inputs with data-i18n-ph
-        const placeholders = document.querySelectorAll('[data-i18n-ph]');
-        placeholders.forEach(el => {
-            const key = el.getAttribute('data-i18n-ph');
-            if (translations[key]) {
-                el.placeholder = translations[key][lang];
-            }
-        });
-      }
-
-      // Accordion Logic
-      const accordions = document.querySelectorAll('.accordion-header');
-      accordions.forEach(acc => {
-        acc.addEventListener('click', function() {
-          this.classList.toggle('active');
-          const panel = this.nextElementSibling;
-          if (panel.style.maxHeight) {
-            panel.style.maxHeight = null;
-          } else {
-            panel.style.maxHeight = panel.scrollHeight + "px";
-          }
-        });
-      });
-
-      // Mobile Menu Logic
-      const mobileMenu = document.getElementById('mobile-menu');
-      const navLinks = document.querySelector('.nav-links');
-
-      mobileMenu.addEventListener('click', () => {
-        navLinks.classList.toggle('active');
-      });
-
-      document.querySelectorAll('.nav-links a').forEach(link => {
-          link.addEventListener('click', () => {
-              navLinks.classList.remove('active');
-          });
-      });
-
-      // Scroll to Top Logic
-      const scrollTopBtn = document.querySelector('.scroll-top');
-      window.addEventListener('scroll', () => {
-          if (window.pageYOffset > 300) {
-              scrollTopBtn.classList.add('active');
-          } else {
-              scrollTopBtn.classList.remove('active');
-          }
-      });
-
-      // Form Logic to WhatsApp
-      document.getElementById('sales-form').addEventListener('submit', function(e) {
-        e.preventDefault();
-        const nome = document.getElementById('nome_pessoa').value;
-        const telefone = document.getElementById('telefone').value;
-        const empresa = document.getElementById('empresa').value;
-        const instagram = document.getElementById('instagram').value;
-        const cidade = document.getElementById('cidade').value;
-        const interesseSelect = document.getElementById('interesse');
-        const interesse = interesseSelect.options[interesseSelect.selectedIndex].text;
-        const msg = document.getElementById('msg').value;
-        const filiais = document.getElementById('filiais').checked ? "Sim (+30%)" : "Não";
-
-        const text = `*Nova Solicitação via Site*%0A%0A👤 *Nome:* ${nome}%0A📞 *Telefone:* ${telefone}%0A🏢 *Empresa:* ${empresa}%0A📱 *Instagram:* ${instagram}%0A📍 *Cidade/UF:* ${cidade}%0A🎯 *Interesse:* ${interesse}%0A🏢 *Filiais:* ${filiais}%0A📝 *Mensagem:* ${msg}`;
-        
-        window.open(`https://api.whatsapp.com/send/?phone=5581995387708&text=${text}`, '_blank');
-      });
-
-      // Scroll Animation (Intersection Observer)
-      const observerOptions = { threshold: 0.1 };
-      const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add('visible');
-          }
-        });
-      }, observerOptions);
-
-      document.querySelectorAll('.fade-in').forEach(el => {
-        observer.observe(el);
-      });
-    </script>
-  </body>
+    <button x-show="showScrollTop" @click="window.scrollTo({top: 0, behavior: 'smooth'})" class="fixed bottom-28 right-9 w-12 h-12 bg-[#111827]/80 border border-[#01d4ff] rounded-full flex items-center justify-center transition-all z-[990] hover:bg-[#01d4ff] group">
+        <svg class="w-5 h-5 fill-[#01d4ff] group-hover:fill-black" viewBox="0 0 384 512"><path d="M352 352c-8.188 0-16.38-3.125-22.62-9.375L192 205.3l-137.4 137.4c-12.5 12.5-32.75 12.5-45.25 0s-12.5-32.75 0-45.25l160-160c12.5-12.5 32.75-12.5 45.25 0l160 160c12.5 12.5 12.5 32.75 0 45.25C368.4 348.9 360.2 352 352 352z"/></svg>
+    </button>
+</body>
 </html>
